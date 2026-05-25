@@ -1,0 +1,36 @@
+# =========================
+# C / C++ / Info Embarquée
+# =========================
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.elf
+*.hex
+*.bin
+.vscode/
+
+# =========================
+# MATLAB / Simulink
+# =========================
+*.asv
+slprj/
+*.autosave
+*.mat
+
+# =========================
+# CAO Électronique (Proteus, KiCad...)
+# =========================
+*.bak
+*.bck
+*-backups/
+*.tmp
+
+# =========================
+# Rapports et OS
+# =========================
+~$*.docx
+~$*.xlsx
+.DS_Store
+Thumbs.db
