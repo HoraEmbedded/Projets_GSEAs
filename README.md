@@ -1,5 +1,7 @@
 #  Interface de Commande de Puissance (Driver MOS)
 
+![Vue 3D de la carte de puissance](./Pictures/vue_3D.png)
+
 ## Description du projet
 Ce projet a été réalisé dans le cadre du Bureau d'Étude N°3 d'Électronique de Puissance (ENSAT). Il consiste à analyser, dimensionner et concevoir une interface de commande basée sur un transistor MOS en mode commutation. 
 L'objectif est de piloter de manière fiable six relais électromagnétiques (RT42405) depuis un microcontrôleur 3.3V (courant max 20 mA).
