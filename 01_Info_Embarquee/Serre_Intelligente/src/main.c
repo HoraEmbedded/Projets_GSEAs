@@ -1,31 +1,22 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-// Configuration de la vitesse de communication (Baud rate)
+// Configuration UART (Baud rate : 9600)
 #define BAUD 9600
 #define BRC ((F_CPU/16/BAUD) - 1)
 
-// Fonction d'initialisation de l'UART0
 void uart_init() {
-    // Définition du baud rate dans les registres (High et Low)
     UBRR0H = (BRC >> 8);
     UBRR0L = BRC;
-    
-    // Activation de la transmission (TX) et de la réception (RX)
     UCSR0B = (1 << TXEN0) | (1 << RXEN0);
-    
-    // Configuration du format de la trame : 8 bits de données, 1 bit de stop
     UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
 }
 
-// Fonction pour envoyer un seul caractère
 void uart_send_char(char c) {
-    // Attendre que le buffer de transmission soit vide
     while (!(UCSR0A & (1 << UDRE0)));
-    UDR0 = c; // Placer la donnée dans le registre
+    UDR0 = c;
 }
 
-// Fonction pour envoyer une chaîne de caractères
 void uart_send_string(const char* str) {
     while (*str) {
         uart_send_char(*str++);
@@ -33,13 +24,25 @@ void uart_send_string(const char* str) {
 }
 
 int main(void) {
-    // Initialisation
+    // 1. Initialisation de la communication UART
     uart_init();
     
-    // Boucle infinie ( d'Arduino)
+    // 2. Configuration des broches pour les LEDs (Relais)
+    // DDRH configure la direction. L'opérateur "|=" met les bits PH5 et PH6 à 1 (OUTPUT)
+    DDRH |= (1 << PH5) | (1 << PH6); 
+
     while (1) {
-        uart_send_string("Systeme Serre Intelligente OK - Test UART\r\n");
-        _delay_ms(1000); // Pause de 1 seconde
+        uart_send_string("Actionneurs ON\r\n");
+        
+        // Allumer les LEDs (Mise à 1 des bits dans PORTH)
+        PORTH |= (1 << PH5) | (1 << PH6);
+        _delay_ms(1000);
+        
+        uart_send_string("Actionneurs OFF\r\n");
+        
+        // Éteindre les LEDs (Mise à 0 via l'opérateur ET binaire sur l'inverse des bits)
+        PORTH &= ~((1 << PH5) | (1 << PH6));
+        _delay_ms(1000);
     }
     
     return 0;
