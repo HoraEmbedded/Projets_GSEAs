@@ -2,6 +2,7 @@
 #include <util/delay.h>
 #include <stdint.h>
 #include <avr/wdt.h>
+#include <avr/interrupt.h> // Nécessaire pour la gestion des interruptions
 
 // --- DÉSACTIVATION DU WATCHDOG ---
 void wdt_init(void) __attribute__((naked)) __attribute__((section(".init3")));
@@ -41,12 +42,12 @@ void lcd_set_cursor(uint8_t col, uint8_t row) { uint8_t row_offsets[] = { 0x00, 
 void lcd_print_int(int num) {
     char buffer[10]; int i = 0;
     if (num == 0) { lcd_send('0', 1); return; }
-    if (num < 0) { lcd_send('-', 1); num = -num; }
+    if (num < 0) { lcd_send('-', 1); num = -num; } 
     while (num > 0) { buffer[i++] = (num % 10) + '0'; num /= 10; }
     while (i > 0) { lcd_send(buffer[--i], 1); }
 }
 
-// --- DHT22 (Température et Humidité de l'air) ---
+// --- DHT22 ---
 #define DHT_PIN PE4
 uint8_t dht_data[5];
 int dht_read() {
@@ -62,90 +63,101 @@ int dht_read() {
     return -6;
 }
 
-// --- ADC (Potentiomètre / Humidité du sol) ---
+// --- ADC ---
 void adc_init() {
-    ADMUX = (1 << REFS0); // Tension de référence = AVCC (5V), Canal A0 (PF0)
-    ADCSRA = (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0); // Active l'ADC, diviseur d'horloge 128
+    ADMUX = (1 << REFS0);
+    ADCSRA = (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);
 }
 uint16_t adc_read() {
-    ADCSRA |= (1 << ADSC); // Démarre la conversion
-    while(ADCSRA & (1 << ADSC)); // Attend la fin
+    ADCSRA |= (1 << ADSC);
+    while(ADCSRA & (1 << ADSC));
     return ADC;
 }
 
+// --- TIMER 1 ET INTERRUPTIONS ---
+// La variable est "volatile" car elle est modifiée par une interruption matérielle
+volatile uint8_t flag_mesure = 0;
+
+void timer1_init() {
+    TCCR1A = 0; // Fonctionnement normal du port
+    // Configuration en mode CTC (WGM12=1) avec un Prescaler de 1024 (CS12=1, CS10=1)
+    TCCR1B = (1 << WGM12) | (1 << CS12) | (1 << CS10); 
+    OCR1A = 31249; // Seuil pour atteindre 2 secondes exactes
+    TIMSK1 = (1 << OCIE1A); // Autoriser l'interruption de comparaison A
+}
+
+// Vecteur d'interruption : appelé automatiquement par le matériel toutes les 2s
+ISR(TIMER1_COMPA_vect) {
+    flag_mesure = 1; // On lève le drapeau
+}
+
+
 // --- Fonction Principale ---
 int main(void) {
-    uart_init(); i2c_init(); lcd_init(); adc_init();
+    uart_init(); i2c_init(); lcd_init(); adc_init(); timer1_init();
     
-    // LEDs / Relais en sortie (Broche 8/PH5 = Pompe, Broche 9/PH6 = Ventilo)
     DDRH |= (1 << PH5) | (1 << PH6); 
     
     int temperature, hum_air, etat_dht;
     uint16_t valeur_brute_sol;
     int hum_sol_pourcentage;
-    
-    // Variables d'état pour maintenir l'hystérésis
     uint8_t etat_ventilo = 0; 
     uint8_t etat_pompe = 0;
 
     lcd_print("Systeme Actif");
-    _delay_ms(2000); 
+    _delay_ms(2000); // Temps de chauffe initial du capteur DHT22 (toléré une seule fois au boot)
+    
+    sei(); // "Set Enable Interrupts" : Active l'écoute globale des interruptions sur le processeur
 
+    // LA BOUCLE PRINCIPALE NON-BLOQUANTE
     while (1) {
-        // 1. Lecture des capteurs
-        etat_dht = dht_read();
-        valeur_brute_sol = adc_read();
         
-        // Conversion de l'ADC (0-1023) en pourcentage (0-100%)
-        hum_sol_pourcentage = (valeur_brute_sol * 100L) / 1023L;
-        
-        lcd_send(0x01, 0); // Nettoyage écran
-        _delay_ms(2);
-        
-        if (etat_dht == 0) {
-            hum_air = (dht_data[0] << 8) | dht_data[1];
-            temperature = ((dht_data[2] & 0x7F) << 8) | dht_data[3];
-            if (dht_data[2] & 0x80) temperature = -temperature;
+        // On ne fait le travail lourd que si le Timer nous en donne l'ordre
+        if (flag_mesure == 1) {
+            flag_mesure = 0; // On abaisse le drapeau immédiatement
             
-            // 2. LOGIQUE DE CONTRÔLE : HYSTÉRÉSIS VENTILATEUR (Température)
-            // S'il fait > 26.0°C, on allume. S'il fait < 24.0°C, on éteint.
-            if (temperature >= 260) {
-                etat_ventilo = 1;
-            } else if (temperature <= 240) {
-                etat_ventilo = 0;
+            etat_dht = dht_read();
+            valeur_brute_sol = adc_read();
+            hum_sol_pourcentage = (valeur_brute_sol * 100L) / 1023L;
+            
+            lcd_send(0x01, 0); 
+            _delay_ms(2);
+            
+            if (etat_dht == 0) {
+                hum_air = (dht_data[0] << 8) | dht_data[1];
+                temperature = ((dht_data[2] & 0x7F) << 8) | dht_data[3];
+                if (dht_data[2] & 0x80) temperature = -temperature;
+                
+                // Hystérésis
+                if (temperature >= 260) etat_ventilo = 1;
+                else if (temperature <= 240) etat_ventilo = 0;
+                
+                if (hum_sol_pourcentage <= 30) etat_pompe = 1;
+                else if (hum_sol_pourcentage >= 60) etat_pompe = 0;
+                
+                // Actionneurs
+                if (etat_ventilo) PORTH |= (1 << PH6); else PORTH &= ~(1 << PH6);
+                if (etat_pompe) PORTH |= (1 << PH5); else PORTH &= ~(1 << PH5);
+                
+                // Affichages
+                lcd_set_cursor(0, 0);
+                lcd_print("T:"); lcd_print_int(temperature/10); lcd_print(" V:"); lcd_print(etat_ventilo ? "ON " : "OFF");
+                lcd_set_cursor(0, 1);
+                lcd_print("S:"); lcd_print_int(hum_sol_pourcentage); lcd_print("% P:"); lcd_print(etat_pompe ? "ON " : "OFF");
+                
+                uart_send_string("T:"); uart_send_int(temperature/10);
+                uart_send_string("C | Air:"); uart_send_int(hum_air/10);
+                uart_send_string("% | Sol:"); uart_send_int(hum_sol_pourcentage);
+                uart_send_string("% | Ventilo:"); uart_send_string(etat_ventilo ? "ON" : "OFF");
+                uart_send_string(" | Pompe:"); uart_send_string(etat_pompe ? "ON\r\n" : "OFF\r\n");
+            } else {
+                lcd_print("Err Capteur Air");
             }
-            
-            // 3. LOGIQUE DE CONTRÔLE : HYSTÉRÉSIS POMPE (Humidité du Sol)
-            // Si le sol est très sec (< 30%), on arrose. Si bien humide (> 60%), on arrête.
-            if (hum_sol_pourcentage <= 30) {
-                etat_pompe = 1;
-            } else if (hum_sol_pourcentage >= 60) {
-                etat_pompe = 0;
-            }
-            
-            // 4. Application des états sur les broches GPIO
-            if (etat_ventilo) PORTH |= (1 << PH6); else PORTH &= ~(1 << PH6);
-            if (etat_pompe) PORTH |= (1 << PH5); else PORTH &= ~(1 << PH5);
-            
-            // 5. Affichage LCD
-            lcd_set_cursor(0, 0);
-            lcd_print("T:"); lcd_print_int(temperature/10); lcd_print(" V:"); lcd_print(etat_ventilo ? "ON " : "OFF");
-            
-            lcd_set_cursor(0, 1);
-            lcd_print("S:"); lcd_print_int(hum_sol_pourcentage); lcd_print("% P:"); lcd_print(etat_pompe ? "ON " : "OFF");
-            
-            // 6. Logs UART
-            uart_send_string("T:"); uart_send_int(temperature/10);
-            uart_send_string("C | Air:"); uart_send_int(hum_air/10);
-            uart_send_string("C | Sol:"); uart_send_int(hum_sol_pourcentage);
-            uart_send_string("% | Ventilo:"); uart_send_string(etat_ventilo ? "ON" : "OFF");
-            uart_send_string(" | Pompe:"); uart_send_string(etat_pompe ? "ON\r\n" : "OFF\r\n");
-            
-        } else {
-            lcd_print("Err Capteur Air");
         }
         
-        _delay_ms(2000); // Pause avant la prochaine boucle
+        // ICI : Le processeur est libre de faire autre chose !
+        // (Dans un vrai système sur batterie, on pourrait le mettre en veille "Sleep Mode" ici pour économiser l'énergie).
     }
+    
     return 0;
 }
