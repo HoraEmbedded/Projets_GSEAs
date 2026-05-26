@@ -3,7 +3,7 @@
   "author": "Assistant",
   "editor": "wokwi",
   "parts": [
-    { "type": "board-arduino-mega", "id": "mega", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-arduino-mega", "id": "mega", "top": 0, "left": 0, "attrs": {} },
     { "type": "wokwi-dht22", "id": "dht", "top": -150, "left": 200, "attrs": {} },
     { "type": "wokwi-lcd1602", "id": "lcd", "top": 150, "left": 200, "attrs": { "pins": "i2c" } },
     { "type": "wokwi-potentiometer", "id": "pot", "top": 50, "left": -200, "attrs": {} },
