@@ -36,7 +36,7 @@ int main(void) {
     // Initialisation
     uart_init();
     
-    // Boucle infinie (équivalent de la fonction loop() d'Arduino)
+    // Boucle infinie ( d'Arduino)
     while (1) {
         uart_send_string("Systeme Serre Intelligente OK - Test UART\r\n");
         _delay_ms(1000); // Pause de 1 seconde
