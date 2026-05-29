@@ -183,37 +183,41 @@
       background: linear-gradient(180deg, #DCE9F4 0%, #AAC4DF 100%);
       display: flex;
       align-items: flex-end;
-      padding-left: 54px; /* Espace aligné sous le bouton Office */
+      padding-left: 54px; 
       border-bottom: 1px solid #89A1C5;
-      height: 25px;
+      height: 22px; /* Réduction de l'épaisseur de la barre */
       flex-shrink: 0;
     }
     
     .r-tab {
-      padding: 3px 14px 4px;
+      padding: 2px 10px 3px; /* Réduction de l'espacement pour des onglets plus étroits */
       font-size: 11px;
       color: #15428B;
       cursor: pointer;
       border: 1px solid transparent;
       border-bottom: none;
-      border-radius: 4px 4px 0 0;
+      border-radius: 3px 3px 0 0; /* Arrondi plus subtil typique de l'interface */
       background: transparent;
-      margin-right: 2px;
+      margin-right: 1px; /* Rapprochement des onglets entre eux */
       position: relative;
       bottom: -1px;
       transition: background 0.1s;
     }
+
     .r-tab:hover:not(.active) {
       background: rgba(255, 255, 255, 0.5);
       border-color: rgba(255, 255, 255, 0.7);
     }
     .r-tab.active {
-      background: #EAF2FB; /* Couleur exacte de la ligne supérieure du ruban */
+      background: #EAF2FB; 
       border-color: #89A1C5;
-      border-bottom-color: #EAF2FB; /* Efface la ligne de séparation */
+      border-bottom-color: #EAF2FB; 
       color: #000;
     }
     
+    /* ════════════════════════════════════════
+       CORPS DU RUBAN (Style Word 2007)
+    ════════════════════════════════════════ */
     /* ════════════════════════════════════════
        CORPS DU RUBAN (Style Word 2007)
     ════════════════════════════════════════ */
@@ -223,16 +227,22 @@
       display: flex;
       align-items: stretch;
       padding: 2px 2px 0;
-      min-height: 92px;
+      min-height: 78px; /* Hauteur réduite pour un rendu plus compact (anciennement 92px) */
       flex-shrink: 0;
       overflow-x: auto;
     }
+    
     .r-group {
       display: flex; flex-direction: column; justify-content: space-between;
       padding: 2px 8px 0; border-right: 1px solid #B0CBEB; position: relative;
     }
-    .group-cmds { 
-      display: flex; gap: 4px; align-items: flex-start; flex: 1; padding-bottom: 18px; 
+    
+    .group-cmds {
+      display: flex;
+      gap: 1px;
+      align-items: flex-start;
+      flex: 1;
+      padding-bottom: 14px; /* Réduit pour s'adapter à la nouvelle hauteur */
     }
     .group-name {
       position: absolute; bottom: 2px; left: 0; right: 0; text-align: center;
@@ -816,13 +826,11 @@
 
     <!-- Barre d'accès rapide -->
     <div class="qat">
-      <button class="qat-btn" title="Télécharger CV" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')">💾</button>
-<button class="qat-btn" title="Envoyer un email" onclick="switchTab('contact')">✉</button>
-<div class="qat-sep"></div>
-      <button class="qat-btn" title="LinkedIn" onclick="window.open('https://www.linkedin.com/in/horaembedded/', '_blank')"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></button>
-<button class="qat-btn" title="GitHub" onclick="window.open('https://github.com/ton-profil', '_blank')"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></button>
+      <button class="qat-btn" title="Télécharger CV" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')">▤</button>
+      <button class="qat-btn" title="Envoyer un email" onclick="switchTab('contact')">✉</button>
       <div class="qat-sep"></div>
-      <button class="qat-btn" title="Personnaliser la barre d'accès rapide">▾</button>
+      <button class="qat-btn" title="LinkedIn" onclick="window.open('https://linkedin.com/in/horaembedded/', '_blank')"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></button>
+      <button class="qat-btn" title="GitHub" onclick="window.open('https://github.com/ton-profil', '_blank')"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></button>
     </div>
 
     <!-- Titre -->
@@ -849,157 +857,67 @@
   ═══════════════════════════════════════ -->
   <div class="ribbon-body">
 
-    <!-- ── Ruban ACCUEIL ── -->
     <div class="ribbon-panel active" id="rp-accueil">
       <div class="r-group">
         <div class="group-cmds">
-          <button class="rb-lg" onclick="switchTab('accueil')"><span class="ri">  ID</span><span class="rl">Profil</span></button>
-          <button class="rb-lg" onclick="alert('Remplacez par votre photo')"><span class="ri">🖼️</span><span class="rl">Photo</span></button>
+          <button class="rb-lg" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')"><span class="ri">▤</span><span class="rl">Télécharger<br>CV</span></button>
+          <button class="rb-lg" onclick="window.print()"><span class="ri">⎙</span><span class="rl">Imprimer<br>Portfolio</span></button>
         </div>
-        <span class="group-name">Identité</span>
+        <span class="group-name">Document</span>
         <span class="dialog-launcher">▼</span>
       </div>
-      
       <div class="r-group">
         <div class="group-cmds">
-          <div class="rb-col">
-            <button class="rb-sm"><span class="ri">📍</span> Tanger, Maroc</button>
-            <button class="rb-sm"><span class="ri">🎓</span> ENSA Tanger – GSEA</button>
-            <button class="rb-sm"><span class="ri">🔍</span> Recherche PFA 2025</button>
-          </div>
+          <button class="rb-lg" onclick="window.open('https://linkedin.com/in/horaembedded/', '_blank')"><span class="ri"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></span><span class="rl">LinkedIn</span></button>
+          <button class="rb-lg" onclick="window.open('https://github.com/ton-profil', '_blank')"><span class="ri"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></span><span class="rl">GitHub</span></button>
         </div>
-        <span class="group-name">Informations</span>
+        <span class="group-name">Réseaux Sociaux</span>
       </div>
       <div class="r-group" style="border-right:none">
         <div class="group-cmds">
-          <div class="rb-col">
-            <button class="rb-sm" onclick="switchTab('contact')"><span class="ri">✉️</span> Contacter</button>
-            <button class="rb-sm" onclick="document.querySelector('.doc-area').scrollTop=0"><span class="ri">⬆️</span> Haut de page</button>
-          </div>
+          <button class="rb-lg" onclick="document.getElementById('docArea').scrollTop=0"><span class="ri">⇪</span><span class="rl">Haut de<br>page</span></button>
         </div>
-        <span class="group-name">Actions</span>
+        <span class="group-name">Navigation</span>
       </div>
     </div>
 
-    <!-- ── Ruban À PROPOS ── -->
     <div class="ribbon-panel" id="rp-apropos">
-      <div class="r-group">
-        <div class="group-cmds">
-          <button class="rb-lg"><span class="ri">📚</span><span class="rl">Parcours<br>Académique</span></button>
-          <button class="rb-lg"><span class="ri">📅</span><span class="rl">Chronologie</span></button>
-        </div>
-        <span class="group-name">Formation</span>
-        <span class="dialog-launcher">▼</span>
-      </div>
-      <div class="r-group">
-        <div class="group-cmds">
-          <div class="rb-col">
-            <button class="rb-sm"><span class="ri">🇫🇷</span> Français – Courant (C1)</button>
-            <button class="rb-sm"><span class="ri">🇬🇧</span> Anglais – Intermédiaire (B2)</button>
-            <button class="rb-sm"><span class="ri">🇲🇦</span> Arabe – Natif (C2)</button>
-          </div>
-        </div>
-        <span class="group-name">Langues</span>
-      </div>
       <div class="r-group" style="border-right:none">
         <div class="group-cmds">
-          <div class="rb-col">
-            <button class="rb-sm"><span class="ri">🏛️</span> Univ. Abdelmalek Essaâdi</button>
-            <button class="rb-sm"><span class="ri">⚡</span> Spé. GSEA</button>
-          </div>
+          <button class="rb-lg" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')"><span class="ri">▤</span><span class="rl">Télécharger<br>CV</span></button>
         </div>
-        <span class="group-name">Établissement</span>
+        <span class="group-name">Export</span>
       </div>
     </div>
 
-    <!-- ── Ruban PROJETS ── -->
     <div class="ribbon-panel" id="rp-projets">
-      <div class="r-group">
-        <div class="group-cmds">
-          <button class="rb-lg"><span class="ri">◈</span><span class="rl">Contrôle<br>Intelligent</span></button>
-          <button class="rb-lg"><span class="ri">💾</span><span class="rl">Embarqué<br>FPGA</span></button>
-          <button class="rb-lg"><span class="ri">⚡</span><span class="rl">Électronique<br>PCB</span></button>
-        </div>
-        <span class="group-name">Catégories</span>
-      </div>
-      <div class="r-group">
-        <div class="group-cmds">
-          <div class="rb-col">
-            <button class="rb-sm"><span class="ri">📊</span> Trier par date</button>
-            <button class="rb-sm"><span class="ri">🏷️</span> Trier par type</button>
-            <button class="rb-sm"><span class="ri">⭐</span> Trier par priorité</button>
-          </div>
-        </div>
-        <span class="group-name">Afficher</span>
-        <span class="dialog-launcher">▼</span>
-      </div>
       <div class="r-group" style="border-right:none">
         <div class="group-cmds">
-          <button class="rb-lg"><span class="ri">➕</span><span class="rl">Ajouter<br>Projet</span></button>
+          <button class="rb-lg" onclick="window.open('https://github.com/ton-profil', '_blank')"><span class="ri"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></span><span class="rl">Ouvrir<br>GitHub</span></button>
         </div>
-        <span class="group-name">Éditer</span>
+        <span class="group-name">Dépôts Sources</span>
       </div>
     </div>
 
-    <!-- ── Ruban COMPÉTENCES ── -->
     <div class="ribbon-panel" id="rp-competences">
-      <div class="r-group">
-        <div class="group-cmds">
-          <button class="rb-lg"><span class="ri">🎛️</span><span class="rl">Automatique<br>& Contrôle</span></button>
-          <button class="rb-lg"><span class="ri">💾</span><span class="rl">Systèmes<br>Embarqués</span></button>
-          <button class="rb-lg"><span class="ri">🔋</span><span class="rl">Électronique<br>de Puissance</span></button>
-        </div>
-        <span class="group-name">Domaines</span>
-      </div>
-      <div class="r-group">
-        <div class="group-cmds">
-          <div class="rb-col">
-            <button class="rb-sm"><span class="ri">🏅</span> MathWorks – MATLAB</button>
-            <button class="rb-sm"><span class="ri">🏅</span> ARM – Embedded Systems</button>
-            <button class="rb-sm"><span class="ri">🏅</span> Xilinx – FPGA</button>
-          </div>
-        </div>
-        <span class="group-name">Certifications cibles</span>
-        <span class="dialog-launcher">▼</span>
-      </div>
       <div class="r-group" style="border-right:none">
         <div class="group-cmds">
-          <div class="rb-col">
-            <button class="rb-sm"><span class="ri">📊</span> Vue graphique</button>
-            <button class="rb-sm"><span class="ri">📝</span> Vue liste</button>
-          </div>
+          <button class="rb-lg" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')"><span class="ri">▤</span><span class="rl">Télécharger<br>CV</span></button>
         </div>
-        <span class="group-name">Disposition</span>
+        <span class="group-name">Fichier</span>
       </div>
     </div>
 
-    <!-- ── Ruban CONTACT ── -->
     <div class="ribbon-panel" id="rp-contact">
-      <div class="r-group">
-        <div class="group-cmds">
-          <button class="rb-lg" onclick="alert('Remplacez par votre adresse email dans la page Contact')">
-            <span class="ri">✉️</span><span class="rl">Envoyer<br>Email</span>
-          </button>
-          <button class="rb-lg">
-            <span class="ri">📱</span><span class="rl">Téléphoner</span>
-          </button>
-        </div>
-        <span class="group-name">Contacter</span>
-      </div>
       <div class="r-group" style="border-right:none">
         <div class="group-cmds">
-          <div class="rb-col">
-            <button class="rb-sm"><span class="ri"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></span> Ouvrir LinkedIn</button>
-            <button class="rb-sm"><span class="ri"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></span> Ouvrir GitHub</button>
-            <button class="rb-sm"><span class="ri">📍</span> Voir sur Maps</button>
-          </div>
+          <button class="rb-lg" onclick="switchTab('contact')"><span class="ri">✉</span><span class="rl">Envoyer<br>Email</span></button>
         </div>
-        <span class="group-name">Réseaux</span>
+        <span class="group-name">Communication</span>
       </div>
     </div>
 
-  </div><!-- / ribbon-body -->
-
+  </div>
 
   <!-- ═══════════════════════════════════════
        RÈGLE (Ruler)
@@ -1165,161 +1083,94 @@
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
         <div class="sec" id="sec-projets">
 
-          <div class="doc-h2">📁 Projets Académiques & Techniques</div>
+          <div class="doc-h2">Projets Académiques & Techniques</div>
 
           <article class="proj-card">
-            <h3>🤖 Contrôle Flou Mamdani — Bras Robotique 2-DOF</h3>
-            <p>Conception et implémentation d'un contrôleur Flou PD de type Mamdani pour la commande d'un
-            bras robotique à 2 degrés de liberté sous MATLAB/Simulink. Optimisation des fonctions
-            d'appartenance et des règles floues pour minimiser l'erreur de position angulaire.
-            Comparaison des performances avec un PID classique.</p>
-            
+            <h3>■ Programmation DSP — TMS320C6713 DSK</h3>
+            <p>Mise en œuvre du DSP TI TMS320C6713 sous Code Composer Studio v7. Développement en C et assembleur C6000 pour la génération de signaux et le filtrage numérique FIR/IIR en temps réel. Diagnostic de dépendances de compilation et maîtrise du workflow toolchain DSP embarqué.</p>
             <div class="proj-links">
-              <a href="#" target="_blank" class="proj-link-btn">📁 Consulter le rapport / code</a>
+              <a href="#" target="_blank" class="proj-link-btn"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> Consulter le code</a>
             </div>
-
             <div class="proj-tags">
-              <span class="pt tech">MATLAB</span>
-              <span class="pt tech">Simulink</span>
-              <span class="pt tech">Fuzzy Logic Toolbox</span>
-              <span class="pt type">Contrôle Intelligent</span>
-              <span class="pt type">Robotique</span>
+              <span class="pt tech">C / C++</span>
+              <span class="pt tech">Assembleur C6000</span>
+              <span class="pt tech">TMS320C6713</span>
+              <span class="pt type">Traitement du Signal</span>
             </div>
           </article>
 
           <article class="proj-card">
-            <h3>🧠 Approximation par Réseau de Neurones (MLP)</h3>
-            <p>Implémentation d'un contrôleur à base de réseau de neurones artificiels (MLP – Perceptron
-            Multicouche) pour approximer le comportement optimal d'un contrôleur sur bras robotique 2-DOF.
-            Entraînement supervisé avec données générées par contrôleur de référence. Intégration dans
-            Simulink via un bloc personnalisé.</p>
-            
+            <h3>■ Étude et Dimensionnement d'un Transistor NMOS en Commutation</h3>
+            <p>Analyse, calcul théorique et dimensionnement d'un canal de commande de puissance utilisant un transistor NMOS en régime de commutation. Choix et validation des composants associés pour assurer la robustesse du montage : sélection d'un optocoupleur pour l'isolation galvanique, d'une diode rapide pour la protection contre les surtensions inductives, et calcul des puissances dissipées par les résistances de polarisation.</p>
             <div class="proj-links">
-              <a href="#" target="_blank" class="proj-link-btn">📁 Consulter le rapport / code</a>
+              <a href="#" target="_blank" class="proj-link-btn"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> Consulter le code</a>
             </div>
-
             <div class="proj-tags">
-              <span class="pt tech">MATLAB</span>
-              <span class="pt tech">Neural Network Toolbox</span>
-              <span class="pt tech">Simulink</span>
+              <span class="pt tech">Électronique de Puissance</span>
+              <span class="pt tech">Dimensionnement HW</span>
+              <span class="pt tech">Composants CMS</span>
+              <span class="pt type">Bureau d'Études</span>
+            </div>
+          </article>
+
+          <article class="proj-card">
+            <h3>■ Smart Greenhouse Management System (Bare-Metal)</h3>
+            <p>Conception d'un système de gestion de serre automatisée sur microcontrôleur ATmega2560. Développement en C pur (Bare-Metal) avec architecture temps-réel pilotée par interruptions matérielles (Timer1). Implémentation d'un contrôle par hystérésis à double seuil et d'arithmétique à virgule fixe pour optimiser les performances et la durée de vie des relais. Simulation "Software-in-the-Loop" (VS Code, Wokwi) avec monitoring I2C/UART.</p>
+            <div class="proj-links">
+              <a href="https://github.com/HoraEmbedded/Projets_GSEAs/tree/main/01_Info_Embarquee/Serre_Intelligente" target="_blank" class="proj-link-btn"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> Consulter le code</a>
+            </div>
+            <div class="proj-tags">
+              <span class="pt tech">C (Bare-Metal)</span>
+              <span class="pt tech">ATmega2560</span>
+              <span class="pt tech">Wokwi / PlatformIO</span>
+              <span class="pt type">Systèmes Embarqués</span>
+            </div>
+          </article>
+
+          <article class="proj-card">
+            <h3>■ Modélisation et Commande de Robot Manipulateur (2DDL)</h3>
+            <p>Modélisation physique et implémentation d'une commande articulaire PID pour un robot à 2 degrés de liberté sous MATLAB/Simscape Multibody. Étude de la cinématique directe (FK) et inverse (IK) pour la génération de trajectoires. Optimisation de la robustesse et du suivi de trajectoire, atteignant une précision avec une erreur latérale inférieure à 0.05 m.</p>
+            <div class="proj-links">
+              <a href="#" target="_blank" class="proj-link-btn"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> Consulter le code</a>
+            </div>
+            <div class="proj-tags">
+              <span class="pt tech">MATLAB / Simscape</span>
+              <span class="pt tech">PID</span>
+              <span class="pt tech">Cinématique (FK/IK)</span>
+              <span class="pt tech">Robotics System Toolbox</span>
+              <span class="pt type">Robotique Industrielle</span>
+            
+            </div>
+          </article>
+
+          <article class="proj-card">
+            <h3>■ Les Auto-Encodeurs (AE) — Compression & Détection d'Anomalies</h3>
+            <p>Étude approfondie et implémentation d'architectures d'apprentissage profond (Vanilla AE, Sparse, Denoising, et VAE). Application pratique dédiée au traitement d'images (filtrage du bruit) et au diagnostic industriel par détection d'anomalies, complétée par une analyse comparative des performances des modèles.</p>
+            <div class="proj-links">
+              <a href="#" target="_blank" class="proj-link-btn"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> Consulter le code</a>
+            </div>
+            <div class="proj-tags">
+              <span class="pt tech">Deep Learning</span>
+              <span class="pt tech">Auto-encodeurs (VAE)</span>
+              <span class="pt tech">Python / Keras</span>
               <span class="pt type">Machine Learning</span>
-              <span class="pt type">Contrôle</span>
             </div>
           </article>
-
+          
           <article class="proj-card">
-            <h3>🧬 Optimisation PID par Algorithme Génétique (GA)</h3>
-            <p>Optimisation automatique des paramètres (Kp, Ki, Kd) d'un contrôleur PID via Algorithme
-            Génétique pour la commande d'un bras robotique 2-DOF. Définition de la fonction de fitness
-            basée sur l'ITAE. Comparaison des performances avec tuning manuel et méthodes analytiques.</p>
-            
+            <h3>■ Convoyeur de tri automatique (Factory I/O)</h3>
+            <p>Programmation d'un automate Siemens S7-1200 (simulé) via TIA Portal pour trier des objets par couleur. Développement du programme Ladder avec gestion des modes automatique, manuel et arrêt d'urgence. Communication PLCSIM ↔ Factory I/O via OPC-DA.</p>
             <div class="proj-links">
-              <a href="#" target="_blank" class="proj-link-btn">📁 Consulter le rapport / code</a>
+              <a href="https://github.com/HoraEmbedded/Projets_GSEAs/blob/main/05_Projets_Globaux/MonPortfolio/index.html" target="_blank" class="proj-link-btn"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> Consulter le code</a>
             </div>
-
             <div class="proj-tags">
-              <span class="pt tech">MATLAB</span>
-              <span class="pt tech">Global Optimization Toolbox</span>
-              <span class="pt type">Optimisation</span>
-              <span class="pt type">Algorithme Génétique</span>
+              <span class="pt tech">TIA Portal (Ladder)</span>
+              <span class="pt tech">Siemens S7-1200</span>
+              <span class="pt tech">Factory I/O</span>
+              <span class="pt type">Automatisme Industriel</span>
             </div>
           </article>
-
-          <article class="proj-card">
-            <h3>🔧 Implémentation S-Function MATLAB/Simulink</h3>
-            <p>Développement d'une S-Function C personnalisée sous MATLAB/Simulink pour intégrer des
-            algorithmes de contrôle avancés dans l'environnement de simulation temps continu. Application
-            sur le modèle de bras robotique 2-DOF. Gestion des entrées/sorties, états discrets et continus.</p>
-            
-            <div class="proj-links">
-              <a href="#" target="_blank" class="proj-link-btn">📁 Consulter le rapport / code</a>
-            </div>
-
-            <div class="proj-tags">
-              <span class="pt tech">MATLAB</span>
-              <span class="pt tech">C/C++</span>
-              <span class="pt tech">S-Function</span>
-              <span class="pt type">Simulation</span>
-              <span class="pt type">Temps-réel</span>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <h3>💾 Contrôleur PID sur FPGA</h3>
-            <p>Conception et implémentation d'un contrôleur PID numérique sur FPGA en VHDL.
-            Synthèse, simulation fonctionnelle et temporelle avec Quartus II. Validation hardware
-            sur carte de développement. Optimisation de la précision numérique (virgule fixe).</p>
-            
-            <div class="proj-links">
-              <a href="#" target="_blank" class="proj-link-btn">💾 Code VHDL</a>
-            </div>
-
-            <div class="proj-tags">
-              <span class="pt tech">VHDL</span>
-              <span class="pt tech">Quartus II</span>
-              <span class="pt tech">FPGA</span>
-              <span class="pt type">Embarqué</span>
-              <span class="pt type">Numérique</span>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <h3>⚡ Convertisseur Buck — Conception PCB</h3>
-            <p>Conception complète d'un convertisseur abaisseur de tension (Buck) incluant le
-            dimensionnement des composants, simulation sous LTSpice et réalisation du PCB sur
-            plusieurs couches. Validation des performances (rendement, ondulation, réponse
-            transitoire) par mesures expérimentales sur banc de test.</p>
-            
-            <div class="proj-links">
-              <a href="#" target="_blank" class="proj-link-btn">📐 Voir les schémas</a>
-            </div>
-
-            <div class="proj-tags">
-              <span class="pt tech">LTSpice</span>
-              <span class="pt tech">Altium / KiCad</span>
-              <span class="pt type">Électronique de Puissance</span>
-              <span class="pt type">Conception PCB</span>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <h3>🌐 Projet IoT Embarqué</h3>
-            <p>Développement d'un système IoT complet incluant acquisition de données via capteurs
-            (température, humidité, luminosité), traitement local sur microcontrôleur et transmission
-            sans fil. Interface de monitoring avec affichage temps réel et alertes configurables.
-            Communication MQTT sur réseau Wi-Fi.</p>
-            
-            <div class="proj-links">
-              <a href="#" target="_blank" class="proj-link-btn">📁 Consulter le code</a>
-            </div>
-
-            <div class="proj-tags">
-              <span class="pt tech">ESP32</span>
-              <span class="pt tech">Arduino IDE / C++</span>
-              <span class="pt tech">MQTT</span>
-              <span class="pt type">IoT</span>
-              <span class="pt type">Temps Réel</span>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <h3>📐 Projets AutoCAD Electrical</h3>
-            <p>Réalisation d'une série de 10 projets AutoCAD Electrical couvrant des thèmes professionnels
-            (armoires électriques industrielles, démarrages moteurs, systèmes de sécurité, câblage
-            industriel) et créatifs (automatisation domotique, véhicule électrique, énergie solaire).
-            Constitution d'un portfolio documenté.</p>
-            
-            <div class="proj-links">
-              <a href="#" target="_blank" class="proj-link-btn">📐 Voir le Portfolio AutoCAD</a>
-            </div>
-
-            <div class="proj-tags">
-              <span class="pt tech">AutoCAD Electrical</span>
-              <span class="pt type">Schémas Électriques</span>
-              <span class="pt type">Portfolio</span>
-            </div>
-          </article>
-
+          
         </div>
 
         <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1327,96 +1178,66 @@
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
         <div class="sec" id="sec-competences">
 
-          <div class="doc-h2">⚙️ Compétences Techniques</div>
+          <div class="doc-h2">Compétences Techniques</div>
 
           <div class="skill-cat">
-            <div class="skill-cat-title">🖥️ Logiciels & Environnements de Développement</div>
-            <div class="sk-row">
-              <div class="sk-lbl"><span>MATLAB / Simulink</span><span>Avancé</span></div>
-              <div class="sk-track"><div class="sk-fill" style="width:92%"></div></div>
-            </div>
-            <div class="sk-row" style="margin-top:6px">
-              <div class="sk-lbl"><span>AutoCAD Electrical</span><span>Intermédiaire+</span></div>
-              <div class="sk-track"><div class="sk-fill" style="width:75%"></div></div>
-            </div>
-            <div class="sk-row" style="margin-top:6px">
-              <div class="sk-lbl"><span>Quartus II / Vivado</span><span>Intermédiaire</span></div>
-              <div class="sk-track"><div class="sk-fill" style="width:68%"></div></div>
-            </div>
-            <div class="sk-row" style="margin-top:6px">
-              <div class="sk-lbl"><span>LTSpice / Proteus</span><span>Intermédiaire</span></div>
-              <div class="sk-track"><div class="sk-fill" style="width:70%"></div></div>
-            </div>
-            <div class="sk-row" style="margin-top:6px">
-              <div class="sk-lbl"><span>Keil µVision / STM32CubeIDE</span><span>Intermédiaire</span></div>
-              <div class="sk-track"><div class="sk-fill" style="width:65%"></div></div>
-            </div>
-          </div>
-
-          <div class="skill-cat">
-            <div class="skill-cat-title">💻 Langages de Programmation</div>
+            <div class="skill-cat-title">Embarqué & Hardware</div>
             <div class="tag-cloud">
               <span class="tag">C / C++</span>
-              <span class="tag">MATLAB Script</span>
-              <span class="tag">VHDL</span>
+              <span class="tag">Assembleur C6000</span>
+              <span class="tag">ESP32 & STM32</span>
+              <span class="tag">Arduino</span>
+              <span class="tag">TMS320C6713 (DSP)</span>
+              <span class="tag lite">FPGA (notions)</span>
+            </div>
+          </div>
+
+          <div class="skill-cat">
+            <div class="skill-cat-title">Automatique & Régulation</div>
+            <div class="tag-cloud">
+              <span class="tag">MATLAB / Simulink</span>
+              <span class="tag">TIA Portal (Ladder, Grafcet)</span>
+              <span class="tag">PID & FOPDT</span>
+              <span class="tag">Factory I/O</span>
+              <span class="tag lite">OPC-DA</span>
+            </div>
+          </div>
+
+          <div class="skill-cat">
+            <div class="skill-cat-title">Robotique & Vision</div>
+            <div class="tag-cloud">
+              <span class="tag">Robotics System Toolbox</span>
+              <span class="tag">OpenCV</span>
               <span class="tag">Python</span>
-              <span class="tag">Assembleur (ARM)</span>
-              <span class="tag lite">HTML / CSS</span>
-              <span class="tag lite">Bash / Shell</span>
+              <span class="tag lite">Cinématique directe/inverse</span>
             </div>
           </div>
 
           <div class="skill-cat">
-            <div class="skill-cat-title">🧠 Contrôle Automatique & Systèmes Intelligents</div>
+            <div class="skill-cat-title">IIoT & Réseaux Industriels</div>
             <div class="tag-cloud">
-              <span class="tag">Contrôle Flou Mamdani</span>
-              <span class="tag">Réseaux de Neurones (MLP)</span>
-              <span class="tag">Algorithmes Génétiques</span>
-              <span class="tag">PID / PD / PI</span>
-              <span class="tag">S-Function Simulink</span>
-              <span class="tag lite">Asservissement</span>
-              <span class="tag lite">Modélisation Dynamique</span>
-              <span class="tag lite">Analyse fréquentielle</span>
-            </div>
-          </div>
-
-          <div class="skill-cat">
-            <div class="skill-cat-title">💾 Systèmes Embarqués & FPGA</div>
-            <div class="tag-cloud">
-              <span class="tag">FPGA (Xilinx / Intel)</span>
-              <span class="tag">STM32 (ARM Cortex-M)</span>
-              <span class="tag">Arduino / ESP32</span>
-              <span class="tag lite">I2C / SPI / UART</span>
-              <span class="tag lite">CAN Bus</span>
-              <span class="tag lite">PWM / ADC / DAC</span>
-              <span class="tag lite">RTOS</span>
-            </div>
-          </div>
-
-          <div class="skill-cat">
-            <div class="skill-cat-title">⚡ Électronique & Conception PCB</div>
-            <div class="tag-cloud">
-              <span class="tag">Conception PCB multi-couches</span>
-              <span class="tag">Électronique de Puissance</span>
-              <span class="tag">Convertisseurs DC/DC</span>
-              <span class="tag lite">Altium Designer</span>
-              <span class="tag lite">KiCad</span>
-              <span class="tag lite">Mesures & Validation</span>
+              <span class="tag">MQTT</span>
+              <span class="tag">Modbus</span>
+              <span class="tag">Node-RED</span>
+              <span class="tag">Raspberry Pi</span>
+              <span class="tag lite">OPC-UA (notions)</span>
             </div>
           </div>
 
           <div class="skill-cat" style="margin-bottom:0">
-            <div class="skill-cat-title">🌐 IoT & Réseaux Industriels</div>
+            <div class="skill-cat-title">Outils & Conception</div>
             <div class="tag-cloud">
-              <span class="tag">MQTT</span>
-              <span class="tag">Wi-Fi / BLE</span>
-              <span class="tag lite">Modbus</span>
-              <span class="tag lite">OPC-UA</span>
-              <span class="tag lite">SCADA (bases)</span>
+              <span class="tag">Code Composer Studio</span>
+              <span class="tag">Linux / Ubuntu</span>
+              <span class="tag">Git / GitHub</span>
+              <span class="tag">OrCAD/PSpice </span>
+              <span class="tag lite">Microsoft Office</span>
+              <span class="tag lite">KiCad (notions)</span>
+              <span class="tag lite">LaTeX</span>
             </div>
           </div>
 
-        </div><!-- / sec-competences -->
+        </div>
 
 
         <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1471,16 +1292,13 @@
        BARRE D'ÉTAT
   ═══════════════════════════════════════ -->
   <div class="status-bar">
-    <div class="st">📄 Page 1 sur 1</div>
-    <div class="st">✅ Prêt</div>
+    <div class="st">▤ Page 1 sur 1</div>
+    <div class="st">☑ Prêt</div>
     <div class="st" id="st-section">ACCUEIL</div>
-    <div class="st">🇫🇷 Français (Maroc)</div>
-    <div class="st">Mots : 847</div>
     <div class="st-fill"></div>
     <div class="st-right">
-      <button class="view-btn" title="Mode Page" onclick="setView('page',this)" style="background:rgba(255,255,255,0.18)">📄</button>
+      <button class="view-btn" title="Mode Page" onclick="setView('page',this)" style="background:rgba(255,255,255,0.18)">▤</button>
       <button class="view-btn" title="Mode Plein écran" onclick="setView('full',this)">⛶</button>
-      <button class="view-btn" title="Mode Web" onclick="setView('web',this)">🌐</button>
       <div class="zoom-wrap">
         <button onclick="changeZoom(-10)">−</button>
         <input type="range" class="zoom-slider" id="zoomSlider" min="50" max="200" value="100" oninput="applyZoom(this.value)">
