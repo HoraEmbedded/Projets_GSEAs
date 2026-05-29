@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV Horacia AZONHOUMON – Ingénieure GSEA</title>
+  <style>
+    /* ─── PALETTE DE COULEURS MODERNE & PROFESSIONNELLE ─── */
+    :root {
+      --primary: #1e3a8a;       /* Bleu marine profond */
+      --secondary: #0284c7;     /* Bleu d'accent moderne */
+      --text-dark: #1e293b;     /* Gris anthracite pour le texte principal */
+      --text-light: #64748b;    /* Gris délavé pour les sous-titres */
+      --bg-light: #f8fafc;      /* Fond de page ultra-clair */
+      --sidebar-bg: #f1f5f9;    /* Fond de la colonne de gauche */
+      --border: #e2e8f0;        /* Lignes de séparation discrètes */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-serif, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── CONTENEUR PRINCIPAL DU CV (FORMAT A4 ADAPTATIF) ─── */
+    .cv-container {
+      max-width: 920px;
+      margin: 30px auto;
+      background: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    /* ─── COLONNE GAUCHE / SIDEBAR (35%) ─── */
+    .sidebar {
+      width: 35%;
+      background-color: var(--sidebar-bg);
+      padding: 30px 25px;
+      border-right: 1px solid var(--border);
+    }
+
+    /* ─── COLONNE DROITE / CONTENU PRINCIPAL (65%) ─── */
+    .main-content {
+      width: 65%;
+      padding: 35px 35px;
+    }
+
+    /* ─── EN-TÊTE / PROFIL ─── */
+    .header {
+      margin-bottom: 25px;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 15px;
+    }
+
+    .header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+    }
+
+    .header h2 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--secondary);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .profile-summary {
+      font-size: 12.5px;
+      color: var(--text-dark);
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+
+    /* ─── STYLES DES SECTIONS ─── */
+    .section-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 4px;
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar .section-title {
+      margin-top: 25px;
+    }
+    .sidebar .section-title:first-of-type {
+      margin-top: 0;
+    }
+
+    /* ─── COORDONNÉES & CONTACT ─── */
+    .contact-info {
+      list-style: none;
+      font-size: 12px;
+    }
+
+    .contact-info li {
+      margin-bottom: 8px;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+    }
+
+    .contact-info li strong {
+      color: var(--primary);
+      width: 25px;
+      display: inline-block;
+    }
+
+    .contact-info a {
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+    .contact-info a:hover {
+      color: var(--secondary);
+    }
+
+    /* ─── PARCOURS ACCÈS CHRONOLOGIQUE (FORMATION) ─── */
+    .education-item {
+      margin-bottom: 15px;
+    }
+
+    .education-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .education-org {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--secondary);
+    }
+
+    .education-date {
+      font-size: 11px;
+      color: var(--text-light);
+      font-style: italic;
+      margin-bottom: 2px;
+    }
+
+    .education-details {
+      font-size: 11px;
+      color: var(--text-light);
+    }
+
+    /* ─── TAG CHIPS POUR COMPÉTENCES & LANGUES ─── */
+    .skills-container {
+      margin-bottom: 15px;
+    }
+
+    .skills-cat-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tag {
+      font-size: 10.5px;
+      background-color: #ffffff;
+      color: var(--primary);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .tag.lang {
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+    }
+
+    /* ─── BLOCS DE PROJETS TECHNIQUES ─── */
+    .project-item {
+      margin-bottom: 18px;
+    }
+
+    .project-item:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 3px;
+    }
+
+    .project-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .project-date {
+      font-size: 11px;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .project-desc {
+      font-size: 11.5px;
+      color: var(--text-dark);
+      text-align: justify;
+      margin-bottom: 4px;
+    }
+
+    .project-tech {
+      font-size: 10.5px;
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    /* ─── OPTIMISATION IMPRESSION EN UNE PAGE (A4) ─── */
+    @media print {
+      body {
+        background-color: #ffffff;
+      }
+      .cv-container {
+        margin: 0;
+        box-shadow: none;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+      }
+      .sidebar {
+        background-color: #f8fafc !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .cv-container {
+        flex-direction: column;
+        margin: 10px;
+      }
+      .sidebar, .main-content {
+        width: 100%;
+        border-right: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cv-container">
+    
+    <!-- ════════════════ COLONNE GAUCHE : INFOS & SKILLS ════════════════ -->
+    <aside class="sidebar">
+      
+      <!-- Section Contact -->
+      <section>
+        <h3 class="section-title">Contact</h3>
+        <ul class="contact-info">
+          <li><strong>📍</strong> Tanger, Maroc</li>
+          <li><strong>✉</strong> <a href="mailto:votre.email@example.com">votre.email@example.com</a></li>
+          <li><strong>📞</strong> +212 6 XX XX XX XX</li>
+          <li><strong>⚯</strong> <a href="https://linkedin.com/in/horacia-azonhoumon" target="_blank">linkedin.com/in/horacia-azonhoumon</a></li>
+          <li><strong>⌨</strong> <a href="https://github.com/votre-profil" target="_blank">github.com/votre-profil</a></li>
+        </ul>
+      </section>
+
+      <!-- Section Formation -->
+      <section>
+        <h3 class="section-title">Formation</h3>
+        
+        <div class="education-item">
+          <div class="education-title">Cycle Ingénieur (GSEA)</div>
+          <div class="education-org">ENSA Tanger</div>
+          <div class="education-date">2022 – Présent (4e année)</div>
+          <div class="education-details">Génie des Systèmes Électronique & Automatique.</div>
+        </div>
+
+        <div class="education-item">
+          <div class="education-title">Classes Préparatoires (CPGE)</div>
+          <div class="education-org">Filière TSI / MPSI</div>
+          <div class="education-date">2020 – 2022</div>
+          <div class="education-details">Mathématiques, Physique & Sciences de l'Ingénieur.</div>
+        </div>
+      </section>
+
+      <!-- Section Compétences Réorganisées -->
+      <section>
+        <h3 class="section-title">Compétences</h3>
+        
+        <div class="skills-container">
+          <div class="skills-cat-title">Embarqué & Hardware</div>
+          <div class="tag-cloud">
+            <span class="tag">C / C++</span>
+            <span class="tag">Assembleur C6000</span>
+            <span class="tag">STM32 / ESP32</span>
+            <span class="tag">TMS320C6713 (DSP)</span>
+            <span class="tag">Arduino</span>
+          </div>
+        </div>
+
+        <div class="skills-container">
+          <div class="skills-cat-title">Automatique & Régulation</div>
+          <div class="tag-cloud">
+            <span class="tag">MATLAB / Simulink</span>
+            <span class="tag">TIA Portal (Ladder)</span>
+            <span class="tag">Régulation PID</span>
+            <span class="tag">Factory I/O</span>
+            <span class="tag">Modélisation FOPDT</span>
+          </div>
+        </div>
+
+        <div class="skills-container">
+          <div class="skills-cat-title">Robotique & Vision / IA</div>
+          <div class="tag-cloud">
+            <span class="tag">OpenCV</span>
+            <span class="tag">Deep Learning (VAE)</span>
+            <span class="tag">Python</span>
+            <span class="tag">Robotics Toolbox</span>
+          </div>
+        </div>
+
+        <div class="skills-container">
+          <div class="skills-cat-title">IIoT & Outils Ingénieur</div>
+          <div class="tag-cloud">
+            <span class="tag">MQTT / Modbus</span>
+            <span class="tag">Linux / Ubuntu</span>
+            <span class="tag">Git / GitHub</span>
+            <span class="tag">Code Composer Studio</span>
+            <span class="tag">LaTeX / MS Office</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Langues -->
+      <section>
+        <h3 class="section-title">Langues</h3>
+        <div class="tag-cloud" style="margin-top: 5px;">
+          <span class="tag lang">Français (C1)</span>
+          <span class="tag lang">Anglais (B2)</span>
+          <span class="tag lang">Arabe (C2)</span>
+        </div>
+      </section>
+
+      <!-- Section Soft Skills -->
+      <section>
+        <h3 class="section-title">Aptitudes</h3>
+        <div class="tag-cloud" style="margin-top: 5px;">
+          <span class="tag">Rigueur analytique</span>
+          <span class="tag">Esprit d'équipe</span>
+          <span class="tag">Autonomie technique</span>
+          <span class="tag">Adaptabilité rapide</span>
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- ════════════════ COLONNE DROITE : PROFIL & PROJETS ════════════════ -->
+    <main class="main-content">
+      
+      <!-- En-tête nominatif -->
+      <header class="header">
+        <h1>Horacia AZONHOUMON</h1>
+        <h2>Éleve Ingénieure — Systèmes Embarqués & Mécatronique</h2>
+      </header>
+
+      <!-- Résumé Profil Professionnel -->
+      <p class="profile-summary">
+        Étudiante ingénieure en 4e année à l'ENSA Tanger, spécialisée en systèmes embarqués et automatique industrielle. Forte d'une solide maîtrise de la programmation bas-niveau (C, assembleur DSP), de l'automatisme (TIA Portal), et de la modélisation robotique, je combine rigueur méthodologique et polyvalence technique. Je recherche un <strong>stage PFA (Projet de Fin d'Année)</strong> dynamique et innovant afin de mettre mes compétences au service de projets industriels d'envergure, notamment au sein de structures d'excellence comme <em>Capgemini Engineering</em>.
+      </p>
+
+      <!-- Section Majeure : Projets Techniques Extraits et Validés -->
+      <section>
+        <h3 class="section-title">Projets Académiques & Techniques</h3>
+
+        <!-- Projet 1 : Smart Greenhouse -->
+        <div class="project-item">
+          <div class="project-header">
+            <span class="project-title">■ Smart Greenhouse Management System</span>
+            <span class="project-date">2026</span>
+          </div>
+          <p class="project-desc">
+            Conception d'un système de gestion de serre automatisée sur architecture ATmega2560. Développement complet en C pur (Bare-Metal) piloté par interruptions matérielles (Timer1 CTC) pour optimiser l'utilisation du CPU. Implémentation d'un algorithme par hystérésis à double seuil (atténuation du chattering des relais) et d'une logique en virgule fixe. Validation via simulation Software-in-the-Loop avec télémétrie UART/I2C.
+          </p>
+          <span class="project-tech">Technologies : C (Bare-Metal), ATmega2560, PlatformIO, Wokwi, I2C, UART</span>
+        </div>
+
+        <!-- Projet 2 : Robotique TPs -->
+        <div class="project-item">
+          <div class="project-header">
+            <span class="project-title">■ Modélisation et Commande de Robot Manipulateur (2DDL)</span>
+            <span class="project-date">2026</span>
+          </div>
+          <p class="project-desc">
+            Modélisation physique et simulation d'un bras robotique articulé à 2 degrés de liberté. Développement et réglage d'une commande articulaire PID robuste sous MATLAB/Simscape Multibody. Application des matrices de cinématique directe (FK) et cinématique inverse (IK) pour la génération de profils de mouvements fluides, atteignant une précision de suivi de trajectoire de haute fidélité (erreur latérale inférieure à 0.05 m).
+          </p>
+          <span class="project-tech">Technologies : MATLAB, Simulink, Simscape Multibody, Commande PID, Cinématique</span>
+        </div>
+
+        <!-- Projet 3 : Auto-encodeurs -->
+        <div class="project-item">
+          <div class="project-header">
+            <span class="project-title">■ Auto-Encodeurs (AE) — Compression & Détection d'Anomalies</span>
+            <span class="project-date">2026</span>
+          </div>
+          <p class="project-desc">
+            Recherche avancée et implémentation d'architectures d'apprentissage profond : Vanilla AE, Sparse, Denoising et Auto-encodeurs Variationnels (VAE). Application pratique au filtrage et à la reconstruction de données d'images bruitées, ainsi qu'au diagnostic industriel par détection automatique d'anomalies de comportement. Analyse critique et comparative des performances.
+          </p>
+          <span class="project-tech">Technologies : Deep Learning, Python, Keras, TensorFlow, VAE, Traitement d'images</span>
+        </div>
+
+        <!-- Projet 4 : Transistor NMOS Commutation -->
+        <div class="project-item">
+          <div class="project-header">
+            <span class="project-title">■ Dimensionnement d'un Canal de Commutation NMOS</span>
+            <span class="project-date">2025</span>
+          </div>
+          <p class="project-desc">
+            Étude et dimensionnement théorique complet d'un circuit de puissance à transistor NMOS. Sélection rigoureuse de composants de niveau commercial (CMS) pour assurer la robustesse du montage : intégration d'un optocoupleur pour l'isolation galvanique, calcul de la diode de roue libre contre les surtensions inductives, et modélisation de la dissipation thermique des résistances de polarisation.
+          </p>
+          <span class="project-tech">Technologies : Électronique de puissance, Schémas électriques, Choix Composants CMS</span>
+        </div>
+
+        <!-- Projet 5 : DSP TI -->
+        <div class="project-item">
+          <div class="project-header">
+            <span class="project-title">■ Programmation DSP temps-réel — TMS320C6713 DSK</span>
+            <span class="project-date">2024</span>
+          </div>
+          <p class="project-desc">
+            Mise en œuvre du processeur de traitement de signal Texas Instruments TMS320C6713. Développement optimisé en C embarqué et assembleur C6000 pour la génération de signaux et l'implémentation de filtres numériques FIR/IIR. Configuration de la toolchain et diagnostic de bas niveau sous Code Composer Studio v7.
+          </p>
+          <span class="project-tech">Technologies : C embarqué, Assembleur C6000, CCS v7, Filtrage Numérique</span>
+        </div>
+
+        <!-- Projet 6 : Convoyeur S7-1200 -->
+        <div class="project-item">
+          <div class="project-header">
+            <span class="project-title">■ Convoyeur de Tri Automatique Intelligent</span>
+            <span class="project-date">2024</span>
+          </div>
+          <p class="project-desc">
+            Développement d'un algorithme de tri d'objets par couleur sur automate Siemens S7-1200 sous TIA Portal. Programmation structurée en langage Ladder intégrant la gestion des modes opératoires (Auto/Man/Arrêt d'urgence) et interface OPC-DA couplée au jumeau numérique Factory I/O.
+          </p>
+          <span class="project-tech">Technologies : TIA Portal, Langage Ladder, Factory I/O, Siemens S7-1200</span>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>
