@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio – Horacia | Microsoft Portfolio 2007</title>
+  <title>Horacia AZONHOUMON – Portfolio Ingénieure GSEA</title>
   <style>
     /* ════════════════════════════════════════
        RESET & BASE
@@ -642,6 +642,16 @@
     .pt.tech { background: #1848A8; color: white; }
     .pt.type { background: #E5EEFB; color: #1848A8; border: 1px solid #B5D0EE; }
 
+    .proj-links { margin-bottom: 10px; }
+    .proj-link-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11.5px; text-decoration: none; color: #1848A8;
+      font-weight: 600; border: 1px solid #B5D0EE;
+      padding: 3px 8px; border-radius: 3px; background: white;
+      transition: background 0.1s, border-color 0.1s;
+    }
+    .proj-link-btn:hover { background: #E8F3FE; border-color: #8AAEE0; }
+
     /* ── Contact ── */
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
     .ct-card {
@@ -795,18 +805,17 @@
     <!-- Barre d'accès rapide -->
     <div class="qat">
       <button class="qat-btn" title="Accueil" onclick="switchTab('accueil')">⌂</button>
-      <button class="qat-btn" title="Télécharger CV" onclick="alert('Remplacez par votre fichier CV')">💾</button>
-      <button class="qat-btn" title="Envoyer un email" onclick="switchTab('contact')">✉</button>
-      <div class="qat-sep"></div>
-      <button class="qat-btn" title="Profil LinkedIn" onclick="alert('Lien LinkedIn à configurer')">🔗</button>
-      <button class="qat-btn" title="GitHub" onclick="alert('Lien GitHub à configurer')">💻</button>
+      <button class="qat-btn" title="Télécharger CV" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')">💾</button>
+<button class="qat-btn" title="Envoyer un email" onclick="switchTab('contact')">✉</button>
+<div class="qat-sep"></div>
+<button class="qat-btn" title="Profil LinkedIn" onclick="window.open('https://linkedin.com/in/ton-profil', '_blank')">🔗</button>
+<button class="qat-btn" title="GitHub" onclick="window.open('https://github.com/ton-profil', '_blank')">💻</button>
       <div class="qat-sep"></div>
       <button class="qat-btn" title="Personnaliser la barre d'accès rapide">▾</button>
     </div>
 
     <!-- Titre -->
-    <div class="win-title">Horacia [NOM] — Portfolio Professionnel · Microsoft Portfolio 2007</div>
-
+    <div class="win-title">Horacia AZONHOUMON — Portfolio Professionnel Ingénierie GSEA</div>
     <!-- Contrôles fenêtre -->
     <div class="win-controls">
       <button class="win-ctrl" title="Réduire">—</button>
@@ -856,13 +865,13 @@
       </div>
       <div class="r-group">
         <div class="group-cmds">
-          <button class="rb-lg" onclick="alert('Remplacez par le lien de téléchargement de votre CV')">
-            <span class="ri">📄</span><span class="rl">Télécharger<br>CV</span>
-          </button>
-          <button class="rb-lg" onclick="alert('Lien LinkedIn à configurer')">
+          <button class="rb-lg" onclick="window.open('LIEN_VERS_TON_CV.pdf', '_blank')">
+  <span class="ri">📄</span><span class="rl">Télécharger<br>CV</span>
+</button>
+          <button class="rb-lg" onclick="window.open('LIEN_VERS_TON_PROFIL_LINKEDIN', '_blank')">
             <span class="ri">🔗</span><span class="rl">LinkedIn</span>
           </button>
-          <button class="rb-lg" onclick="alert('Lien GitHub à configurer')">
+          <button class="rb-lg" onclick="window.open('LIEN_VERS_TON_PROFIL_GITHUB', '_blank')">
             <span class="ri">💻</span><span class="rl">GitHub</span>
           </button>
         </div>
@@ -1118,9 +1127,7 @@
           <div class="profile-hero">
             <div class="avatar">👩‍💻</div>
             <div>
-              <div class="hero-name">Horacia [NOM]
-                <!-- ↑ Remplacez [NOM] par votre nom de famille -->
-              </div>
+              <div class="hero-name">Horacia AZONHOUMON</div>
               <div class="hero-sub">Ingénieure en Génie des Systèmes Électronique et Automatique (GSEA)</div>
               <div class="hero-chips">
                 <span class="chip">📍 Tanger, Maroc</span>
@@ -1251,12 +1258,17 @@
 
           <div class="doc-h2">📁 Projets Académiques & Techniques</div>
 
-          <div class="proj-card">
+          <article class="proj-card">
             <h3>🤖 Contrôle Flou Mamdani — Bras Robotique 2-DOF</h3>
             <p>Conception et implémentation d'un contrôleur Flou PD de type Mamdani pour la commande d'un
             bras robotique à 2 degrés de liberté sous MATLAB/Simulink. Optimisation des fonctions
             d'appartenance et des règles floues pour minimiser l'erreur de position angulaire.
             Comparaison des performances avec un PID classique.</p>
+            
+            <div class="proj-links">
+              <a href="#" target="_blank" class="proj-link-btn">📁 Consulter le rapport / code</a>
+            </div>
+
             <div class="proj-tags">
               <span class="pt tech">MATLAB</span>
               <span class="pt tech">Simulink</span>
@@ -1264,14 +1276,19 @@
               <span class="pt type">Contrôle Intelligent</span>
               <span class="pt type">Robotique</span>
             </div>
-          </div>
+          </article>
 
-          <div class="proj-card">
+          <article class="proj-card">
             <h3>🧠 Approximation par Réseau de Neurones (MLP)</h3>
             <p>Implémentation d'un contrôleur à base de réseau de neurones artificiels (MLP – Perceptron
             Multicouche) pour approximer le comportement optimal d'un contrôleur sur bras robotique 2-DOF.
             Entraînement supervisé avec données générées par contrôleur de référence. Intégration dans
             Simulink via un bloc personnalisé.</p>
+            
+            <div class="proj-links">
+              <a href="#" target="_blank" class="proj-link-btn">📁 Consulter le rapport / code</a>
+            </div>
+
             <div class="proj-tags">
               <span class="pt tech">MATLAB</span>
               <span class="pt tech">Neural Network Toolbox</span>
@@ -1279,26 +1296,36 @@
               <span class="pt type">Machine Learning</span>
               <span class="pt type">Contrôle</span>
             </div>
-          </div>
+          </article>
 
-          <div class="proj-card">
+          <article class="proj-card">
             <h3>🧬 Optimisation PID par Algorithme Génétique (GA)</h3>
             <p>Optimisation automatique des paramètres (Kp, Ki, Kd) d'un contrôleur PID via Algorithme
             Génétique pour la commande d'un bras robotique 2-DOF. Définition de la fonction de fitness
             basée sur l'ITAE. Comparaison des performances avec tuning manuel et méthodes analytiques.</p>
+            
+            <div class="proj-links">
+              <a href="#" target="_blank" class="proj-link-btn">📁 Consulter le rapport / code</a>
+            </div>
+
             <div class="proj-tags">
               <span class="pt tech">MATLAB</span>
               <span class="pt tech">Global Optimization Toolbox</span>
               <span class="pt type">Optimisation</span>
               <span class="pt type">Algorithme Génétique</span>
             </div>
-          </div>
+          </article>
 
-          <div class="proj-card">
+          <article class="proj-card">
             <h3>🔧 Implémentation S-Function MATLAB/Simulink</h3>
             <p>Développement d'une S-Function C personnalisée sous MATLAB/Simulink pour intégrer des
             algorithmes de contrôle avancés dans l'environnement de simulation temps continu. Application
             sur le modèle de bras robotique 2-DOF. Gestion des entrées/sorties, états discrets et continus.</p>
+            
+            <div class="proj-links">
+              <a href="#" target="_blank" class="proj-link-btn">📁 Consulter le rapport / code</a>
+            </div>
+
             <div class="proj-tags">
               <span class="pt tech">MATLAB</span>
               <span class="pt tech">C/C++</span>
@@ -1306,13 +1333,18 @@
               <span class="pt type">Simulation</span>
               <span class="pt type">Temps-réel</span>
             </div>
-          </div>
+          </article>
 
-          <div class="proj-card">
+          <article class="proj-card">
             <h3>💾 Contrôleur PID sur FPGA</h3>
             <p>Conception et implémentation d'un contrôleur PID numérique sur FPGA en VHDL.
             Synthèse, simulation fonctionnelle et temporelle avec Quartus II. Validation hardware
             sur carte de développement. Optimisation de la précision numérique (virgule fixe).</p>
+            
+            <div class="proj-links">
+              <a href="#" target="_blank" class="proj-link-btn">💾 Code VHDL</a>
+            </div>
+
             <div class="proj-tags">
               <span class="pt tech">VHDL</span>
               <span class="pt tech">Quartus II</span>
@@ -1320,28 +1352,38 @@
               <span class="pt type">Embarqué</span>
               <span class="pt type">Numérique</span>
             </div>
-          </div>
+          </article>
 
-          <div class="proj-card">
+          <article class="proj-card">
             <h3>⚡ Convertisseur Buck — Conception PCB</h3>
             <p>Conception complète d'un convertisseur abaisseur de tension (Buck) incluant le
             dimensionnement des composants, simulation sous LTSpice et réalisation du PCB sur
             plusieurs couches. Validation des performances (rendement, ondulation, réponse
             transitoire) par mesures expérimentales sur banc de test.</p>
+            
+            <div class="proj-links">
+              <a href="#" target="_blank" class="proj-link-btn">📐 Voir les schémas</a>
+            </div>
+
             <div class="proj-tags">
               <span class="pt tech">LTSpice</span>
               <span class="pt tech">Altium / KiCad</span>
               <span class="pt type">Électronique de Puissance</span>
               <span class="pt type">Conception PCB</span>
             </div>
-          </div>
+          </article>
 
-          <div class="proj-card">
+          <article class="proj-card">
             <h3>🌐 Projet IoT Embarqué</h3>
             <p>Développement d'un système IoT complet incluant acquisition de données via capteurs
             (température, humidité, luminosité), traitement local sur microcontrôleur et transmission
             sans fil. Interface de monitoring avec affichage temps réel et alertes configurables.
             Communication MQTT sur réseau Wi-Fi.</p>
+            
+            <div class="proj-links">
+              <a href="#" target="_blank" class="proj-link-btn">📁 Consulter le code</a>
+            </div>
+
             <div class="proj-tags">
               <span class="pt tech">ESP32</span>
               <span class="pt tech">Arduino IDE / C++</span>
@@ -1349,23 +1391,27 @@
               <span class="pt type">IoT</span>
               <span class="pt type">Temps Réel</span>
             </div>
-          </div>
+          </article>
 
-          <div class="proj-card">
+          <article class="proj-card">
             <h3>📐 Projets AutoCAD Electrical</h3>
             <p>Réalisation d'une série de 10 projets AutoCAD Electrical couvrant des thèmes professionnels
             (armoires électriques industrielles, démarrages moteurs, systèmes de sécurité, câblage
             industriel) et créatifs (automatisation domotique, véhicule électrique, énergie solaire).
             Constitution d'un portfolio documenté.</p>
+            
+            <div class="proj-links">
+              <a href="#" target="_blank" class="proj-link-btn">📐 Voir le Portfolio AutoCAD</a>
+            </div>
+
             <div class="proj-tags">
               <span class="pt tech">AutoCAD Electrical</span>
               <span class="pt type">Schémas Électriques</span>
               <span class="pt type">Portfolio</span>
             </div>
-          </div>
+          </article>
 
-        </div><!-- / sec-projets -->
-
+        </div>
 
         <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
              SECTION : COMPÉTENCES
