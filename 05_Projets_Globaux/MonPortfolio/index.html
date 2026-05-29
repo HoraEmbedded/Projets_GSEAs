@@ -22,33 +22,24 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       font-size: 13px;
-      background: #6B8AAA;
-      background-image:
-        radial-gradient(ellipse at 20% 80%, rgba(30,60,120,0.5) 0%, transparent 55%),
-        radial-gradient(ellipse at 85% 15%, rgba(90,150,210,0.35) 0%, transparent 50%),
-        radial-gradient(ellipse at 60% 50%, rgba(50,90,160,0.2) 0%, transparent 60%);
-      min-height: 100vh;
-      padding: 16px;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      margin: 0;
+      padding: 0;
+      background: #fff; 
+      height: 100vh;
+      overflow: hidden; 
     }
 
     /* ════════════════════════════════════════
        FENÊTRE PRINCIPALE
     ════════════════════════════════════════ */
     .ms-window {
-      width: min(1140px, 100%);
+      width: 100%;
+      height: 100vh;
       background: #fff;
-      border-radius: 8px 8px 4px 4px;
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,0.35),
-        0 10px 50px rgba(0,0,0,0.55),
-        inset 0 1px 0 rgba(255,255,255,0.25);
       display: flex;
       flex-direction: column;
-      min-height: calc(100vh - 32px);
-      overflow: hidden;
+      border: none;
+      box-shadow: none;
     }
 
     /* ════════════════════════════════════════
@@ -58,7 +49,6 @@
       height: 34px;
       background: linear-gradient(180deg,
         #58A0DC 0%, #2A6EC0 18%, #1850A8 45%, #2460B8 70%, #1A4898 100%);
-      border-radius: 8px 8px 0 0;
       display: flex;
       align-items: center;
       padding: 0 6px 0 66px;
@@ -71,7 +61,6 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 50%;
       background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 100%);
-      border-radius: 8px 8px 0 0;
       pointer-events: none;
     }
     .title-bar::after {
@@ -191,30 +180,52 @@
     ════════════════════════════════════════ */
     /* ─── Ruban : Onglets et Corps (Cohérence Structurelle) ─── */
     .ribbon-tabs {
-      background: linear-gradient(180deg, #D4E6FA 0%, #BBD6F6 100%);
-      display: flex; align-items: flex-end; padding-left: 60px;
-      border-bottom: 1px solid #8EADC7; height: 28px; flex-shrink: 0;
-    }
-    .r-tab {
-      padding: 4px 16px 3px; font-size: 12px; color: #1E395B; cursor: pointer;
-      border: 1px solid transparent; border-bottom: none;
-      border-radius: 4px 4px 0 0; background: transparent;
-      margin-right: 2px; position: relative; bottom: -1px;
-      transition: all 0.1s;
-    }
-    .r-tab:hover:not(.active) {
-      background: linear-gradient(180deg, #FAFCFF 0%, #E0EEFA 100%);
-      border-color: #A9C9E8;
-    }
-    .r-tab.active {
-      background: #EEF5FD; border-color: #8EADC7;
-      border-bottom-color: #EEF5FD; font-weight: 700; color: #000;
+      background: linear-gradient(180deg, #DCE9F4 0%, #AAC4DF 100%);
+      display: flex;
+      align-items: flex-end;
+      padding-left: 54px; /* Espace aligné sous le bouton Office */
+      border-bottom: 1px solid #89A1C5;
+      height: 25px;
+      flex-shrink: 0;
     }
     
+    .r-tab {
+      padding: 3px 14px 4px;
+      font-size: 11px;
+      color: #15428B;
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+      background: transparent;
+      margin-right: 2px;
+      position: relative;
+      bottom: -1px;
+      transition: background 0.1s;
+    }
+    .r-tab:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.5);
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+    .r-tab.active {
+      background: #EAF2FB; /* Couleur exacte de la ligne supérieure du ruban */
+      border-color: #89A1C5;
+      border-bottom-color: #EAF2FB; /* Efface la ligne de séparation */
+      color: #000;
+    }
+    
+    /* ════════════════════════════════════════
+       CORPS DU RUBAN (Style Word 2007)
+    ════════════════════════════════════════ */
     .ribbon-body {
-      background: linear-gradient(180deg, #EEF5FD 0%, #D5E7FA 100%);
-      border-bottom: 1px solid #9CBBE5; display: flex; align-items: stretch;
-      padding: 3px 4px 0; min-height: 90px; flex-shrink: 0; overflow-x: auto;
+      background: linear-gradient(180deg, #EAF2FB 0%, #DDE9F8 30%, #C9DEF5 100%);
+      border-bottom: 1px solid #7387A9;
+      display: flex;
+      align-items: stretch;
+      padding: 2px 2px 0;
+      min-height: 92px;
+      flex-shrink: 0;
+      overflow-x: auto;
     }
     .r-group {
       display: flex; flex-direction: column; justify-content: space-between;
@@ -425,24 +436,26 @@
     /* ─── Aire du document ─── */
     .doc-area {
       flex: 1;
-      background: #808080;
+      background: #89A1C5; /* Le bleu-gris iconique de l'image source */
       overflow-y: auto;
-      padding: 22px 22px 40px;
+      padding: 40px 20px 60px; /* Espace de respiration autour de la feuille */
       display: flex;
       justify-content: center;
+      align-items: flex-start; /* Empêche la page de s'étirer de force en hauteur */
     }
 
     /* La "feuille" Word */
     .page {
       width: 100%;
-      max-width: 720px;
-      background: white;
-      box-shadow: 0 2px 18px rgba(0,0,0,0.48);
-      padding: 52px 62px 60px;
-      min-height: 600px;
+      max-width: 816px; /* Largeur standard s'approchant du format A4 */
+      background: #FFFFFF;
+      /* Ombre portée directionnelle et bordure fine reproduisant le logiciel */
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.35);
+      border: 1px solid #7387A9;
+      padding: 60px 70px; /* Marges intérieures simulant les règles de Word */
+      min-height: 1050px; /* Simule la hauteur d'une vraie page vide */
       flex-shrink: 0;
     }
-
     /* Sections de la page */
     .sec { display: none; }
     .sec.active { display: block; }
@@ -635,26 +648,43 @@
     .proj-link-btn:hover { background: #E8F3FE; border-color: #8AAEE0; }
 
     /* ── Contact ── */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
-    .ct-card {
-      display: flex; align-items: flex-start; gap: 10px;
-      padding: 11px; border: 1px solid #BDD8F0; border-radius: 4px;
-      background: linear-gradient(180deg, #F4F9FF, #E8F3FE);
+    /* ── Contact Form (Style Office 2007) ── */
+    .contact-layout {
+      display: flex; gap: 30px; margin: 15px 0;
     }
-    .ct-icon  { font-size: 18px; line-height: 1; flex-shrink: 0; color: #2060B8; font-weight: bold; }
-    .ct-lbl   { font-size: 10px; color: #2060B8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
-    .ct-val   { font-size: 12.5px; color: #1A1A2A; margin-top: 2px; }
-    .ct-val a { color: #2060B8; text-decoration: none; }
-    .ct-val a:hover { text-decoration: underline; }
-
-    /* Callout disponibilité */
-    .callout {
-      background: linear-gradient(180deg, #E8F2FE, #D5E8FC);
-      border: 1px solid #A8CCF0; border-left: 4px solid #2060B8;
-      border-radius: 4px; padding: 12px 14px;
-      font-size: 12.5px; color: #333; line-height: 1.65;
+    .contact-left { flex: 3; }
+    .contact-right { flex: 2; display: flex; flex-direction: column; gap: 4px; }
+    
+    .form-group { margin-bottom: 12px; }
+    .form-control {
+      width: 100%; padding: 7px 9px; 
+      font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 12px;
+      border: 1px solid #A9C9E8; border-radius: 2px;
+      background: #FFFFFF; color: #333;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+      transition: border-color 0.15s, box-shadow 0.15s;
     }
-    .callout strong { color: #1040A0; }
+    .form-control::placeholder { color: #8899AA; }
+    .form-control:focus {
+      outline: none; border-color: #F2CA5C; /* Contour Doré Office */
+      box-shadow: 0 0 4px rgba(242, 202, 92, 0.45), inset 0 1px 3px rgba(0,0,0,0.06);
+    }
+    textarea.form-control { resize: vertical; min-height: 95px; }
+    
+    .btn-submit {
+      padding: 6px 18px; font-size: 12px; font-weight: 600; color: #1E395B;
+      background: linear-gradient(180deg, #F4F9FF 0%, #D5E7FA 100%);
+      border: 1px solid #9CBBE5; border-radius: 3px; cursor: pointer;
+      font-family: inherit; transition: all 0.1s;
+    }
+    .btn-submit:hover {
+      background: linear-gradient(180deg, #FFF0B0 0%, #FFE070 100%);
+      border-color: #C28200; color: #000;
+    }
+    
+    @media (max-width: 768px) {
+      .contact-layout { flex-direction: column; }
+    }
 
     /* ════════════════════════════════════════
        SCROLLBAR
@@ -798,11 +828,6 @@
     <!-- Titre -->
     <div class="win-title">Horacia AZONHOUMON — Portfolio Professionnel Ingénierie GSEA</div>
     <!-- Contrôles fenêtre -->
-    <div class="win-controls">
-      <button class="win-ctrl" title="Réduire">—</button>
-      <button class="win-ctrl" title="Agrandir">⬜</button>
-      <button class="win-ctrl close" title="Fermer">✕</button>
-    </div>
 
   </div><!-- / title-bar -->
 
@@ -980,54 +1005,7 @@
        RÈGLE (Ruler)
   ═══════════════════════════════════════ -->
   <div class="ruler-container">
-    <div class="ruler-corner"></div>
-    <div class="ruler">
-      <svg viewBox="0 0 700 18" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="700" height="18" fill="#F5F8FC"/>
-        <!-- Marques de centimètres -->
-        <g fill="none" stroke="#9AAAC0" stroke-width="0.7">
-          <line x1="0" y1="12" x2="700" y2="12"/>
-        </g>
-        <g fill="none" stroke="#8090A8">
-          <!-- Grandes marques tous les 70px -->
-          <line x1="70"  y1="6"  x2="70"  y2="12" stroke-width="0.8"/>
-          <line x1="140" y1="6"  x2="140" y2="12" stroke-width="0.8"/>
-          <line x1="210" y1="6"  x2="210" y2="12" stroke-width="0.8"/>
-          <line x1="280" y1="6"  x2="280" y2="12" stroke-width="0.8"/>
-          <line x1="350" y1="6"  x2="350" y2="12" stroke-width="0.8"/>
-          <line x1="420" y1="6"  x2="420" y2="12" stroke-width="0.8"/>
-          <line x1="490" y1="6"  x2="490" y2="12" stroke-width="0.8"/>
-          <line x1="560" y1="6"  x2="560" y2="12" stroke-width="0.8"/>
-          <line x1="630" y1="6"  x2="630" y2="12" stroke-width="0.8"/>
-          <!-- Petites marques tous les 35px -->
-          <line x1="35"  y1="9"  x2="35"  y2="12" stroke-width="0.5"/>
-          <line x1="105" y1="9"  x2="105" y2="12" stroke-width="0.5"/>
-          <line x1="175" y1="9"  x2="175" y2="12" stroke-width="0.5"/>
-          <line x1="245" y1="9"  x2="245" y2="12" stroke-width="0.5"/>
-          <line x1="315" y1="9"  x2="315" y2="12" stroke-width="0.5"/>
-          <line x1="385" y1="9"  x2="385" y2="12" stroke-width="0.5"/>
-          <line x1="455" y1="9"  x2="455" y2="12" stroke-width="0.5"/>
-          <line x1="525" y1="9"  x2="525" y2="12" stroke-width="0.5"/>
-          <line x1="595" y1="9"  x2="595" y2="12" stroke-width="0.5"/>
-          <line x1="665" y1="9"  x2="665" y2="12" stroke-width="0.5"/>
-        </g>
-        <!-- Numéros -->
-        <g font-size="7" fill="#6A7A90" text-anchor="middle" font-family="Segoe UI, Tahoma, sans-serif">
-          <text x="70"  y="9">1</text>
-          <text x="140" y="9">2</text>
-          <text x="210" y="9">3</text>
-          <text x="280" y="9">4</text>
-          <text x="350" y="9">5</text>
-          <text x="420" y="9">6</text>
-          <text x="490" y="9">7</text>
-          <text x="560" y="9">8</text>
-          <text x="630" y="9">9</text>
-        </g>
-        <!-- Tabulations (marges) -->
-        <polygon points="60,12 66,12 63,18" fill="#6A7A90"/>
-        <polygon points="636,12 642,12 639,18" fill="#6A7A90"/>
-      </svg>
-    </div>
+    
   </div>
 
 
@@ -1037,29 +1015,7 @@
   <div class="main-area">
 
     <!-- Volet de navigation -->
-    <div class="nav-pane">
-      <div class="nav-pane-hdr">Plan du Document</div>
-      <div class="nav-section-lbl">Sections</div>
-      <div class="nav-item active" id="nav-accueil" onclick="switchTab('accueil')">
-        <span class="nav-icon">⌂</span> Accueil
-      </div>
-      <div class="nav-item" id="nav-apropos" onclick="switchTab('apropos')">
-        <span class="nav-icon">ℹ️</span> À Propos
-      </div>
-      <div class="nav-item" id="nav-projets" onclick="switchTab('projets')">
-        <span class="nav-icon">📁</span> Projets
-      </div>
-      <div class="nav-item" id="nav-competences" onclick="switchTab('competences')">
-        <span class="nav-icon">⚙️</span> Compétences
-      </div>
-      <div class="nav-item" id="nav-contact" onclick="switchTab('contact')">
-        <span class="nav-icon">✉️</span> Contact
-      </div>
-      <div class="nav-section-lbl" style="margin-top:10px">Disponibilité</div>
-      <div class="nav-item" style="color:#0A6A1A;font-weight:600;background:#E8F8EE">
-        <span class="nav-icon">🟢</span> Stage PFA 2025
-      </div>
-    </div>
+    
 
     <!-- Zone document -->
     <div class="doc-area" id="docArea">
@@ -1085,14 +1041,20 @@
             </div>
           </div>
 
-          <div class="doc-h2">📋 Résumé Professionnel</div>
-          <p class="body-text">
+          <div class="doc-h2">📋 Résumé Professionnel & Objectif</div>
+          <p class="body-text" style="margin-bottom: 12px;">
             Étudiante ingénieure en 4ème/5ème année à l'ENSA Tanger, spécialisée en <strong>Génie des
             Systèmes Électronique et Automatique (GSEA)</strong>. Passionnée par les systèmes de contrôle
             intelligents, les systèmes embarqués et l'automatisation industrielle. Expérience pratique
             approfondie en <strong>MATLAB/Simulink</strong>, contrôle flou, réseaux de neurones, FPGA et
-            conception PCB. À la recherche d'un <strong>stage PFA</strong> dans les domaines de
-            l'automatisation, de l'électronique embarquée ou de l'Industrie 4.0.
+            conception PCB.
+          </p>
+          
+          <div class="callout" style="margin-bottom: 24px;">
+            ☑ <strong>Objectif :</strong> Recherche active d'un <strong>stage PFA (Projet de Fin d'Année)</strong> pour 2025.<br>
+            ☑ <strong>Domaines :</strong> Automatisation industrielle, Électronique embarquée, Industrie 4.0.<br>
+            ☑ <strong>Disponibilité :</strong> Tanger et environs, ou mission à distance.
+          </div>
           </p>
 
           <div class="doc-h2">⭐ Points Forts</div>
@@ -1463,64 +1425,39 @@
         <div class="sec" id="sec-contact">
 
           <div class="doc-h2">✉️ Informations de Contact</div>
-          <div class="contact-grid">
-            <div class="ct-card">
-              <span class="ct-icon">@</span>
-              <div>
-                <div class="ct-lbl">Email</div>
-                <!-- ↓ Remplacez par votre adresse email -->
-                <div class="ct-val"><a href="mailto:votre@email.com">votre@email.com</a></div>
-              </div>
+          <div class="contact-layout">
+            <div class="contact-left">
+              <form action="mailto:votre@email.com" method="post" enctype="text/plain">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Nom complet" required>
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control" placeholder="Adresse email" required>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" placeholder="Votre message..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Envoyer le message</button>
+              </form>
             </div>
-            <div class="ct-card">
-              <span class="ct-icon">📍</span>
-              <div>
-                <div class="ct-lbl">Localisation</div>
-                <div class="ct-val">Tanger, Maroc</div>
+            
+            <div class="contact-right">
+              <p class="body-text" style="margin-bottom: 8px;">
+                Voici un espace idéal pour m'informer de la meilleure façon de vous recontacter concernant une opportunité de stage ou une collaboration.
+              </p>
+              
+              <div class="nav-item" onclick="window.open('mailto:votre@email.com', '_blank')" style="border:none; margin:0; padding: 6px 8px;">
+                <span class="nav-icon" style="font-size:16px;">✉</span> votre@email.com
               </div>
-            </div>
-            <div class="ct-card">
-              <span class="ct-icon">💼</span>
-              <div>
-                <div class="ct-lbl">LinkedIn</div>
-                <!-- ↓ Remplacez par votre URL LinkedIn -->
-                <div class="ct-val"><a href="https://linkedin.com/in/votre-profil" target="_blank">linkedin.com/in/votre-profil</a></div>
+              <div class="nav-item" onclick="window.open('https://linkedin.com/in/votre-profil', '_blank')" style="border:none; margin:0; padding: 6px 8px;">
+                <span class="nav-icon" style="font-size:16px;">⚯</span> @votre-profil
               </div>
-            </div>
-            <div class="ct-card">
-              <span class="ct-icon">💻</span>
-              <div>
-                <div class="ct-lbl">GitHub</div>
-                <!-- ↓ Remplacez par votre URL GitHub -->
-                <div class="ct-val"><a href="https://github.com/votre-profil" target="_blank">github.com/votre-profil</a></div>
-              </div>
-            </div>
-            <div class="ct-card">
-              <span class="ct-icon">📱</span>
-              <div>
-                <div class="ct-lbl">Téléphone</div>
-                <!-- ↓ Remplacez par votre numéro -->
-                <div class="ct-val"><a href="tel:+212774469995" style="color: #2060B8; text-decoration: none;">+212 774 469 995</a></div>
-              </div>
-            </div>
-            <div class="ct-card">
-              <span class="ct-icon">🎓</span>
-              <div>
-                <div class="ct-lbl">École</div>
-                <div class="ct-val">ENSA Tanger – GSEA<br><span style="font-size:11px;color:#5A6A8A">Univ. Abdelmalek Essaâdi</span></div>
+              <div class="nav-item" onclick="window.open('https://github.com/votre-profil', '_blank')" style="border:none; margin:0; padding: 6px 8px;">
+                <span class="nav-icon" style="font-size:16px;">⌨</span> votre-github
               </div>
             </div>
           </div>
-
-          <div class="doc-h2" style="margin-top:24px">📋 Disponibilité & Objectif</div>
-          <div class="callout">
-            Actuellement à la recherche d'un <strong>stage PFA (Projet de Fin d'Année)</strong> dans les
-            domaines de l'<strong>automatisation industrielle</strong>, des <strong>systèmes embarqués</strong>,
-            de l'<strong>électronique de puissance</strong> ou de l'<strong>Industrie 4.0</strong>.<br><br>
-            Disponible pour des opportunités à <strong>Tanger et dans les environs</strong>, ainsi qu'à
-            distance. N'hésitez pas à me contacter pour toute collaboration ou opportunité professionnelle.
-          </div>
-
+        
         </div><!-- / sec-contact -->
 
 
