@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horacia AZONHOUMON – Portfolio GSEA</title>
+  <meta name="description" content="Portfolio professionnel de Horacia AZONHOUMON, étudiante ingénieure en Génie des Systèmes Électronique et Automatique (GSEA).">
+  
+  <style>
+    /* ════════════════════════════════════════
+       VARIABLES & THÈME (Style Logiciel CAO)
+    ════════════════════════════════════════ */
+    :root {
+      --menu-bg: #f0f0f0;
+      --toolbar-bg: #e4e4e4;
+      --sidebar-bg: #f4f4f4;
+      --sidebar-header: #c8c8c8;
+      --workspace-bg: #7a7a7a;
+      
+      --page-bg: #ffffff;
+      --grid-dot: #b0c4de;
+      
+      --text-main: #333333;
+      --text-muted: #666666;
+      --color-blue: #1a5b9c; /* Bleu typique Proteus/Altium */
+      --color-blue-light: #e6f0fa;
+      --border-color: #d0d0d0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 13px;
+      color: var(--text-main);
+      background-color: var(--workspace-bg);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ════════════════════════════════════════
+       BARRE DE MENUS & OUTILS
+    ════════════════════════════════════════ */
+    .top-menu {
+      background-color: var(--menu-bg);
+      display: flex;
+      padding: 4px 10px;
+      border-bottom: 1px solid white;
+      font-size: 12px;
+    }
+    .top-menu div {
+      padding: 4px 10px;
+      cursor: pointer;
+    }
+    .top-menu div:hover { background-color: var(--color-blue-light); color: var(--color-blue); }
+
+    .toolbar {
+      background-color: var(--toolbar-bg);
+      display: flex;
+      padding: 5px 10px;
+      border-bottom: 1px solid #a0a0a0;
+      gap: 15px;
+      align-items: center;
+    }
+    .toolbar-group {
+      display: flex;
+      gap: 10px;
+      border-right: 1px solid #c0c0c0;
+      padding-right: 15px;
+    }
+    .toolbar-btn {
+      background: none;
+      border: 1px solid transparent;
+      border-radius: 3px;
+      cursor: pointer;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px;
+      transition: 0.1s;
+    }
+    .toolbar-btn svg { width: 16px; height: 16px; fill: currentColor; }
+    .toolbar-btn:hover { background-color: var(--color-blue-light); border-color: #b3d4f5; color: var(--color-blue); }
+
+    /* ════════════════════════════════════════
+       LAYOUT PRINCIPAL (Sidebar + Workspace)
+    ════════════════════════════════════════ */
+    .main-layout {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── BARRE LATÉRALE ── */
+    .sidebar {
+      width: 250px;
+      background-color: var(--sidebar-bg);
+      border-right: 2px solid #a0a0a0;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+    }
+    
+    .sidebar-header {
+      background-color: var(--sidebar-header);
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: bold;
+      color: #333;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-color);
+      border-top: 1px solid white;
+    }
+
+    .nav-items {
+      display: flex;
+      flex-direction: column;
+      flex: 1; /* Permet d'occuper tout l'espace vertical disponible */
+      justify-content: center; /* Centre les menus verticalement */
+      padding: 20px 0;
+      gap: 8px; /* Espacement net entre les boutons */
+    }
+    
+    .nav-item {
+      padding: 16px 20px 16px 30px; /* Plus d'espace cliquable en hauteur */
+      font-size: 14px; /* Police agrandie pour plus de lisibilité */
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      border-left: 4px solid transparent;
+      border-bottom: 1px solid transparent;
+      border-top: 1px solid transparent;
+      transition: background-color 0.2s, padding-left 0.2s; /* Animation fluide */
+    }
+    
+    .nav-item:hover { 
+      background-color: #eaeaea; 
+      padding-left: 35px; /* Petit effet de glissement au survol */
+    }
+    
+    .nav-item.active {
+      background-color: var(--color-blue-light);
+      border-left: 4px solid var(--color-blue);
+      border-top: 1px solid #b3d4f5;
+      border-bottom: 1px solid #b3d4f5;
+      color: var(--color-blue);
+      font-weight: bold;
+      padding-left: 35px; /* Maintient le décalage quand actif */
+    }
+
+    .nav-icon { font-size: 14px; width: 16px; text-align: center; }
+
+    /* Devices / Propriétés (Profil persistant) */
+    .device-box { padding: 15px; }
+    .u1-title { font-weight: bold; color: var(--color-blue); font-size: 13px; margin-bottom: 8px; }
+    .device-prop { font-size: 11px; margin-bottom: 4px; color: #444; }
+    
+    .io-pins-title {
+      font-size: 11px; font-weight: bold; color: var(--color-blue);
+      margin: 15px 0 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 3px;
+    }
+    .io-pins { display: flex; flex-wrap: wrap; gap: 5px; }
+    .pin {
+      font-size: 10px; border: 1px solid var(--border-color);
+      padding: 2px 6px; background: white; color: #555;
+    }
+
+    /* ── ZONE DE TRAVAIL (Workspace) ── */
+    .workspace {
+      flex: 1;
+      overflow-y: auto;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 900px;
+      background-color: var(--page-bg);
+      /* Grille pointillée typique CAO */
+      background-image: radial-gradient(circle, var(--grid-dot) 1px, transparent 1px);
+      background-size: 20px 20px;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+      padding: 50px 60px;
+      min-height: 1050px;
+    }
+
+    /* Sections masquables par onglets */
+    .section-content { display: none; }
+    .section-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ════════════════════════════════════════
+       STYLES DU CONTENU (La Feuille)
+    ════════════════════════════════════════ */
+    .sys-title {
+      font-size: 22px; font-weight: bold; color: #000;
+      border-bottom: 2px solid var(--color-blue);
+      padding-bottom: 10px; margin-bottom: 20px;
+    }
+    
+    .text-body { font-size: 13px; line-height: 1.6; color: #333; margin-bottom: 15px; }
+
+    .target-box {
+      border: 1px dashed var(--color-blue);
+      padding: 15px 20px;
+      margin: 25px 0;
+      background: rgba(26, 91, 156, 0.02);
+    }
+    .target-box p { margin-bottom: 8px; font-size: 13px; }
+    .target-box p:last-child { margin-bottom: 0; }
+
+    .blocks-title {
+      font-size: 14px; font-weight: bold; color: var(--color-blue);
+      text-transform: uppercase; margin: 30px 0 15px;
+    }
+
+    /* Grille des blocs fonctionnels */
+    .blocks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px; }
+    .functional-block {
+      border: 1px solid var(--color-blue);
+      background: white; padding: 15px;
+    }
+    .fb-header { display: flex; align-items: center; gap: 8px; font-weight: bold; margin-bottom: 10px; font-size: 13px; }
+    .fb-desc { font-size: 11px; color: #555; line-height: 1.4; }
+
+    /* Cartes Projets */
+    .project-card {
+      border: 1px solid var(--color-blue);
+      background: white; padding: 20px; margin-bottom: 20px;
+    }
+    .project-card h3 {
+      font-size: 14px; font-weight: bold; color: #000; margin-bottom: 12px;
+    }
+    .project-card p { font-size: 12px; color: #444; line-height: 1.6; margin-bottom: 15px; }
+    
+    .btn-source {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--color-blue); color: white;
+      padding: 6px 12px; font-size: 11px; font-weight: bold;
+      border: none; border-radius: 2px; cursor: pointer;
+      margin-bottom: 15px; transition: background 0.2s;
+    }
+    .btn-source:hover { background: #124070; }
+    
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .proj-tags span {
+      font-size: 10px; color: var(--color-blue);
+      border: 1px solid #b3d4f5; padding: 2px 6px; background: #f8fbff;
+    }
+
+    /* Formulaire & Timeline */
+    .timeline-item { border-left: 2px solid var(--color-blue); padding-left: 15px; position: relative; margin-bottom: 25px; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -6px; top: 0;
+      width: 10px; height: 10px; background: var(--color-blue); border-radius: 50%;
+    }
+    .time-date { font-weight: bold; font-size: 11px; color: var(--color-blue); margin-bottom: 3px; }
+    .time-title { font-weight: bold; font-size: 14px; margin-bottom: 3px; }
+    .time-org { font-size: 12px; color: #555; margin-bottom: 5px; }
+
+    .form-control {
+      width: 100%; padding: 8px; margin-bottom: 10px;
+      border: 1px solid var(--border-color); font-family: inherit; font-size: 12px;
+    }
+    .form-control:focus { outline: none; border-color: var(--color-blue); }
+
+    /* ════════════════════════════════════════
+       FENÊTRE D'APERÇU (Modale)
+    ════════════════════════════════════════ */
+    .modal-overlay {
+      display: none; 
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6); 
+      z-index: 9999;
+      align-items: center; justify-content: center;
+    }
+    
+    .modal-overlay.active { 
+      display: flex; 
+      animation: fadeIn 0.2s ease-out; 
+    }
+    
+    .modal-window {
+      background: var(--page-bg); 
+      border: 1px solid var(--color-blue);
+      width: 90%; 
+      max-width: 800px; 
+      max-height: 90vh;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      display: flex; 
+      flex-direction: column;
+    }
+    
+    .modal-header {
+      background: var(--toolbar-bg); 
+      padding: 8px 15px;
+      border-bottom: 1px solid var(--border-color); 
+      display: flex;
+      justify-content: space-between; 
+      align-items: center;
+    }
+    
+    .modal-title {
+      font-weight: bold; 
+      font-size: 13px; 
+      color: var(--color-blue);
+      font-family: monospace;
+    }
+    
+    .modal-close {
+      background: none; 
+      border: none; 
+      font-size: 16px; 
+      cursor: pointer; 
+      color: #555;
+      font-weight: bold;
+    }
+    
+    .modal-close:hover { color: red; }
+    
+    .modal-content { 
+      padding: 20px; 
+      overflow-y: auto; 
+      text-align: center; 
+      background: #f8f8f8;
+    }
+    
+    .modal-content img, .modal-content video { 
+      max-width: 100%; 
+      height: auto; 
+      border: 1px solid var(--border-color); 
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE MOBILE
+    ════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .main-layout { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 2px solid var(--border-color); max-height: 250px; }
+      .nav-items { flex-direction: row; flex-wrap: wrap; }
+      .nav-item { padding: 8px 12px; border-left: none; border-bottom: 3px solid transparent; }
+      .nav-item.active { border-left: none; border-bottom: 3px solid var(--color-blue); }
+      .workspace { padding: 10px; }
+      .page { padding: 20px; min-height: auto; }
+      .blocks-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <div class="toolbar-group">
+      <button class="toolbar-btn" title="Sauvegarder CV" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')">
+        <svg viewBox="0 0 24 24"><path d="M19 21H5C3.895 21 3 20.105 3 19V5C3 3.895 3.895 3 5 3H16L21 8V19C21 20.105 20.105 21 19 21ZM5 5V19H19V8.828L15.172 5H5ZM15 19V15H9V19H15ZM15 5V9H9V5H15Z"/></svg>
+      </button>
+      <button class="toolbar-btn" title="Imprimer" onclick="window.print()">
+        <svg viewBox="0 0 24 24"><path d="M19 8H5V3H19V8ZM16 5H8V6H16V5ZM21 10C21.552 10 22 10.448 22 11V18H18V21H6V18H2C1.448 18 1 17.552 1 17V11C1 10.448 1.448 10 2 10H21ZM16 19V15H8V19H16ZM18 12C18 11.448 18.448 11 19 11C19.552 11 20 11.448 20 12C20 12.552 19.552 13 19 13C18.448 13 18 12.552 18 12Z"/></svg>
+      </button>
+    </div>
+    <div class="toolbar-group" style="border-right: none;">
+      <button class="toolbar-btn" title="GitHub" onclick="window.open('https://github.com/HoraEmbedded', '_blank')">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12C0 17.3 3.438 21.8 8.205 23.385C8.805 23.495 9.025 23.125 9.025 22.815C9.025 22.535 9.015 21.715 9.01 20.615C5.67 21.34 4.965 19.005 4.965 19.005C4.42 17.62 3.635 17.25 3.635 17.25C2.545 16.505 3.715 16.52 3.715 16.52C4.92 16.605 5.555 17.765 5.555 17.765C6.625 19.595 8.365 19.065 9.05 18.755C9.16 17.97 9.475 17.44 9.825 17.135C7.165 16.83 4.37 15.8 4.37 11.365C4.37 10.1 4.82 9.065 5.555 8.25C5.435 7.95 5.04 6.775 5.67 5.17C5.67 5.17 6.64 4.86 8.995 6.455C9.915 6.2 10.96 6.07 12 6.065C13.04 6.07 14.085 6.2 15.005 6.455C17.355 4.86 18.32 5.17 18.32 5.17C18.955 6.775 18.565 7.95 18.445 8.25C19.18 9.065 19.625 10.1 19.625 11.365C19.625 15.81 16.82 16.825 14.15 17.12C14.585 17.495 14.975 18.23 14.975 19.385C14.975 21.035 14.96 22.365 14.96 22.815C14.96 23.13 15.18 23.505 15.79 23.385C20.565 21.795 24 17.295 24 12C24 5.37 18.625 0 12 0Z"/></svg>
+      </button>
+      <button class="toolbar-btn" title="LinkedIn" onclick="window.open('https://linkedin.com/in/horaembedded/', '_blank')">
+        <svg viewBox="0 0 24 24"><path d="M19 0H5C2.239 0 0 2.239 0 5V19C0 21.761 2.239 24 5 24H19C21.762 24 24 21.761 24 19V5C24 2.239 21.762 0 19 0ZM8 19H5V9H8V19ZM6.5 7.732C5.534 7.732 4.75 6.942 4.75 5.968C4.75 4.994 5.534 4.204 6.5 4.204C7.466 4.204 8.25 4.994 8.25 5.968C8.25 6.942 7.466 7.732 6.5 7.732ZM20.5 19H17.5V13.396C17.5 10.028 13.5 10.283 13.5 13.396V19H10.5V9H13.5V10.765C14.896 8.179 20.5 7.988 20.5 13.241V19Z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    
+    <aside class="sidebar" style="justify-content: space-between;">
+      
+      <div style="text-align: center; padding: 40px 10px 30px; border-bottom: 1px solid var(--border-color);">
+        <div style="width: 72px; height: 72px; margin: 0 auto 15px; border: 2px solid var(--color-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: bold; color: var(--color-blue); background: var(--color-blue-light);">HA</div>
+        <div style="font-weight: bold; font-size: 16px; margin-bottom: 6px; color: #000;">Horacia<br>AZONHOUMON</div>
+        <div style="font-size: 11px; color: var(--color-blue); font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Ingénieure GSEA</div>
+      </div>
+
+      <nav class="nav-items">
+        <div class="nav-item active" onclick="switchTab('accueil', this)">01. Accueil</div>
+        <div class="nav-item" onclick="switchTab('apropos', this)">02. À Propos</div>
+        <div class="nav-item" onclick="switchTab('projets', this)">03. Projets Techniques</div>
+        <div class="nav-item" onclick="switchTab('competences', this)">04. Compétences</div>
+        <div class="nav-item" onclick="switchTab('contact', this)">05. Contact</div>
+      </nav>
+
+      <div style="display: flex; justify-content: center; gap: 15px; padding: 25px 20px; border-top: 1px solid var(--border-color);">
+        <button class="toolbar-btn" onclick="window.open('https://linkedin.com/in/horaembedded/', '_blank')" style="border: 1px solid var(--border-color); border-radius: 50%; padding: 10px;">
+          <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M19 0H5C2.239 0 0 2.239 0 5V19C0 21.761 2.239 24 5 24H19C21.762 24 24 21.761 24 19V5C24 2.239 21.762 0 19 0ZM8 19H5V9H8V19ZM6.5 7.732C5.534 7.732 4.75 6.942 4.75 5.968C4.75 4.994 5.534 4.204 6.5 4.204C7.466 4.204 8.25 4.994 8.25 5.968C8.25 6.942 7.466 7.732 6.5 7.732ZM20.5 19H17.5V13.396C17.5 10.028 13.5 10.283 13.5 13.396V19H10.5V9H13.5V10.765C14.896 8.179 20.5 7.988 20.5 13.241V19Z"/></svg>
+        </button>
+        <button class="toolbar-btn" onclick="window.open('https://github.com/HoraEmbedded', '_blank')" style="border: 1px solid var(--border-color); border-radius: 50%; padding: 10px;">
+          <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M12 0C5.37 0 0 5.37 0 12C0 17.3 3.438 21.8 8.205 23.385C8.805 23.495 9.025 23.125 9.025 22.815C9.025 22.535 9.015 21.715 9.01 20.615C5.67 21.34 4.965 19.005 4.965 19.005C4.42 17.62 3.635 17.25 3.635 17.25C2.545 16.505 3.715 16.52 3.715 16.52C4.92 16.605 5.555 17.765 5.555 17.765C6.625 19.595 8.365 19.065 9.05 18.755C9.16 17.97 9.475 17.44 9.825 17.135C7.165 16.83 4.37 15.8 4.37 11.365C4.37 10.1 4.82 9.065 5.555 8.25C5.435 7.95 5.04 6.775 5.67 5.17C5.67 5.17 6.64 4.86 8.995 6.455C9.915 6.2 10.96 6.07 12 6.065C13.04 6.07 14.085 6.2 15.005 6.455C17.355 4.86 18.32 5.17 18.32 5.17C18.955 6.775 18.565 7.95 18.445 8.25C19.18 9.065 19.625 10.1 19.625 11.365C19.625 15.81 16.82 16.825 14.15 17.12C14.585 17.495 14.975 18.23 14.975 19.385C14.975 21.035 14.96 22.365 14.96 22.815C14.96 23.13 15.18 23.505 15.79 23.385C20.565 21.795 24 17.295 24 12C24 5.37 18.625 0 12 0Z"/></svg>
+        </button>
+      </div>
+      
+    </aside>
+
+    <main class="workspace" id="workspace">
+      <div class="page">
+        
+        <div id="sec-accueil" class="section-content active">
+          
+          <div style="font-family: monospace; color: var(--color-blue); margin-bottom: 12px;">>> SYS_INIT : Prête pour de nouveaux défis</div>
+          <h1 style="font-size: 34px; font-weight: bold; color: #000; line-height: 1.25; margin-bottom: 25px;">
+            Conception & Contrôle de<br>Systèmes Intelligents.
+          </h1>
+
+          <div style="display: flex; gap: 10px; margin-bottom: 35px; flex-wrap: wrap;">
+            <span style="border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 20px; font-size: 11px; background: white; font-weight: bold;">📍 Tanger, Maroc</span>
+            <span style="border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 20px; font-size: 11px; background: white; font-weight: bold;">🎓 ENSA Tanger – 4ème/5ème année</span>
+            <span style="border: 1px solid var(--color-blue); padding: 6px 14px; border-radius: 20px; font-size: 11px; color: var(--color-blue); background: var(--color-blue-light); font-weight: bold;">🔍 Recherche stage PFA 2025</span>
+          </div>
+
+          <p class="text-body" style="font-size: 14px; max-width: 800px; line-height: 1.8;">
+            Étudiante ingénieure spécialisée en <strong>Génie des Systèmes Électronique et Automatique (GSEA)</strong>. Passionnée par les systèmes de contrôle intelligents, l'électronique embarquée et l'automatisation industrielle. Expérience pratique approfondie en modélisation (MATLAB/Simulink), contrôle flou, réseaux de neurones, FPGA et conception PCB.
+          </p>
+
+          <div class="target-box" style="border-left: 4px solid #00b894; border-top: none; border-right: none; border-bottom: none; background: rgba(0, 184, 148, 0.05); padding: 18px 20px; margin: 30px 0;">
+            <p style="font-size: 14px; line-height: 1.6;"><strong style="color: #00b894;">[OBJECTIF]</strong> Recherche active d'un stage PFA (Projet de Fin d'Année) orienté Automatisation industrielle, Électronique embarquée ou Industrie 4.0. Disponible à Tanger et environs, ou en mission à distance.</p>
+          </div>
+
+          <div style="display: flex; gap: 15px; margin-top: 35px;">
+            <button onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')" style="background: var(--color-blue); color: white; border: none; padding: 12px 24px; font-size: 13px; font-weight: bold; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: 0.2s;">
+              ⬇ Télécharger CV
+            </button>
+            <button onclick="switchTab('contact', document.querySelectorAll('.nav-item')[4])" style="background: transparent; color: var(--color-blue); border: 2px solid var(--color-blue); padding: 10px 24px; font-size: 13px; font-weight: bold; border-radius: 4px; cursor: pointer; transition: 0.2s;">
+              Me contacter
+            </button>
+          </div>
+
+        </div>
+
+        <div id="sec-apropos" class="section-content">
+          <h1 class="sys-title">[SYS] Historique & Configuration</h1>
+          <p class="text-body">
+            Passionnée d'ingénierie depuis mes classes préparatoires, je combine rigueur analytique et créativité technique. Mon parcours à l'ENSA Tanger m'a permis de développer une expertise solide en automatique avancée, électronique embarquée et systèmes intelligents.
+          </p>
+
+          <div class="blocks-title">CHRONOGRAMME ACADÉMIQUE</div>
+          <div class="timeline-item">
+            <div class="time-date">2022 – Présent</div>
+            <div class="time-title">École Nationale des Sciences Appliquées – Tanger</div>
+            <div class="time-org">Génie des Systèmes Électronique et Automatique (GSEA)</div>
+            <p class="text-body" style="font-size: 12px; margin: 0;">Spécialisation en contrôle automatique avancé, systèmes embarqués, électronique de puissance. Cours avancés : Systèmes de contrôle intelligents (Pr. EL JANATI EL IDRISSI).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="time-date">2020 – 2022</div>
+            <div class="time-title">Classes Préparatoires aux Grandes Écoles (CPGE)</div>
+            <div class="time-org">Filière TSI / MPSI</div>
+            <p class="text-body" style="font-size: 12px; margin: 0;">Formation intensive. Solides bases en analyse, algèbre, mécanique et électronique.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="time-date">Antérieur</div>
+            <div class="time-title">Baccalauréat</div>
+            <div class="time-org">Sciences Mathématiques / Sciences Expérimentales</div>
+            <p class="text-body" style="font-size: 12px; margin: 0;">Mention Bien.</p>
+          </div>
+        </div>
+
+        <div id="sec-projets" class="section-content">
+          <h1 class="sys-title">[PRJ] Ingénierie & Implémentations</h1>
+
+          <div class="project-card">
+            <h3>■ Programmation DSP — TMS320C6713 DSK</h3>
+            <p>Mise en œuvre du DSP TI TMS320C6713 sous Code Composer Studio v7. Développement en C et assembleur C6000 pour la génération de signaux et le filtrage numérique FIR/IIR en temps réel. Diagnostic de dépendances de compilation et maîtrise du workflow toolchain DSP embarqué.</p>
+            <button class="btn-source" onclick="window.open('https://github.com/HoraEmbedded', '_blank')">📁 Accéder aux sources</button>
+            <div class="proj-tags">
+              <span>C / C++</span><span>Assembleur C6000</span><span>TMS320C6713</span><span>Traitement du Signal</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <h3>■ Étude et Dimensionnement d'un Transistor NMOS en Commutation</h3>
+            <p>Analyse, calcul théorique et dimensionnement d'un canal de commande de puissance utilisant un transistor NMOS en régime de commutation. Choix et validation des composants associés pour assurer la robustesse du montage : sélection d'un optocoupleur pour l'isolation galvanique, d'une diode rapide pour la protection contre les surtensions inductives, et calcul des puissances dissipées par les résistances de polarisation.</p>
+            <button class="btn-source" onclick="window.open('https://github.com/HoraEmbedded/Projets_GSEAs', '_blank')">📁 Accéder au projet</button>
+            <button class="btn-source" style="background: var(--color-blue-light); color: var(--color-blue); border: 1px solid var(--color-blue);" onclick="openPreview('Routage PCB NMOS', '<img src=\'chemin_vers_ton_image.jpg\'>')">
+  👁 Ouvrir l'aperçu
+</button>
+            <div class="proj-tags">
+              <span>Électronique de Puissance</span><span>Dimensionnement HW</span><span>Composants CMS</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <h3>■ Smart Greenhouse Management System (Bare-Metal)</h3>
+            <p>Conception d'un système de gestion de serre automatisée sur microcontrôleur ATmega2560. Développement en C pur (Bare-Metal) avec architecture temps-réel pilotée par interruptions matérielles (Timer1). Implémentation d'un contrôle par hystérésis à double seuil et d'arithmétique à virgule fixe.</p>
+            <button class="btn-source" onclick="window.open('https://github.com/HoraEmbedded/Projets_GSEAs', '_blank')">📁 Accéder au code</button>
+            <div class="proj-tags">
+              <span>C (Bare-Metal)</span><span>ATmega2560</span><span>Wokwi</span><span>Systèmes Embarqués</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <h3>■ Modélisation et Commande de Robot Manipulateur (2DDL)</h3>
+            <p>Modélisation physique et implémentation d'une commande articulaire PID pour un robot à 2 degrés de liberté sous MATLAB/Simscape Multibody. Étude de la cinématique directe (FK) et inverse (IK) pour la génération de trajectoires.</p>
+            <button class="btn-source" onclick="">📁 Consulter la modélisation</button>
+            <div class="proj-tags">
+              <span>MATLAB / Simscape</span><span>PID</span><span>Cinématique (FK/IK)</span><span>Robotics</span>
+            </div> 
+          </div>
+
+          <div class="project-card">
+            <h3>■ Les Auto-Encodeurs (AE) — Compression & Détection d'Anomalies</h3>
+            <p>Étude approfondie et implémentation d'architectures d'apprentissage profond (Vanilla AE, Sparse, Denoising, et VAE). Application pratique dédiée au traitement d'images et au diagnostic industriel par détection d'anomalies.</p>
+            <button class="btn-source" onclick="">📁 Voir les notebooks</button>
+            <div class="proj-tags">
+              <span>Deep Learning</span><span>Auto-encodeurs (VAE)</span><span>Python / Keras</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <h3>■ Convoyeur de tri automatique (Factory I/O)</h3>
+            <p>Programmation d'un automate Siemens S7-1200 (simulé) via TIA Portal pour trier des objets par couleur. Développement du programme Ladder avec gestion des modes automatique, manuel et arrêt d'urgence. Communication PLCSIM ↔ Factory I/O via OPC-DA.</p>
+            <button class="btn-source" onclick="">📁 Détails API</button>
+            <button class="btn-source" style="background: var(--color-blue-light); color: var(--color-blue); border: 1px solid var(--color-blue);" onclick="openPreview('Simulation Factory I/O', '<video autoplay loop muted controls><source src=\'chemin_vers_ta_video.mp4\' type=\'video/mp4\'></video>')">
+  👁 Ouvrir la simulation
+</button>
+            <div class="proj-tags">
+              <span>TIA Portal (Ladder)</span><span>Siemens S7-1200</span><span>Factory I/O</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="sec-competences" class="section-content">
+          <h1 class="sys-title">[SYS] Bibliothèques & Composants Maîtrisés</h1>
+          
+          <div class="blocks-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="functional-block">
+              <div class="fb-header">Automatique & Régulation</div>
+              <div class="proj-tags" style="margin-top:10px;">
+                <span>MATLAB / Simulink</span><span>TIA Portal (Ladder)</span><span>PID / FOPDT</span><span>Factory I/O</span>
+              </div>
+            </div>
+            <div class="functional-block">
+              <div class="fb-header">Embarqué & Hardware</div>
+              <div class="proj-tags" style="margin-top:10px;">
+                <span>C / C++</span><span>ESP32 & STM32</span><span>Assembleur C6000</span><span>TMS320C6713</span>
+              </div>
+            </div>
+            <div class="functional-block">
+              <div class="fb-header">IIoT & Réseaux Industriels</div>
+              <div class="proj-tags" style="margin-top:10px;">
+                <span>MQTT</span><span>Modbus</span><span>Node-RED</span><span>Raspberry Pi</span>
+              </div>
+            </div>
+            <div class="functional-block">
+              <div class="fb-header">Outils de Conception</div>
+              <div class="proj-tags" style="margin-top:10px;">
+                <span>Code Composer Studio</span><span>OrCAD/PSpice</span><span>Git / GitHub</span><span>KiCad</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="sec-contact" class="section-content">
+          <h1 class="sys-title">[SYS] Interfaces de Communication</h1>
+          <p class="text-body">
+            Prête à établir une connexion pour une opportunité de stage PFA. N'hésitez pas à me transmettre vos requêtes via le formulaire ci-dessous ou mes réseaux professionnels.
+          </p>
+          
+          <div style="display:flex; gap: 30px; margin-top: 30px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 250px;">
+              <div class="functional-block">
+                <form action="mailto:votre@email.com" method="post" enctype="text/plain">
+                  <input type="text" class="form-control" placeholder="Nom de l'entité" required>
+                  <input type="email" class="form-control" placeholder="Adresse de retour (Email)" required>
+                  <textarea class="form-control" placeholder="Trame de message..." rows="5" required></textarea>
+                  <button type="submit" class="btn-source" style="margin-bottom:0;">TX (Transmettre message)</button>
+                </form>
+              </div>
+            </div>
+            <div style="flex: 1; min-width: 250px;">
+              <div class="target-box" style="margin-top:0;">
+                <p><strong>[ PORT 1 ] Email :</strong> votre@email.com</p>
+                <p><strong>[ PORT 2 ] LinkedIn :</strong> @horaembedded</p>
+                <p><strong>[ PORT 3 ] GitHub :</strong> HoraEmbedded</p>
+                <p><strong>[ LOC ] Emplacement :</strong> Tanger, Maroc</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function switchTab(tabId, element) {
+      // Retirer la classe active de tous les menus
+      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+      // Ajouter la classe active au menu cliqué
+      element.classList.add('active');
+
+      // Masquer toutes les sections
+      document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
+      // Afficher la section cible
+      document.getElementById('sec-' + tabId).classList.add('active');
+
+      // Remonter en haut de la page
+      document.getElementById('workspace').scrollTop = 0;
+    }
+
+    /* ── Gestion des Aperçus (Modale) ── */
+    function openPreview(title, mediaHTML) {
+      document.getElementById('modalTitle').textContent = '>> SYS_VIEWER : ' + title;
+      document.getElementById('modalBody').innerHTML = mediaHTML;
+      document.getElementById('previewModal').classList.add('active');
+    }
+
+    function closePreview(event) {
+      document.getElementById('previewModal').classList.remove('active');
+      // Vider le contenu permet de couper le son d'une vidéo si elle était en cours de lecture
+      setTimeout(() => { document.getElementById('modalBody').innerHTML = ''; }, 200);
+    }
+
+  </script>
+
+<div class="modal-overlay" id="previewModal" onclick="closePreview(event)">
+    <div class="modal-window" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span class="modal-title" id="modalTitle">>> SYS_VIEWER : Aperçu</span>
+        <button class="modal-close" onclick="closePreview()">✕</button>
+      </div>
+      <div class="modal-content" id="modalBody">
+        </div>
+    </div>
+  </div>
+
+</body>
+</html>
