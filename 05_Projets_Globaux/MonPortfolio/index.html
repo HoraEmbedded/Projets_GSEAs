@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="description" content="Portfolio professionnel de Horacia AZONHOUMON, étudiante ingénieure en Génie des Systèmes Électronique et Automatique (GSEA) à l'ENSA Tanger. Recherche de stage PFA.">
+  <meta name="keywords" content="Ingénieure, GSEA, Automatique, Électronique, Systèmes Embarqués, MATLAB, Simulink, FPGA, VHDL, PCB, Tanger, Stage PFA 2025">
+  <meta name="author" content="Horacia AZONHOUMON">
+
+  <meta property="og:title" content="Portfolio | Horacia AZONHOUMON - Ingénierie GSEA">
+  <meta property="og:description" content="Découvrez mes projets en contrôle intelligent, systèmes embarqués et électronique. Actuellement à la recherche d'un stage PFA.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lien-de-ton-portfolio.com">
+  
   <title>Horacia AZONHOUMON – Portfolio Ingénieure GSEA</title>
   <style>
     /* ════════════════════════════════════════
@@ -123,29 +133,24 @@
     .orb-q3 { background: #60B0F0; }
     .orb-q4 { background: #F0C830; }
 
-    /* ─── Barre d'accès rapide ─── */
-    .qat {
-      display: flex;
-      align-items: center;
-      gap: 1px;
-      flex: 1;
+    /* ─── Barre d'accès rapide (Affinée) ─── */
+    .qat { 
+      display: flex; align-items: center; gap: 2px; flex: 1; padding-left: 4px; 
     }
     .qat-btn {
-      width: 22px; height: 22px;
-      background: transparent;
-      border: 1px solid transparent;
-      border-radius: 3px;
-      cursor: pointer;
-      color: rgba(255,255,255,0.92);
-      font-size: 13px;
+      width: 24px; height: 24px; background: transparent; border: 1px solid transparent;
+      border-radius: 3px; cursor: pointer; color: #ffffff; font-size: 14px;
       display: flex; align-items: center; justify-content: center;
-      transition: background 0.1s, border-color 0.1s;
+      transition: all 0.1s ease-in-out;
     }
     .qat-btn:hover {
-      background: rgba(255,255,255,0.20);
-      border-color: rgba(255,255,255,0.38);
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.45);
+      box-shadow: inset 0 0 2px rgba(255,255,255,0.6);
     }
-    .qat-sep { width: 1px; height: 13px; background: rgba(255,255,255,0.28); margin: 0 3px; }
+    .qat-sep { 
+      width: 1px; height: 14px; background: rgba(255,255,255,0.4); margin: 0 4px; 
+    }
 
     /* ─── Titre centré ─── */
     .win-title {
@@ -184,69 +189,54 @@
     /* ════════════════════════════════════════
        RANGÉE DES ONGLETS RUBAN
     ════════════════════════════════════════ */
+    /* ─── Ruban : Onglets et Corps (Cohérence Structurelle) ─── */
     .ribbon-tabs {
-      background: linear-gradient(180deg, #C6D8EE 0%, #AECCE4 100%);
-      display: flex;
-      align-items: flex-end;
-      padding-left: 60px;
-      border-bottom: 1px solid #7AACD8;
-      height: 26px;
-      flex-shrink: 0;
+      background: linear-gradient(180deg, #D4E6FA 0%, #BBD6F6 100%);
+      display: flex; align-items: flex-end; padding-left: 60px;
+      border-bottom: 1px solid #8EADC7; height: 28px; flex-shrink: 0;
     }
     .r-tab {
-      padding: 4px 15px 3px;
-      font-size: 11.5px;
-      color: #1A3E8A;
-      cursor: pointer;
-      border: 1px solid transparent;
-      border-bottom: none;
-      border-radius: 4px 4px 0 0;
-      background: transparent;
-      font-family: inherit;
-      position: relative;
-      bottom: -1px;
-      transition: background 0.08s;
-      white-space: nowrap;
+      padding: 4px 16px 3px; font-size: 12px; color: #1E395B; cursor: pointer;
+      border: 1px solid transparent; border-bottom: none;
+      border-radius: 4px 4px 0 0; background: transparent;
+      margin-right: 2px; position: relative; bottom: -1px;
+      transition: all 0.1s;
     }
     .r-tab:hover:not(.active) {
-      background: rgba(255,255,255,0.48);
-      border-color: rgba(100,155,215,0.55);
+      background: linear-gradient(180deg, #FAFCFF 0%, #E0EEFA 100%);
+      border-color: #A9C9E8;
     }
     .r-tab.active {
-      background: #FAFBFD;
-      border-color: #7AACD8;
-      border-bottom-color: #FAFBFD;
-      font-weight: 600;
-      color: #102A6A;
+      background: #EEF5FD; border-color: #8EADC7;
+      border-bottom-color: #EEF5FD; font-weight: 700; color: #000;
+    }
+    
+    .ribbon-body {
+      background: linear-gradient(180deg, #EEF5FD 0%, #D5E7FA 100%);
+      border-bottom: 1px solid #9CBBE5; display: flex; align-items: stretch;
+      padding: 3px 4px 0; min-height: 90px; flex-shrink: 0; overflow-x: auto;
+    }
+    .r-group {
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: 2px 8px 0; border-right: 1px solid #B0CBEB; position: relative;
+    }
+    .group-cmds { 
+      display: flex; gap: 4px; align-items: flex-start; flex: 1; padding-bottom: 18px; 
+    }
+    .group-name {
+      position: absolute; bottom: 2px; left: 0; right: 0; text-align: center;
+      font-size: 10px; color: #5B7494; font-weight: 600;
     }
 
     /* ════════════════════════════════════════
        CORPS DU RUBAN
     ════════════════════════════════════════ */
-    .ribbon-body {
-      background: linear-gradient(180deg, #EEF5FD 0%, #D8E9F8 100%);
-      border-bottom: 2px solid #68A0D0;
-      display: flex;
-      align-items: stretch;
-      padding: 3px 4px 0;
-      min-height: 90px;
-      flex-shrink: 0;
-      overflow-x: auto;
-    }
-
+    
     /* Contenu du ruban par onglet */
     .ribbon-panel { display: none; flex: 1; align-items: stretch; }
     .ribbon-panel.active { display: flex; }
 
-    /* Groupe */
-    .r-group {
-      display: flex;
-      flex-direction: column;
-      padding: 3px 6px 0;
-      border-right: 1px solid #B5CDE5;
-      min-width: 56px;
-      position: relative;
-    }
+    
     .r-group:last-child { border-right: none; }
     .group-cmds {
       display: flex;
@@ -255,15 +245,7 @@
       flex: 1;
       padding-bottom: 17px;
     }
-    .group-name {
-      position: absolute;
-      bottom: 2px; left: 0; right: 0;
-      text-align: center;
-      font-size: 9.5px;
-      color: #5A6A80;
-      border-top: 1px solid rgba(0,0,0,0.07);
-      padding-top: 1px;
-    }
+    
     .dialog-launcher {
       position: absolute;
       bottom: 3px; right: 4px;
@@ -294,7 +276,7 @@
       background: linear-gradient(180deg, #FFF2A0 0%, #FFD960 100%);
       border-color: #C89030;
     }
-    .rb-lg .ri { font-size: 28px; line-height: 1; }
+    .rb-lg .ri { font-size: 24px; line-height: 1; color: #2060B8; font-weight: normal; }
     .rb-lg .rl { font-size: 10px; color: #1A1A1A; text-align: center; line-height: 1.25; white-space: nowrap; }
 
     /* Petit bouton ruban (icône + texte côte à côte) */
@@ -317,7 +299,7 @@
       background: linear-gradient(180deg, #FFF2A0 0%, #FFD960 100%);
       border-color: #C89030;
     }
-    .rb-sm .ri { font-size: 14px; }
+    .rb-sm .ri { font-size: 14px; color: #2060B8; font-weight: bold; }
 
     /* Colonne de petits boutons */
     .rb-col { display: flex; flex-direction: column; gap: 1px; }
@@ -438,7 +420,7 @@
       border-left: 3px solid #2860B8;
       padding-left: 13px;
     }
-    .nav-icon { font-size: 13px; opacity: 0.85; }
+    .nav-icon { font-size: 13px; color: #2060B8; font-weight: bold; }
 
     /* ─── Aire du document ─── */
     .doc-area {
@@ -545,7 +527,7 @@
       border-radius: 50%;
       background: linear-gradient(135deg, #1B50A8 0%, #5898D8 55%, #90C8F0 100%);
       display: flex; align-items: center; justify-content: center;
-      font-size: 40px; color: white;
+      font-size: 32px; color: white; font-family: monospace; font-weight: bold;
       flex-shrink: 0;
       box-shadow: 0 3px 14px rgba(30,80,170,0.45);
       border: 4px solid #CCE4F8;
@@ -578,7 +560,7 @@
       padding: 10px 8px; text-align: center;
       background: linear-gradient(180deg, #F4F9FF 0%, #E8F3FE 100%);
     }
-    .hl-icon  { font-size: 24px; margin-bottom: 4px; }
+    .hl-icon  { font-size: 22px; margin-bottom: 4px; color: #2060B8; }
     .hl-title { font-size: 11px; font-weight: 700; color: #102A70; }
     .hl-sub   { font-size: 10.5px; color: #5878A0; margin-top: 2px; }
 
@@ -659,7 +641,7 @@
       padding: 11px; border: 1px solid #BDD8F0; border-radius: 4px;
       background: linear-gradient(180deg, #F4F9FF, #E8F3FE);
     }
-    .ct-icon  { font-size: 22px; line-height: 1; flex-shrink: 0; }
+    .ct-icon  { font-size: 18px; line-height: 1; flex-shrink: 0; color: #2060B8; font-weight: bold; }
     .ct-lbl   { font-size: 10px; color: #2060B8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
     .ct-val   { font-size: 12.5px; color: #1A1A2A; margin-top: 2px; }
     .ct-val a { color: #2060B8; text-decoration: none; }
@@ -804,12 +786,11 @@
 
     <!-- Barre d'accès rapide -->
     <div class="qat">
-      <button class="qat-btn" title="Accueil" onclick="switchTab('accueil')">⌂</button>
       <button class="qat-btn" title="Télécharger CV" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')">💾</button>
 <button class="qat-btn" title="Envoyer un email" onclick="switchTab('contact')">✉</button>
 <div class="qat-sep"></div>
-<button class="qat-btn" title="Profil LinkedIn" onclick="window.open('https://linkedin.com/in/ton-profil', '_blank')">🔗</button>
-<button class="qat-btn" title="GitHub" onclick="window.open('https://github.com/ton-profil', '_blank')">💻</button>
+      <button class="qat-btn" title="LinkedIn" onclick="window.open('https://www.linkedin.com/in/horaembedded/', '_blank')"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></button>
+<button class="qat-btn" title="GitHub" onclick="window.open('https://github.com/ton-profil', '_blank')"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></button>
       <div class="qat-sep"></div>
       <button class="qat-btn" title="Personnaliser la barre d'accès rapide">▾</button>
     </div>
@@ -847,37 +828,13 @@
     <div class="ribbon-panel active" id="rp-accueil">
       <div class="r-group">
         <div class="group-cmds">
-          <button class="rb-lg" onclick="switchTab('accueil')"><span class="ri">👤</span><span class="rl">Profil</span></button>
+          <button class="rb-lg" onclick="switchTab('accueil')"><span class="ri">  ID</span><span class="rl">Profil</span></button>
           <button class="rb-lg" onclick="alert('Remplacez par votre photo')"><span class="ri">🖼️</span><span class="rl">Photo</span></button>
         </div>
         <span class="group-name">Identité</span>
         <span class="dialog-launcher">▼</span>
       </div>
-      <div class="r-group">
-        <div class="group-cmds">
-          <div class="rb-col">
-            <button class="rb-sm" onclick="switchTab('apropos')"><span class="ri">🎓</span> Formation</button>
-            <button class="rb-sm" onclick="switchTab('projets')"><span class="ri">📁</span> Projets</button>
-            <button class="rb-sm" onclick="switchTab('competences')"><span class="ri">⚙️</span> Compétences</button>
-          </div>
-        </div>
-        <span class="group-name">Navigation</span>
-      </div>
-      <div class="r-group">
-        <div class="group-cmds">
-          <button class="rb-lg" onclick="window.open('LIEN_VERS_TON_CV.pdf', '_blank')">
-  <span class="ri">📄</span><span class="rl">Télécharger<br>CV</span>
-</button>
-          <button class="rb-lg" onclick="window.open('LIEN_VERS_TON_PROFIL_LINKEDIN', '_blank')">
-            <span class="ri">🔗</span><span class="rl">LinkedIn</span>
-          </button>
-          <button class="rb-lg" onclick="window.open('LIEN_VERS_TON_PROFIL_GITHUB', '_blank')">
-            <span class="ri">💻</span><span class="rl">GitHub</span>
-          </button>
-        </div>
-        <span class="group-name">Partager</span>
-        <span class="dialog-launcher">▼</span>
-      </div>
+      
       <div class="r-group">
         <div class="group-cmds">
           <div class="rb-col">
@@ -934,7 +891,7 @@
     <div class="ribbon-panel" id="rp-projets">
       <div class="r-group">
         <div class="group-cmds">
-          <button class="rb-lg"><span class="ri">🤖</span><span class="rl">Contrôle<br>Intelligent</span></button>
+          <button class="rb-lg"><span class="ri">◈</span><span class="rl">Contrôle<br>Intelligent</span></button>
           <button class="rb-lg"><span class="ri">💾</span><span class="rl">Embarqué<br>FPGA</span></button>
           <button class="rb-lg"><span class="ri">⚡</span><span class="rl">Électronique<br>PCB</span></button>
         </div>
@@ -1007,8 +964,8 @@
       <div class="r-group" style="border-right:none">
         <div class="group-cmds">
           <div class="rb-col">
-            <button class="rb-sm"><span class="ri">🔗</span> Ouvrir LinkedIn</button>
-            <button class="rb-sm"><span class="ri">💻</span> Ouvrir GitHub</button>
+            <button class="rb-sm"><span class="ri"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></span> Ouvrir LinkedIn</button>
+            <button class="rb-sm"><span class="ri"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></span> Ouvrir GitHub</button>
             <button class="rb-sm"><span class="ri">📍</span> Voir sur Maps</button>
           </div>
         </div>
@@ -1083,30 +1040,20 @@
     <div class="nav-pane">
       <div class="nav-pane-hdr">Plan du Document</div>
       <div class="nav-section-lbl">Sections</div>
-      <div class="nav-item active" id="nav-accueil"     onclick="switchTab('accueil')">
+      <div class="nav-item active" id="nav-accueil" onclick="switchTab('accueil')">
         <span class="nav-icon">⌂</span> Accueil
       </div>
-      <div class="nav-item" id="nav-apropos"            onclick="switchTab('apropos')">
+      <div class="nav-item" id="nav-apropos" onclick="switchTab('apropos')">
         <span class="nav-icon">ℹ️</span> À Propos
       </div>
-      <div class="nav-item" id="nav-projets"            onclick="switchTab('projets')">
+      <div class="nav-item" id="nav-projets" onclick="switchTab('projets')">
         <span class="nav-icon">📁</span> Projets
       </div>
-      <div class="nav-item" id="nav-competences"        onclick="switchTab('competences')">
+      <div class="nav-item" id="nav-competences" onclick="switchTab('competences')">
         <span class="nav-icon">⚙️</span> Compétences
       </div>
-      <div class="nav-item" id="nav-contact"            onclick="switchTab('contact')">
+      <div class="nav-item" id="nav-contact" onclick="switchTab('contact')">
         <span class="nav-icon">✉️</span> Contact
-      </div>
-      <div class="nav-section-lbl" style="margin-top:10px">Liens rapides</div>
-      <div class="nav-item" onclick="alert('Remplacez par le lien de votre CV')">
-        <span class="nav-icon">📄</span> Télécharger CV
-      </div>
-      <div class="nav-item" onclick="alert('Lien LinkedIn à configurer')">
-        <span class="nav-icon">🔗</span> LinkedIn
-      </div>
-      <div class="nav-item" onclick="alert('Lien GitHub à configurer')">
-        <span class="nav-icon">💻</span> GitHub
       </div>
       <div class="nav-section-lbl" style="margin-top:10px">Disponibilité</div>
       <div class="nav-item" style="color:#0A6A1A;font-weight:600;background:#E8F8EE">
@@ -1125,7 +1072,7 @@
         <div class="sec active" id="sec-accueil">
 
           <div class="profile-hero">
-            <div class="avatar">👩‍💻</div>
+            <div class="avatar">[ID]</div>
             <div>
               <div class="hero-name">Horacia AZONHOUMON</div>
               <div class="hero-sub">Ingénieure en Génie des Systèmes Électronique et Automatique (GSEA)</div>
@@ -1190,7 +1137,7 @@
         ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
         <div class="sec" id="sec-apropos">
 
-          <div class="doc-h2">👤 À Propos de Moi</div>
+          <div class="doc-h2">  ID À Propos de Moi</div>
           <p class="body-text">
             Passionnée d'ingénierie depuis mes classes préparatoires, je combine rigueur analytique
             et créativité technique. Mon parcours à l'ENSA Tanger m'a permis de développer une
@@ -1451,7 +1398,7 @@
               <span class="tag">MATLAB Script</span>
               <span class="tag">VHDL</span>
               <span class="tag">Python</span>
-              <span class="tag">Assembly ARM</span>
+              <span class="tag">Assembleur (ARM)</span>
               <span class="tag lite">HTML / CSS</span>
               <span class="tag lite">Bash / Shell</span>
             </div>
@@ -1518,7 +1465,7 @@
           <div class="doc-h2">✉️ Informations de Contact</div>
           <div class="contact-grid">
             <div class="ct-card">
-              <span class="ct-icon">📧</span>
+              <span class="ct-icon">@</span>
               <div>
                 <div class="ct-lbl">Email</div>
                 <!-- ↓ Remplacez par votre adresse email -->
@@ -1553,7 +1500,7 @@
               <div>
                 <div class="ct-lbl">Téléphone</div>
                 <!-- ↓ Remplacez par votre numéro -->
-                <div class="ct-val">+212 6XX XXX XXX</div>
+                <div class="ct-val"><a href="tel:+212774469995" style="color: #2060B8; text-decoration: none;">+212 774 469 995</a></div>
               </div>
             </div>
             <div class="ct-card">
