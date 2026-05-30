@@ -1,9 +1,3 @@
-
-Voici le code complet pour ton fichier `README.md`. Il est rédigé selon les standards de l'industrie (clair, structuré, purement technique) pour mettre en valeur la rigueur de ton architecture logicielle.
-
-Tu peux copier l'intégralité de ce bloc et le coller dans ton dépôt GitHub.
-
-```markdown
 # Système Embarqué de Gestion de Serre Intelligente
 
 ## Description du Projet
@@ -51,35 +45,3 @@ Le projet est structuré autour de pilotes développés spécifiquement par mani
    ```bash
    git clone <url-du-depot>
    cd <nom-du-dossier>
-
-```
-
-2. Construire le projet (compilation du firmware) :
-```bash
-pio run
-
-```
-
-
-3. Téléverser le firmware sur l'ATmega2560 :
-```bash
-pio run --target upload
-
-```
-
-
-4. Ouvrir le moniteur série (9600 bauds) pour observer la télémétrie :
-```bash
-pio device monitor -b 9600
-
-```
-
-
-
-## Auteur
-
-*Projet réalisé dans le cadre d'un cursus en ingénierie des systèmes embarqués.*
-
-```
-
-```
