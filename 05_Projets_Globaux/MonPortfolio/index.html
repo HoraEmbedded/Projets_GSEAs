@@ -3,1372 +3,1246 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horacia AZONHOUMON – Portfolio GSEA</title>
+  <meta name="description" content="Portfolio professionnel de Horacia AZONHOUMON, étudiante ingénieure en Génie des Systèmes Électronique et Automatique (GSEA).">
   
-  <meta name="description" content="Portfolio professionnel de Horacia AZONHOUMON, étudiante ingénieure en Génie des Systèmes Électronique et Automatique (GSEA) à l'ENSA Tanger. Recherche de stage PFA.">
-  <meta name="keywords" content="Ingénieure, GSEA, Automatique, Électronique, Systèmes Embarqués, MATLAB, Simulink, FPGA, VHDL, PCB, Tanger, Stage PFA 2025">
-  <meta name="author" content="Horacia AZONHOUMON">
-
-  <meta property="og:title" content="Portfolio | Horacia AZONHOUMON - Ingénierie GSEA">
-  <meta property="og:description" content="Découvrez mes projets en contrôle intelligent, systèmes embarqués et électronique. Actuellement à la recherche d'un stage PFA.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://lien-de-ton-portfolio.com">
-  
-  <title>Horacia AZONHOUMON – Portfolio Ingénieure GSEA</title>
   <style>
     /* ════════════════════════════════════════
-       RESET & BASE
+       VARIABLES & THÈME (Style Logiciel CAO)
     ════════════════════════════════════════ */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --menu-bg: #f0f0f0;
+      --toolbar-bg: #e4e4e4;
+      --sidebar-bg: #f4f4f4;
+      --sidebar-header: #c8c8c8;
+      --workspace-bg: #7a7a7a;
+      
+      --page-bg: #ffffff;
+      --grid-dot: #b0c4de;
+      
+      --text-main: #333333;
+      --text-muted: #666666;
+      --color-blue: #1a5b9c; /* Bleu typique Proteus/Altium */
+      --color-blue-light: #e6f0fa;
+      --border-color: #d0d0d0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       font-size: 13px;
-      margin: 0;
-      padding: 0;
-      background: #fff; 
+      color: var(--text-main);
+      background-color: var(--workspace-bg);
       height: 100vh;
-      overflow: hidden; 
-    }
-
-    /* ════════════════════════════════════════
-       FENÊTRE PRINCIPALE
-    ════════════════════════════════════════ */
-    .ms-window {
-      width: 100%;
-      height: 100vh;
-      background: #fff;
       display: flex;
       flex-direction: column;
-      border: none;
-      box-shadow: none;
-    }
-
-    /* ════════════════════════════════════════
-       BARRE DE TITRE (Aero Glass)
-    ════════════════════════════════════════ */
-    .title-bar {
-      height: 34px;
-      background: linear-gradient(180deg,
-        #58A0DC 0%, #2A6EC0 18%, #1850A8 45%, #2460B8 70%, #1A4898 100%);
-      display: flex;
-      align-items: center;
-      padding: 0 6px 0 66px;
-      position: relative;
-      flex-shrink: 0;
-    }
-    /* Reflet Aero */
-    .title-bar::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 50%;
-      background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, transparent 100%);
-      pointer-events: none;
-    }
-    .title-bar::after {
-      content: '';
-      position: absolute;
-      top: 1px; left: 1px; right: 1px;
-      height: 1px;
-      background: rgba(255,255,255,0.45);
-      border-radius: 8px 8px 0 0;
-      pointer-events: none;
-    }
-
-    /* ─── ORB ─── */
-    .office-orb {
-      position: absolute;
-      left: 6px; top: -10px;
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 38% 36%,
-        #72B8F0 0%, #2A60CC 44%, #1240A0 68%, #0C2878 100%);
-      cursor: pointer;
-      z-index: 200;
-      box-shadow:
-        0 4px 12px rgba(0,0,0,0.55),
-        inset 0 1px 4px rgba(255,255,255,0.4),
-        0 0 0 2px rgba(90,155,230,0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: box-shadow 0.12s, background 0.12s;
       overflow: hidden;
     }
-    .office-orb::before {
-      content: '';
-      position: absolute;
-      top: 4px; left: 9px;
-      width: 28px; height: 19px;
-      background: radial-gradient(ellipse, rgba(255,255,255,0.38) 0%, transparent 75%);
-      border-radius: 50%;
-    }
-    .office-orb:hover {
-      background: radial-gradient(circle at 38% 36%,
-        #84C8FF 0%, #3A72DC 44%, #1E52B8 68%, #0E3088 100%);
-      box-shadow:
-        0 5px 16px rgba(0,0,0,0.65),
-        inset 0 1px 4px rgba(255,255,255,0.5),
-        0 0 0 3px rgba(110,170,245,0.6);
-    }
-    .orb-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5px;
-      padding: 6px;
-      width: 32px; height: 32px;
-    }
-    .orb-q { border-radius: 2px; }
-    .orb-q1 { background: #E85050; }
-    .orb-q2 { background: #50C050; }
-    .orb-q3 { background: #60B0F0; }
-    .orb-q4 { background: #F0C830; }
 
-    /* ─── Barre d'accès rapide (Affinée) ─── */
-    .qat { 
-      display: flex; align-items: center; gap: 2px; flex: 1; padding-left: 4px; 
-    }
-    .qat-btn {
-      width: 24px; height: 24px; background: transparent; border: 1px solid transparent;
-      border-radius: 3px; cursor: pointer; color: #ffffff; font-size: 14px;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.1s ease-in-out;
-    }
-    .qat-btn:hover {
-      background: rgba(255, 255, 255, 0.25);
-      border-color: rgba(255, 255, 255, 0.45);
-      box-shadow: inset 0 0 2px rgba(255,255,255,0.6);
-    }
-    .qat-sep { 
-      width: 1px; height: 14px; background: rgba(255,255,255,0.4); margin: 0 4px; 
-    }
+    a { text-decoration: none; color: inherit; }
 
-    /* ─── Titre centré ─── */
-    .win-title {
-      flex: 2;
-      text-align: center;
-      color: white;
+    /* ════════════════════════════════════════
+       BARRE DE MENUS & OUTILS
+    ════════════════════════════════════════ */
+    .top-menu {
+      background-color: var(--menu-bg);
+      display: flex;
+      padding: 4px 10px;
+      border-bottom: 1px solid white;
       font-size: 12px;
-      font-weight: 400;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-      letter-spacing: 0.2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
-
-    /* ─── Contrôles fenêtre ─── */
-    .win-controls { display: flex; gap: 2px; margin-left: auto; }
-    .win-ctrl {
-      width: 28px; height: 21px;
-      border-radius: 4px;
-      border: 1px solid rgba(255,255,255,0.22);
-      background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06));
+    .top-menu div {
+      padding: 4px 10px;
       cursor: pointer;
-      color: white;
-      font-size: 10px;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.1s;
     }
-    .win-ctrl:hover { background: linear-gradient(180deg, rgba(255,255,255,0.32), rgba(255,255,255,0.14)); }
-    .win-ctrl.close {
-      background: linear-gradient(180deg, #E06060, #C02828);
-      border-color: #9A2020;
-    }
-    .win-ctrl.close:hover { background: linear-gradient(180deg, #F07070, #D03838); }
+    .top-menu div:hover { background-color: var(--color-blue-light); color: var(--color-blue); }
 
-    /* ════════════════════════════════════════
-       RANGÉE DES ONGLETS RUBAN
-    ════════════════════════════════════════ */
-    /* ─── Ruban : Onglets et Corps (Cohérence Structurelle) ─── */
-    .ribbon-tabs {
-      background: linear-gradient(180deg, #DCE9F4 0%, #AAC4DF 100%);
+    .toolbar {
+      background-color: var(--toolbar-bg);
       display: flex;
-      align-items: flex-end;
-      padding-left: 54px; 
-      border-bottom: 1px solid #89A1C5;
-      height: 22px; /* Réduction de l'épaisseur de la barre */
-      flex-shrink: 0;
+      padding: 5px 10px;
+      border-bottom: 1px solid #a0a0a0;
+      gap: 15px;
+      align-items: center;
     }
-    
-    .r-tab {
-      padding: 2px 10px 3px; /* Réduction de l'espacement pour des onglets plus étroits */
-      font-size: 11px;
-      color: #15428B;
-      cursor: pointer;
+    .toolbar-group {
+      display: flex;
+      gap: 10px;
+      border-right: 1px solid #c0c0c0;
+      padding-right: 15px;
+    }
+    .toolbar-btn {
+      background: none;
       border: 1px solid transparent;
-      border-bottom: none;
-      border-radius: 3px 3px 0 0; /* Arrondi plus subtil typique de l'interface */
-      background: transparent;
-      margin-right: 1px; /* Rapprochement des onglets entre eux */
-      position: relative;
-      bottom: -1px;
-      transition: background 0.1s;
-    }
-
-    .r-tab:hover:not(.active) {
-      background: rgba(255, 255, 255, 0.5);
-      border-color: rgba(255, 255, 255, 0.7);
-    }
-    .r-tab.active {
-      background: #EAF2FB; 
-      border-color: #89A1C5;
-      border-bottom-color: #EAF2FB; 
-      color: #000;
-    }
-    
-    /* ════════════════════════════════════════
-       CORPS DU RUBAN (Style Word 2007)
-    ════════════════════════════════════════ */
-    /* ════════════════════════════════════════
-       CORPS DU RUBAN (Style Word 2007)
-    ════════════════════════════════════════ */
-    .ribbon-body {
-      background: linear-gradient(180deg, #EAF2FB 0%, #DDE9F8 30%, #C9DEF5 100%);
-      border-bottom: 1px solid #7387A9;
-      display: flex;
-      align-items: stretch;
-      padding: 2px 2px 0;
-      min-height: 78px; /* Hauteur réduite pour un rendu plus compact (anciennement 92px) */
-      flex-shrink: 0;
-      overflow-x: auto;
-    }
-    
-    .r-group {
-      display: flex; flex-direction: column; justify-content: space-between;
-      padding: 2px 8px 0; border-right: 1px solid #B0CBEB; position: relative;
-    }
-    
-    .group-cmds {
-      display: flex;
-      gap: 1px;
-      align-items: flex-start;
-      flex: 1;
-      padding-bottom: 14px; /* Réduit pour s'adapter à la nouvelle hauteur */
-    }
-    .group-name {
-      position: absolute; bottom: 2px; left: 0; right: 0; text-align: center;
-      font-size: 10px; color: #5B7494; font-weight: 600;
-    }
-
-    /* ════════════════════════════════════════
-       CORPS DU RUBAN
-    ════════════════════════════════════════ */
-    
-    /* Contenu du ruban par onglet */
-    .ribbon-panel { display: none; flex: 1; align-items: stretch; }
-    .ribbon-panel.active { display: flex; }
-
-    
-    .r-group:last-child { border-right: none; }
-    .group-cmds {
-      display: flex;
-      gap: 1px;
-      align-items: flex-start;
-      flex: 1;
-      padding-bottom: 17px;
-    }
-    
-    .dialog-launcher {
-      position: absolute;
-      bottom: 3px; right: 4px;
-      font-size: 8px;
-      color: #6A7A8A;
+      border-radius: 3px;
       cursor: pointer;
-      line-height: 1;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px;
+      transition: 0.1s;
     }
-    .dialog-launcher:hover { color: #2060B0; }
+    .toolbar-btn svg { width: 16px; height: 16px; fill: currentColor; }
+    .toolbar-btn:hover { background-color: var(--color-blue-light); border-color: #b3d4f5; color: var(--color-blue); }
 
-    /* Grand bouton ruban (icône + label sous) */
-    .rb-lg {
+    /* ════════════════════════════════════════
+       LAYOUT PRINCIPAL (Sidebar + Workspace)
+    ════════════════════════════════════════ */
+    .main-layout {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ── BARRE LATÉRALE ── */
+    .sidebar {
+      width: 250px;
+      background-color: var(--sidebar-bg);
+      border-right: 2px solid #a0a0a0;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 4px 5px 3px;
-      border: 1px solid transparent;
-      border-radius: 3px;
-      cursor: pointer;
-      min-width: 46px;
-      background: transparent;
-      gap: 2px;
-      transition: all 0.08s;
-      font-family: inherit;
-    }
-    .rb-lg:hover {
-      background: linear-gradient(180deg, #FFF2A0 0%, #FFD960 100%);
-      border-color: #C89030;
-    }
-    .rb-lg .ri { font-size: 24px; line-height: 1; color: #2060B8; font-weight: normal; }
-    .rb-lg .rl { font-size: 10px; color: #1A1A1A; text-align: center; line-height: 1.25; white-space: nowrap; }
-
-    /* Petit bouton ruban (icône + texte côte à côte) */
-    .rb-sm {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 2px 5px;
-      border: 1px solid transparent;
-      border-radius: 3px;
-      cursor: pointer;
-      font-size: 11px;
-      color: #1A1A1A;
-      background: transparent;
-      white-space: nowrap;
-      transition: all 0.08s;
-      font-family: inherit;
-    }
-    .rb-sm:hover {
-      background: linear-gradient(180deg, #FFF2A0 0%, #FFD960 100%);
-      border-color: #C89030;
-    }
-    .rb-sm .ri { font-size: 14px; color: #2060B8; font-weight: bold; }
-
-    /* Colonne de petits boutons */
-    .rb-col { display: flex; flex-direction: column; gap: 1px; }
-
-    /* Séparateur vertical interne */
-    .r-vsep {
-      width: 1px;
-      background: rgba(0,0,0,0.10);
-      align-self: stretch;
-      margin: 0 3px;
-    }
-
-    /* Dropdown simulé */
-    .rb-dropdown {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      border: 1px solid transparent;
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .rb-dropdown:hover { border-color: #C89030; }
-    .rb-dropdown .rb-sm { border: none; border-radius: 0; }
-    .rb-dropdown .drop-arrow {
-      width: 12px;
-      background: transparent;
-      border-left: 1px solid rgba(0,0,0,0.12);
-      font-size: 8px;
-      color: #555;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      height: 100%;
-      padding: 2px;
-    }
-
-    /* ════════════════════════════════════════
-       RÈGLE (Ruler)
-    ════════════════════════════════════════ */
-    .ruler-container {
-      background: #F0F5FC;
-      border-bottom: 1px solid #C0D4E8;
-      display: flex;
-      height: 18px;
       flex-shrink: 0;
-    }
-    .ruler-corner {
-      width: 187px;
-      min-width: 187px;
-      background: #E4EEF8;
-      border-right: 1px solid #B8CDE4;
-    }
-    .ruler {
-      flex: 1;
-      overflow: hidden;
-      position: relative;
-      background: #F5F8FC;
-    }
-    .ruler svg { width: 100%; height: 100%; }
-
-    /* ════════════════════════════════════════
-       ZONE DE CONTENU PRINCIPAL
-    ════════════════════════════════════════ */
-    .main-area {
-      display: flex;
-      flex: 1;
-      overflow: hidden;
-      min-height: 0;
-    }
-
-    /* ─── Volet de navigation ─── */
-    .nav-pane {
-      width: 188px;
-      min-width: 188px;
-      background: #F0F5FC;
-      border-right: 1px solid #B8CCE4;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    .nav-pane-hdr {
-      background: linear-gradient(180deg, #4282CC, #2A62A8);
-      color: white;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 5px 8px;
-      letter-spacing: 0.3px;
-      flex-shrink: 0;
-    }
-    .nav-section-lbl {
-      padding: 3px 8px;
-      font-size: 10px;
-      color: #5A6A7A;
-      background: #E2EAF5;
-      border-top: 1px solid #C5D5EB;
-      border-bottom: 1px solid #C5D5EB;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-weight: 600;
-      flex-shrink: 0;
-    }
-    .nav-item {
-      padding: 5px 8px 5px 16px;
-      font-size: 11.5px;
-      color: #1A3E8A;
-      cursor: pointer;
-      border-bottom: 1px solid #D5E5F5;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: background 0.1s;
-      user-select: none;
-    }
-    .nav-item:hover { background: #D5E8F8; }
-    .nav-item.active {
-      background: linear-gradient(180deg, #C8DCF5, #B5CAEA);
-      color: #08267A;
-      font-weight: 600;
-      border-left: 3px solid #2860B8;
-      padding-left: 13px;
-    }
-    .nav-icon { font-size: 13px; color: #2060B8; font-weight: bold; }
-
-    /* ─── Aire du document ─── */
-    .doc-area {
-      flex: 1;
-      background: #89A1C5; /* Le bleu-gris iconique de l'image source */
       overflow-y: auto;
-      padding: 40px 20px 60px; /* Espace de respiration autour de la feuille */
+    }
+    
+    .sidebar-header {
+      background-color: var(--sidebar-header);
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: bold;
+      color: #333;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border-color);
+      border-top: 1px solid white;
+    }
+
+    .nav-items {
+      display: flex;
+      flex-direction: column;
+      flex: 1; /* Permet d'occuper tout l'espace vertical disponible */
+      justify-content: center; /* Centre les menus verticalement */
+      padding: 20px 0;
+      gap: 8px; /* Espacement net entre les boutons */
+    }
+    
+    .nav-item {
+      padding: 16px 20px 16px 30px; /* Plus d'espace cliquable en hauteur */
+      font-size: 14px; /* Police agrandie pour plus de lisibilité */
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      border-left: 4px solid transparent;
+      border-bottom: 1px solid transparent;
+      border-top: 1px solid transparent;
+      transition: background-color 0.2s, padding-left 0.2s; /* Animation fluide */
+    }
+    
+    .nav-item:hover { 
+      background-color: #eaeaea; 
+      padding-left: 35px; /* Petit effet de glissement au survol */
+    }
+    
+    .nav-item.active {
+      background-color: var(--color-blue-light);
+      border-left: 4px solid var(--color-blue);
+      border-top: 1px solid #b3d4f5;
+      border-bottom: 1px solid #b3d4f5;
+      color: var(--color-blue);
+      font-weight: bold;
+      padding-left: 35px; /* Maintient le décalage quand actif */
+    }
+
+    .nav-icon { font-size: 14px; width: 16px; text-align: center; }
+
+    /* Devices / Propriétés (Profil persistant) */
+    .device-box { padding: 15px; }
+    .u1-title { font-weight: bold; color: var(--color-blue); font-size: 13px; margin-bottom: 8px; }
+    .device-prop { font-size: 11px; margin-bottom: 4px; color: #444; }
+    
+    .io-pins-title {
+      font-size: 11px; font-weight: bold; color: var(--color-blue);
+      margin: 15px 0 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 3px;
+    }
+    .io-pins { display: flex; flex-wrap: wrap; gap: 5px; }
+    .pin {
+      font-size: 10px; border: 1px solid var(--border-color);
+      padding: 2px 6px; background: white; color: #555;
+    }
+
+    /* ── ZONE DE TRAVAIL (Workspace) ── */
+    .workspace {
+      flex: 1;
+      overflow-y: auto;
+      padding: 40px 20px;
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* Empêche la page de s'étirer de force en hauteur */
+      align-items: flex-start;
     }
 
-    /* La "feuille" Word */
     .page {
       width: 100%;
-      max-width: 816px; /* Largeur standard s'approchant du format A4 */
-      background: #FFFFFF;
-      /* Ombre portée directionnelle et bordure fine reproduisant le logiciel */
-      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.35);
-      border: 1px solid #7387A9;
-      padding: 60px 70px; /* Marges intérieures simulant les règles de Word */
-      min-height: 1050px; /* Simule la hauteur d'une vraie page vide */
-      flex-shrink: 0;
+      max-width: 900px;
+      background-color: var(--page-bg);
+      /* Grille pointillée typique CAO */
+      background-image: radial-gradient(circle, var(--grid-dot) 1px, transparent 1px);
+      background-size: 20px 20px;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+      padding: 50px 60px;
+      min-height: 1050px;
     }
-    /* Sections de la page */
-    .sec { display: none; }
-    .sec.active { display: block; }
+
+    /* Sections masquables par onglets */
+    .section-content { display: none; }
+    .section-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     /* ════════════════════════════════════════
-       BARRE D'ÉTAT
+       STYLES DU CONTENU (La Feuille)
     ════════════════════════════════════════ */
-    .status-bar {
-      background: linear-gradient(180deg, #3E7AC8, #2858A8);
-      height: 23px;
-      display: flex;
-      align-items: center;
-      padding: 0;
-      border-top: 1px solid #1A4080;
-      flex-shrink: 0;
+    .sys-title {
+      font-size: 22px; font-weight: bold; color: #000;
+      border-bottom: 2px solid var(--color-blue);
+      padding-bottom: 10px; margin-bottom: 20px;
     }
-    .st {
-      color: rgba(255,255,255,0.93);
-      font-size: 11px;
-      padding: 0 9px;
-      border-right: 1px solid rgba(255,255,255,0.18);
-      height: 100%;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      cursor: default;
-      transition: background 0.1s;
-      white-space: nowrap;
-    }
-    .st:hover { background: rgba(255,255,255,0.14); }
-    .st-fill { flex: 1; }
-    .st-right { display: flex; align-items: center; gap: 0; margin-left: auto; }
-    .view-btn {
-      width: 26px; height: 23px;
-      background: transparent;
-      border: none;
-      border-left: 1px solid rgba(255,255,255,0.18);
-      cursor: pointer;
-      color: rgba(255,255,255,0.85);
-      font-size: 11px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .view-btn:hover { background: rgba(255,255,255,0.16); }
-    .zoom-wrap { display: flex; align-items: center; gap: 4px; padding: 0 8px; border-left: 1px solid rgba(255,255,255,0.18); }
-    .zoom-wrap button {
-      background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.25); border-radius: 2px;
-      color: white; width: 14px; height: 14px; font-size: 10px; cursor: pointer; line-height: 1;
-      display: flex; align-items: center; justify-content: center; padding: 0;
-    }
-    .zoom-wrap button:hover { background: rgba(255,255,255,0.28); }
-    input[type=range].zoom-slider {
-      -webkit-appearance: none; appearance: none;
-      width: 80px; height: 4px;
-      background: linear-gradient(90deg, rgba(255,255,255,0.4), rgba(255,255,255,0.2));
-      border-radius: 2px; outline: none; cursor: pointer;
-    }
-    input[type=range].zoom-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 11px; height: 11px;
-      border-radius: 50%;
-      background: white;
-      border: 1px solid rgba(40,100,200,0.7);
-      cursor: pointer;
-    }
-    .zoom-lbl { color: rgba(255,255,255,0.93); font-size: 11px; min-width: 33px; text-align: center; }
-
-    /* ════════════════════════════════════════
-       STYLES DU DOCUMENT
-    ════════════════════════════════════════ */
-
-    /* ── En-tête profil ── */
-    .profile-hero {
-      display: flex;
-      gap: 22px;
-      margin-bottom: 26px;
-      padding-bottom: 20px;
-      border-bottom: 2.5px solid #2060B8;
-      align-items: flex-start;
-    }
-    .avatar {
-      width: 92px; height: 92px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #1B50A8 0%, #5898D8 55%, #90C8F0 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 32px; color: white; font-family: monospace; font-weight: bold;
-      flex-shrink: 0;
-      box-shadow: 0 3px 14px rgba(30,80,170,0.45);
-      border: 4px solid #CCE4F8;
-    }
-    .hero-name { font-size: 26px; color: #102A70; font-weight: 700; margin-bottom: 3px; letter-spacing: -0.3px; }
-    .hero-sub  { color: #2060B8; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
-    .hero-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-    .chip {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: 11px; color: #3A5878;
-      background: #EBF3FD; border: 1px solid #BCD4EE;
-      border-radius: 12px; padding: 2px 9px;
-    }
-
-    /* ── Titre de section interne ── */
-    .doc-h2 {
-      font-size: 13.5px; font-weight: 700; color: white;
-      background: linear-gradient(90deg, #1E5CB8, #5898D8);
-      padding: 4px 10px; margin: 22px -6px 12px;
-      border-radius: 2px;
-    }
-
-    /* ── Texte courant ── */
-    .body-text { font-size: 12.5px; color: #333; line-height: 1.72; margin-bottom: 14px; }
-
-    /* ── Grille de points forts ── */
-    .highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; }
-    .hl-card {
-      border: 1px solid #BDDAF0; border-radius: 4px;
-      padding: 10px 8px; text-align: center;
-      background: linear-gradient(180deg, #F4F9FF 0%, #E8F3FE 100%);
-    }
-    .hl-icon  { font-size: 22px; margin-bottom: 4px; color: #2060B8; }
-    .hl-title { font-size: 11px; font-weight: 700; color: #102A70; }
-    .hl-sub   { font-size: 10.5px; color: #5878A0; margin-top: 2px; }
-
-    /* ── Timeline parcours ── */
-    .timeline { padding-left: 20px; position: relative; }
-    .timeline::before {
-      content: '';
-      position: absolute; left: 6px; top: 4px; bottom: 4px;
-      width: 2px;
-      background: linear-gradient(180deg, #2060B8, #C8DCF0);
-    }
-    .tl-item { position: relative; margin-bottom: 22px; }
-    .tl-dot {
-      position: absolute; left: -17px; top: 5px;
-      width: 10px; height: 10px; border-radius: 50%;
-      background: #2060B8; border: 2px solid white;
-      box-shadow: 0 0 0 1px #2060B8;
-    }
-    .tl-year  { font-size: 10.5px; color: #2060B8; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; }
-    .tl-title { font-size: 13px; font-weight: 700; color: #1A1A2A; margin: 2px 0; }
-    .tl-org   { font-size: 12px; color: #2060B8; margin-bottom: 4px; }
-    .tl-text  { font-size: 11.5px; color: #555; line-height: 1.65; }
-
-    /* ── Barres de compétences ── */
-    .skill-cat { margin-bottom: 18px; }
-    .skill-cat-title {
-      font-size: 11px; font-weight: 700; color: #2060B8;
-      text-transform: uppercase; letter-spacing: 0.5px;
-      border-bottom: 1px solid #BCDAF0; padding-bottom: 2px; margin-bottom: 9px;
-    }
-    .sk-row { margin: 5px 0; }
-    .sk-lbl { display: flex; justify-content: space-between; font-size: 11.5px; color: #333; margin-bottom: 3px; }
-    .sk-track { height: 10px; background: #D5E8F8; border-radius: 2px; overflow: hidden; }
-    .sk-fill  { height: 100%; background: linear-gradient(90deg, #1848A8, #5898D8); border-radius: 2px; }
-
-    /* ── Tags ── */
-    .tag-cloud { display: flex; flex-wrap: wrap; gap: 5px; margin: 8px 0 14px; }
-    .tag {
-      font-size: 10.5px; padding: 2px 8px; border-radius: 10px;
-      font-weight: 500; background: #2060B8; color: white;
-    }
-    .tag.lite { background: #EBF3FD; color: #1848A8; border: 1px solid #B8D4F0; }
-
-    /* ── Fiches projet ── */
-    .proj-card {
-      border: 1px solid #BDD8F0; border-radius: 4px;
-      padding: 12px 14px 12px 18px; margin-bottom: 13px;
-      background: linear-gradient(180deg, #F4F9FF 0%, #E8F3FE 100%);
-      position: relative;
-    }
-    .proj-card::before {
-      content: '';
-      position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-      background: linear-gradient(180deg, #1848A8, #5898D8);
-      border-radius: 4px 0 0 4px;
-    }
-    .proj-card h3   { font-size: 13px; color: #102A70; font-weight: 700; margin-bottom: 5px; }
-    .proj-card p    { font-size: 12px; color: #444; line-height: 1.65; margin-bottom: 8px; }
-    .proj-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-    .pt { font-size: 10px; padding: 1px 7px; border-radius: 10px; font-weight: 500; }
-    .pt.tech { background: #1848A8; color: white; }
-    .pt.type { background: #E5EEFB; color: #1848A8; border: 1px solid #B5D0EE; }
-
-    .proj-links { margin-bottom: 10px; }
-    .proj-link-btn {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: 11.5px; text-decoration: none; color: #1848A8;
-      font-weight: 600; border: 1px solid #B5D0EE;
-      padding: 3px 8px; border-radius: 3px; background: white;
-      transition: background 0.1s, border-color 0.1s;
-    }
-    .proj-link-btn:hover { background: #E8F3FE; border-color: #8AAEE0; }
-
-    /* ── Contact ── */
-    /* ── Contact Form (Style Office 2007) ── */
-    .contact-layout {
-      display: flex; gap: 30px; margin: 15px 0;
-    }
-    .contact-left { flex: 3; }
-    .contact-right { flex: 2; display: flex; flex-direction: column; gap: 4px; }
     
-    .form-group { margin-bottom: 12px; }
+    .text-body { font-size: 13px; line-height: 1.6; color: #333; margin-bottom: 15px; }
+
+    .target-box {
+      border: 1px dashed var(--color-blue);
+      padding: 15px 20px;
+      margin: 25px 0;
+      background: rgba(26, 91, 156, 0.02);
+    }
+    .target-box p { margin-bottom: 8px; font-size: 13px; }
+    .target-box p:last-child { margin-bottom: 0; }
+
+    .blocks-title {
+      font-size: 14px; font-weight: bold; color: var(--color-blue);
+      text-transform: uppercase; margin: 30px 0 15px;
+    }
+
+    /* Grille des blocs fonctionnels */
+    .blocks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px; }
+    .functional-block {
+      border: 1px solid var(--color-blue);
+      background: white; padding: 15px;
+    }
+    .fb-header { display: flex; align-items: center; gap: 8px; font-weight: bold; margin-bottom: 10px; font-size: 13px; }
+    .fb-desc { font-size: 11px; color: #555; line-height: 1.4; }
+
+    /* Cartes Projets */
+    .project-card {
+      border: 1px solid var(--color-blue);
+      background: white; padding: 20px; margin-bottom: 20px;
+    }
+    .project-card h3 {
+      font-size: 14px; font-weight: bold; color: #000; margin-bottom: 12px;
+    }
+    .project-card p { font-size: 12px; color: #444; line-height: 1.6; margin-bottom: 15px; }
+    
+    .btn-source {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--color-blue); color: white;
+      padding: 6px 12px; font-size: 11px; font-weight: bold;
+      border: none; border-radius: 2px; cursor: pointer;
+      margin-bottom: 15px; transition: background 0.2s;
+    }
+    .btn-source:hover { background: #124070; }
+    
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .proj-tags span {
+      font-size: 10px; color: var(--color-blue);
+      border: 1px solid #b3d4f5; padding: 2px 6px; background: #f8fbff;
+    }
+
+    /* Formulaire & Timeline */
+    .timeline-item { border-left: 2px solid var(--color-blue); padding-left: 15px; position: relative; margin-bottom: 25px; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -6px; top: 0;
+      width: 10px; height: 10px; background: var(--color-blue); border-radius: 50%;
+    }
+    .time-date { font-weight: bold; font-size: 11px; color: var(--color-blue); margin-bottom: 3px; }
+    .time-title { font-weight: bold; font-size: 14px; margin-bottom: 3px; }
+    .time-org { font-size: 12px; color: #555; margin-bottom: 5px; }
+
     .form-control {
-      width: 100%; padding: 7px 9px; 
-      font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 12px;
-      border: 1px solid #A9C9E8; border-radius: 2px;
-      background: #FFFFFF; color: #333;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
-      transition: border-color 0.15s, box-shadow 0.15s;
+      width: 100%; padding: 8px; margin-bottom: 10px;
+      border: 1px solid var(--border-color); font-family: inherit; font-size: 12px;
     }
-    .form-control::placeholder { color: #8899AA; }
-    .form-control:focus {
-      outline: none; border-color: #F2CA5C; /* Contour Doré Office */
-      box-shadow: 0 0 4px rgba(242, 202, 92, 0.45), inset 0 1px 3px rgba(0,0,0,0.06);
-    }
-    textarea.form-control { resize: vertical; min-height: 95px; }
-    
-    .btn-submit {
-      padding: 6px 18px; font-size: 12px; font-weight: 600; color: #1E395B;
-      background: linear-gradient(180deg, #F4F9FF 0%, #D5E7FA 100%);
-      border: 1px solid #9CBBE5; border-radius: 3px; cursor: pointer;
-      font-family: inherit; transition: all 0.1s;
-    }
-    .btn-submit:hover {
-      background: linear-gradient(180deg, #FFF0B0 0%, #FFE070 100%);
-      border-color: #C28200; color: #000;
+    .form-control:focus { outline: none; border-color: var(--color-blue); }
+
+    /* ════════════════════════════════════════
+       FENÊTRE D'APERÇU (Modale)
+    ════════════════════════════════════════ */
+    .modal-overlay {
+      display: none; 
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6); 
+      z-index: 9999;
+      align-items: center; justify-content: center;
     }
     
-    @media (max-width: 768px) {
-      .contact-layout { flex-direction: column; }
+    .modal-overlay.active { 
+      display: flex; 
+      animation: fadeIn 0.2s ease-out; 
+    }
+    
+    .modal-window {
+      background: var(--page-bg); 
+      border: 1px solid var(--color-blue);
+      width: 90%; 
+      max-width: 800px; 
+      max-height: 90vh;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      display: flex; 
+      flex-direction: column;
+    }
+    
+    .modal-header {
+      background: var(--toolbar-bg); 
+      padding: 8px 15px;
+      border-bottom: 1px solid var(--border-color); 
+      display: flex;
+      justify-content: space-between; 
+      align-items: center;
+    }
+    
+    .modal-title {
+      font-weight: bold; 
+      font-size: 13px; 
+      color: var(--color-blue);
+      font-family: monospace;
+    }
+    
+    .modal-close {
+      background: none; 
+      border: none; 
+      font-size: 16px; 
+      cursor: pointer; 
+      color: #555;
+      font-weight: bold;
+    }
+    
+    .modal-close:hover { color: red; }
+    
+    .modal-content { 
+      padding: 20px; 
+      overflow-y: auto; 
+      text-align: center; 
+      background: #f8f8f8;
+    }
+    
+    .modal-content img, .modal-content video { 
+      max-width: 100%; 
+      height: auto; 
+      border: 1px solid var(--border-color); 
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     /* ════════════════════════════════════════
-       SCROLLBAR
-    ════════════════════════════════════════ */
-    .doc-area::-webkit-scrollbar { width: 16px; }
-    .doc-area::-webkit-scrollbar-track { background: #C0C8D8; }
-    .doc-area::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #9AACC8, #8098B8);
-      border: 1px solid #7090A8;
-    }
-    .doc-area::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #7A98C0, #6888A8); }
-    .doc-area::-webkit-scrollbar-button { background: #B0BCD0; height: 16px; border: 1px solid #9AAAB8; }
-  
-  /* ════════════════════════════════════════
-       RESPONSIVITÉ (Mobiles et Tablettes)
+       RESPONSIVE MOBILE
     ════════════════════════════════════════ */
     @media (max-width: 768px) {
-      /* Supprimer les marges autour de la fenêtre pour maximiser l'espace */
-      body {
-        padding: 0;
-      }
-      .ms-window {
-        border-radius: 0;
-        min-height: 100vh;
-      }
-      
-      /* Ajustement de la barre de titre et du bouton rond */
-      .title-bar {
-        padding-left: 55px; 
-      }
-      .win-title {
-        display: none; /* Cacher le texte du titre qui est trop long pour mobile */
-      }
-      .office-orb {
-        width: 44px; height: 44px;
-        top: 2px; left: 4px;
-      }
-      .office-orb::before {
-        width: 22px; height: 15px;
-        top: 3px; left: 7px;
-      }
-      .orb-grid {
-        width: 24px; height: 24px;
-      }
-
-      /* Rendre le ruban navigable horizontalement au doigt */
-      .ribbon-tabs {
-        padding-left: 10px;
-        overflow-x: auto;
-      }
-      .ribbon-body {
-        overflow-x: auto;
-        padding-bottom: 5px;
-      }
-
-      /* Cacher la règle qui prend trop de place en hauteur */
-      .ruler-container {
-        display: none;
-      }
-
-      /* Empiler le menu de navigation et la feuille de contenu */
-      .main-area {
-        flex-direction: column;
-      }
-      
-      /* Le menu de gauche devient un menu horizontal défilant en haut */
-      .nav-pane {
-        width: 100%;
-        min-width: 100%;
-        max-height: 130px;
-        overflow-y: auto;
-        border-right: none;
-        border-bottom: 2px solid #B8CCE4;
-      }
-      
-      /* Ajustement de la "feuille" pour l'écran de téléphone */
-      .doc-area {
-        padding: 10px;
-      }
-      .page {
-        padding: 30px 20px;
-        min-height: auto;
-      }
-
-      /* Réorganisation de l'en-tête du profil (Photo au-dessus du texte) */
-      .profile-hero {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-      .hero-chips {
-        justify-content: center;
-      }
-
-      /* Passer les grilles sur une seule colonne verticale */
-      .highlights, .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      /* Simplifier la barre d'état en bas */
-      .st:not(#st-section):not(.st-fill) {
-        display: none; 
-      }
-      .st-right {
-        display: none; /* Cacher les options de zoom sur mobile */
-      }
+      .main-layout { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 2px solid var(--border-color); max-height: 250px; }
+      .nav-items { flex-direction: row; flex-wrap: wrap; }
+      .nav-item { padding: 8px 12px; border-left: none; border-bottom: 3px solid transparent; }
+      .nav-item.active { border-left: none; border-bottom: 3px solid var(--color-blue); }
+      .workspace { padding: 10px; }
+      .page { padding: 20px; min-height: auto; }
+      .blocks-grid { grid-template-columns: 1fr; }
     }
-  
   </style>
 </head>
 <body>
 
-<div class="ms-window">
-
-  <!-- ═══════════════════════════════════════
-       BARRE DE TITRE
-  ═══════════════════════════════════════ -->
-  <div class="title-bar">
-
-    <!-- Orb -->
-    <div class="office-orb" title="Menu Principal" onclick="alert('Bienvenue dans Microsoft Portfolio 2007')">
-      <div class="orb-grid">
-        <div class="orb-q orb-q1"></div>
-        <div class="orb-q orb-q2"></div>
-        <div class="orb-q orb-q3"></div>
-        <div class="orb-q orb-q4"></div>
-      </div>
+  <div class="toolbar">
+    <div class="toolbar-group">
+      <button class="toolbar-btn" title="Sauvegarder CV" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')">
+        <svg viewBox="0 0 24 24"><path d="M19 21H5C3.895 21 3 20.105 3 19V5C3 3.895 3.895 3 5 3H16L21 8V19C21 20.105 20.105 21 19 21ZM5 5V19H19V8.828L15.172 5H5ZM15 19V15H9V19H15ZM15 5V9H9V5H15Z"/></svg>
+      </button>
+      <button class="toolbar-btn" title="Imprimer" onclick="window.print()">
+        <svg viewBox="0 0 24 24"><path d="M19 8H5V3H19V8ZM16 5H8V6H16V5ZM21 10C21.552 10 22 10.448 22 11V18H18V21H6V18H2C1.448 18 1 17.552 1 17V11C1 10.448 1.448 10 2 10H21ZM16 19V15H8V19H16ZM18 12C18 11.448 18.448 11 19 11C19.552 11 20 11.448 20 12C20 12.552 19.552 13 19 13C18.448 13 18 12.552 18 12Z"/></svg>
+      </button>
     </div>
-
-    <!-- Barre d'accès rapide -->
-    <div class="qat">
-      <button class="qat-btn" title="Télécharger CV" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')">▤</button>
-      <button class="qat-btn" title="Envoyer un email" onclick="switchTab('contact')">✉</button>
-      <div class="qat-sep"></div>
-      <button class="qat-btn" title="LinkedIn" onclick="window.open('https://linkedin.com/in/horaembedded/', '_blank')"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></button>
-      <button class="qat-btn" title="GitHub" onclick="window.open('https://github.com/ton-profil', '_blank')"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></button>
+    <div class="toolbar-group" style="border-right: none;">
+      <button class="toolbar-btn" title="Exécuter la simulation (Aller aux projets)" onclick="switchTab('projets', document.querySelectorAll('.nav-item')[2])" style="color: #008f39;">
+        <svg viewBox="0 0 24 24"><path d="M8 5V19L19 12L8 5Z"/></svg>
+      </button>
+      <button class="toolbar-btn" title="Arrêter (Retour à l'accueil)" onclick="switchTab('accueil', document.querySelectorAll('.nav-item')[0])" style="color: #cc0000;">
+        <svg viewBox="0 0 24 24"><path d="M6 6H18V18H6V6Z"/></svg>
+      </button>
+      
+      <div style="width: 1px; background: #c0c0c0; margin: 0 5px;"></div>
+      
+      <button class="toolbar-btn" title="Mode Plein Écran" onclick="if(!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen();">
+        <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+      </button>
     </div>
-
-    <!-- Titre -->
-    <div class="win-title">Horacia AZONHOUMON — Portfolio Professionnel Ingénierie GSEA</div>
-    <!-- Contrôles fenêtre -->
-
-  </div><!-- / title-bar -->
-
-
-  <!-- ═══════════════════════════════════════
-       ONGLETS DU RUBAN
-  ═══════════════════════════════════════ -->
-  <div class="ribbon-tabs">
-    <button class="r-tab active" id="tab-accueil"      onclick="switchTab('accueil')">ACCUEIL</button>
-    <button class="r-tab"        id="tab-apropos"      onclick="switchTab('apropos')">À PROPOS</button>
-    <button class="r-tab"        id="tab-projets"      onclick="switchTab('projets')">PROJETS</button>
-    <button class="r-tab"        id="tab-competences"  onclick="switchTab('competences')">COMPÉTENCES</button>
-    <button class="r-tab"        id="tab-contact"      onclick="switchTab('contact')">CONTACT</button>
   </div>
 
-
-  <!-- ═══════════════════════════════════════
-       CORPS DU RUBAN
-  ═══════════════════════════════════════ -->
-  <div class="ribbon-body">
-
-    <div class="ribbon-panel active" id="rp-accueil">
-      <div class="r-group">
-        <div class="group-cmds">
-          <button class="rb-lg" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')"><span class="ri">▤</span><span class="rl">Télécharger<br>CV</span></button>
-          <button class="rb-lg" onclick="window.print()"><span class="ri">⎙</span><span class="rl">Imprimer<br>Portfolio</span></button>
-        </div>
-        <span class="group-name">Document</span>
-        <span class="dialog-launcher">▼</span>
-      </div>
-      <div class="r-group">
-        <div class="group-cmds">
-          <button class="rb-lg" onclick="window.open('https://linkedin.com/in/horaembedded/', '_blank')"><span class="ri"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></span><span class="rl">LinkedIn</span></button>
-          <button class="rb-lg" onclick="window.open('https://github.com/ton-profil', '_blank')"><span class="ri"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></span><span class="rl">GitHub</span></button>
-        </div>
-        <span class="group-name">Réseaux Sociaux</span>
-      </div>
-      <div class="r-group" style="border-right:none">
-        <div class="group-cmds">
-          <button class="rb-lg" onclick="document.getElementById('docArea').scrollTop=0"><span class="ri">⇪</span><span class="rl">Haut de<br>page</span></button>
-        </div>
-        <span class="group-name">Navigation</span>
-      </div>
-    </div>
-
-    <div class="ribbon-panel" id="rp-apropos">
-      <div class="r-group" style="border-right:none">
-        <div class="group-cmds">
-          <button class="rb-lg" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')"><span class="ri">▤</span><span class="rl">Télécharger<br>CV</span></button>
-        </div>
-        <span class="group-name">Export</span>
-      </div>
-    </div>
-
-    <div class="ribbon-panel" id="rp-projets">
-      <div class="r-group" style="border-right:none">
-        <div class="group-cmds">
-          <button class="rb-lg" onclick="window.open('https://github.com/ton-profil', '_blank')"><span class="ri"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></span><span class="rl">Ouvrir<br>GitHub</span></button>
-        </div>
-        <span class="group-name">Dépôts Sources</span>
-      </div>
-    </div>
-
-    <div class="ribbon-panel" id="rp-competences">
-      <div class="r-group" style="border-right:none">
-        <div class="group-cmds">
-          <button class="rb-lg" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')"><span class="ri">▤</span><span class="rl">Télécharger<br>CV</span></button>
-        </div>
-        <span class="group-name">Fichier</span>
-      </div>
-    </div>
-
-    <div class="ribbon-panel" id="rp-contact">
-      <div class="r-group" style="border-right:none">
-        <div class="group-cmds">
-          <button class="rb-lg" onclick="switchTab('contact')"><span class="ri">✉</span><span class="rl">Envoyer<br>Email</span></button>
-        </div>
-        <span class="group-name">Communication</span>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ═══════════════════════════════════════
-       RÈGLE (Ruler)
-  ═══════════════════════════════════════ -->
-  <div class="ruler-container">
+  <div class="main-layout">
     
-  </div>
+    <aside class="sidebar" style="justify-content: space-between; display: flex; flex-direction: column;">
+      
+      <div style="height: 30px;"></div>
 
+      <nav class="nav-items" style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 8px;">
+        <div class="nav-item active" onclick="switchTab('accueil', this)">01. Accueil</div>
+        <div class="nav-item" onclick="switchTab('apropos', this)">02. À Propos</div>
+        <div class="nav-item" onclick="switchTab('projets', this)">03. Projets Techniques</div>
+        <div class="nav-item" onclick="switchTab('competences', this)">04. Compétences</div>
+        <div class="nav-item" onclick="switchTab('contact', this)">05. Contact</div>
+      </nav>
 
-  <!-- ═══════════════════════════════════════
-       ZONE PRINCIPALE
-  ═══════════════════════════════════════ -->
-  <div class="main-area">
+      <div style="display: flex; justify-content: center; gap: 15px; padding: 25px 20px; border-top: 1px solid var(--border-color);">
+        <button class="toolbar-btn" onclick="window.open('https://linkedin.com/in/horaembedded/', '_blank')" style="border: 1px solid var(--border-color); border-radius: 50%; padding: 10px;">
+          <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M19 0H5C2.239 0 0 2.239 0 5V19C0 21.761 2.239 24 5 24H19C21.762 24 24 21.761 24 19V5C24 2.239 21.762 0 19 0ZM8 19H5V9H8V19ZM6.5 7.732C5.534 7.732 4.75 6.942 4.75 5.968C4.75 4.994 5.534 4.204 6.5 4.204C7.466 4.204 8.25 4.994 8.25 5.968C8.25 6.942 7.466 7.732 6.5 7.732ZM20.5 19H17.5V13.396C17.5 10.028 13.5 10.283 13.5 13.396V19H10.5V9H13.5V10.765C14.896 8.179 20.5 7.988 20.5 13.241V19Z"/></svg>
+        </button>
+        <button class="toolbar-btn" onclick="window.open('https://github.com/HoraEmbedded', '_blank')" style="border: 1px solid var(--border-color); border-radius: 50%; padding: 10px;">
+          <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M12 0C5.37 0 0 5.37 0 12C0 17.3 3.438 21.8 8.205 23.385C8.805 23.495 9.025 23.125 9.025 22.815C9.025 22.535 9.015 21.715 9.01 20.615C5.67 21.34 4.965 19.005 4.965 19.005C4.42 17.62 3.635 17.25 3.635 17.25C2.545 16.505 3.715 16.52 3.715 16.52C4.92 16.605 5.555 17.765 5.555 17.765C6.625 19.595 8.365 19.065 9.05 18.755C9.16 17.97 9.475 17.44 9.825 17.135C7.165 16.83 4.37 15.8 4.37 11.365C4.37 10.1 4.82 9.065 5.555 8.25C5.435 7.95 5.04 6.775 5.67 5.17C5.67 5.17 6.64 4.86 8.995 6.455C9.915 6.2 10.96 6.07 12 6.065C13.04 6.07 14.085 6.2 15.005 6.455C17.355 4.86 18.32 5.17 18.32 5.17C18.955 6.775 18.565 7.95 18.445 8.25C19.18 9.065 19.625 10.1 19.625 11.365C19.625 15.81 16.82 16.825 14.15 17.12C14.585 17.495 14.975 18.23 14.975 19.385C14.975 21.035 14.96 22.365 14.96 22.815C14.96 23.13 15.18 23.505 15.79 23.385C20.565 21.795 24 17.295 24 12C24 5.37 18.625 0 12 0Z"/></svg>
+        </button>
+      </div>
+      
+    </aside>
 
-    <!-- Volet de navigation -->
-    
-
-    <!-- Zone document -->
-    <div class="doc-area" id="docArea">
-      <div class="page" id="mainPage">
-
-
-        <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-             SECTION : ACCUEIL
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-        <div class="sec active" id="sec-accueil">
-
-          <div class="profile-hero">
-            <div class="avatar">[ID]</div>
-            <div>
-              <div class="hero-name">Horacia AZONHOUMON</div>
-              <div class="hero-sub">Ingénieure en Génie des Systèmes Électronique et Automatique (GSEA)</div>
-              <div class="hero-chips">
-                <span class="chip">📍 Tanger, Maroc</span>
-                <span class="chip">🎓 ENSA Tanger – 4ème/5ème année</span>
-                <span class="chip">🔍 Recherche stage PFA</span>
-                <span class="chip">🏛️ Univ. Abdelmalek Essaâdi</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="doc-h2">📋 Résumé Professionnel & Objectif</div>
-          <p class="body-text" style="margin-bottom: 12px;">
-            Étudiante ingénieure en 4ème/5ème année à l'ENSA Tanger, spécialisée en <strong>Génie des
-            Systèmes Électronique et Automatique (GSEA)</strong>. Passionnée par les systèmes de contrôle
-            intelligents, les systèmes embarqués et l'automatisation industrielle. Expérience pratique
-            approfondie en <strong>MATLAB/Simulink</strong>, contrôle flou, réseaux de neurones, FPGA et
-            conception PCB.
-          </p>
-          
-          <div class="callout" style="margin-bottom: 24px;">
-            ☑ <strong>Objectif :</strong> Recherche active d'un <strong>stage PFA (Projet de Fin d'Année)</strong> pour 2025.<br>
-            ☑ <strong>Domaines :</strong> Automatisation industrielle, Électronique embarquée, Industrie 4.0.<br>
-            ☑ <strong>Disponibilité :</strong> Tanger et environs, ou mission à distance.
-          </div>
-          </p>
-
-          <div class="doc-h2">⭐ Points Forts</div>
-          <div class="highlights">
-            <div class="hl-card">
-              <div class="hl-icon">🧠</div>
-              <div class="hl-title">Contrôle Intelligent</div>
-              <div class="hl-sub">Flou Mamdani · RNA · GA</div>
-            </div>
-            <div class="hl-card">
-              <div class="hl-icon">💾</div>
-              <div class="hl-title">Systèmes Embarqués</div>
-              <div class="hl-sub">FPGA · STM32 · VHDL</div>
-            </div>
-            <div class="hl-card">
-              <div class="hl-icon">⚡</div>
-              <div class="hl-title">Électronique</div>
-              <div class="hl-sub">PCB Design · Buck Converter</div>
-            </div>
-            <div class="hl-card">
-              <div class="hl-icon">🔧</div>
-              <div class="hl-title">MATLAB / Simulink</div>
-              <div class="hl-sub">Modélisation & Simulation</div>
-            </div>
-            <div class="hl-card">
-              <div class="hl-icon">🌐</div>
-              <div class="hl-title">IoT & Réseaux</div>
-              <div class="hl-sub">ESP32 · MQTT · Capteurs</div>
-            </div>
-            <div class="hl-card">
-              <div class="hl-icon">📐</div>
-              <div class="hl-title">AutoCAD Electrical</div>
-              <div class="hl-sub">Schémas électriques</div>
-            </div>
-          </div>
-
-        </div><!-- / sec-accueil -->
-
-
-        <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-             SECTION : À PROPOS
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-        <div class="sec" id="sec-apropos">
-
-          <div class="doc-h2">  ID À Propos de Moi</div>
-          <p class="body-text">
-            Passionnée d'ingénierie depuis mes classes préparatoires, je combine rigueur analytique
-            et créativité technique. Mon parcours à l'ENSA Tanger m'a permis de développer une
-            expertise solide en automatique avancée, électronique embarquée et systèmes intelligents.
-            Je suis motivée par les challenges technologiques liés à l'automatisation industrielle,
-            aux systèmes cyber-physiques et à l'Industrie 4.0.
-          </p>
-
-          <div class="doc-h2">🎓 Parcours Académique</div>
-          <div class="timeline">
-            <div class="tl-item">
-              <div class="tl-dot"></div>
-              <div class="tl-year">2022 – Présent</div>
-              <div class="tl-title">École Nationale des Sciences Appliquées – Tanger</div>
-              <div class="tl-org">Génie des Systèmes Électronique et Automatique (GSEA) — 4ème/5ème année</div>
-              <div class="tl-text">
-                Spécialisation en contrôle automatique avancé, systèmes embarqués, électronique de
-                puissance et traitement du signal. Projets sur MATLAB/Simulink, FPGA (VHDL), microcontrôleurs
-                et IoT. Cours avancés : Systèmes de contrôle intelligents (Logique Floue, Réseaux de
-                Neurones Artificiels, Algorithmes Génétiques) – Pr. EL JANATI EL IDRISSI.
-              </div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-dot"></div>
-              <div class="tl-year">2020 – 2022</div>
-              <div class="tl-title">Classes Préparatoires aux Grandes Écoles (CPGE)</div>
-              <div class="tl-org">Filière TSI / MPSI — Mathématiques, Physique, Sciences de l'Ingénieur</div>
-              <div class="tl-text">
-                Formation intensive préparant aux concours des grandes écoles d'ingénieurs.
-                Solides bases en analyse, algèbre linéaire, mécanique, thermodynamique et électronique.
-              </div>
-            </div>
-            <div class="tl-item" style="margin-bottom:0">
-              <div class="tl-dot"></div>
-              <div class="tl-year">Antérieur</div>
-              <div class="tl-title">Baccalauréat Sciences Mathématiques / Sciences Expérimentales</div>
-              <div class="tl-org">Tanger, Maroc</div>
-              <div class="tl-text">Mention Bien.</div>
-            </div>
-          </div>
-
-          <div class="doc-h2">🌍 Langues</div>
-          <div class="skill-cat" style="margin-bottom:0">
-            <div class="sk-row">
-              <div class="sk-lbl"><span>🇫🇷 Français</span><span>Courant – C1</span></div>
-              <div class="sk-track"><div class="sk-fill" style="width:88%"></div></div>
-            </div>
-            <div class="sk-row" style="margin-top:7px">
-              <div class="sk-lbl"><span>🇲🇦 Arabe</span><span>Natif – C2</span></div>
-              <div class="sk-track"><div class="sk-fill" style="width:100%"></div></div>
-            </div>
-            <div class="sk-row" style="margin-top:7px">
-              <div class="sk-lbl"><span>🇬🇧 Anglais</span><span>Intermédiaire – B2</span></div>
-              <div class="sk-track"><div class="sk-fill" style="width:70%"></div></div>
-            </div>
-          </div>
-
-        </div><!-- / sec-apropos -->
-
-
-        <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-             SECTION : PROJETS
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-        <div class="sec" id="sec-projets">
-
-          <div class="doc-h2">Projets Académiques & Techniques</div>
-
-          <article class="proj-card">
-            <h3>■ Programmation DSP — TMS320C6713 DSK</h3>
-            <p>Mise en œuvre du DSP TI TMS320C6713 sous Code Composer Studio v7. Développement en C et assembleur C6000 pour la génération de signaux et le filtrage numérique FIR/IIR en temps réel. Diagnostic de dépendances de compilation et maîtrise du workflow toolchain DSP embarqué.</p>
-            <div class="proj-links">
-              <a href="https://github.com/HoraEmbedded/my-portfolio" target="_blank" class="proj-link-btn"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> Consulter le code</a>
-            </div>
-            <div class="proj-tags">
-              <span class="pt tech">C / C++</span>
-              <span class="pt tech">Assembleur C6000</span>
-              <span class="pt tech">TMS320C6713</span>
-              <span class="pt type">Traitement du Signal</span>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <h3>■ Étude et Dimensionnement d'un Transistor NMOS en Commutation</h3>
-            <p>Analyse, calcul théorique et dimensionnement d'un canal de commande de puissance utilisant un transistor NMOS en régime de commutation. Choix et validation des composants associés pour assurer la robustesse du montage : sélection d'un optocoupleur pour l'isolation galvanique, d'une diode rapide pour la protection contre les surtensions inductives, et calcul des puissances dissipées par les résistances de polarisation.</p>
-            <div class="proj-links">
-              <a href="https://github.com/HoraEmbedded/Projets_GSEAs/blob/main/03_Conception_PCB/README.md" target="_blank" class="proj-link-btn"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> Consulter le projet</a>
-            </div>
-            <div class="proj-tags">
-              <span class="pt tech">Électronique de Puissance</span>
-              <span class="pt tech">Dimensionnement HW</span>
-              <span class="pt tech">Composants CMS</span>
-              <span class="pt type">Bureau d'Études</span>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <h3>■ Smart Greenhouse Management System (Bare-Metal)</h3>
-            <p>Conception d'un système de gestion de serre automatisée sur microcontrôleur ATmega2560. Développement en C pur (Bare-Metal) avec architecture temps-réel pilotée par interruptions matérielles (Timer1). Implémentation d'un contrôle par hystérésis à double seuil et d'arithmétique à virgule fixe pour optimiser les performances et la durée de vie des relais. Simulation "Software-in-the-Loop" (VS Code, Wokwi) avec monitoring I2C/UART.</p>
-            <div class="proj-links">
-              <a href="https://github.com/HoraEmbedded/Projets_GSEAs/tree/main/01_Info_Embarquee/Serre_Intelligente" target="_blank" class="proj-link-btn"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> Consulter le code</a>
-            </div>
-            <div class="proj-tags">
-              <span class="pt tech">C (Bare-Metal)</span>
-              <span class="pt tech">ATmega2560</span>
-              <span class="pt tech">Wokwi / PlatformIO</span>
-              <span class="pt type">Systèmes Embarqués</span>
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <h3>■ Modélisation et Commande de Robot Manipulateur (2DDL)</h3>
-            <p>Modélisation physique et implémentation d'une commande articulaire PID pour un robot à 2 degrés de liberté sous MATLAB/Simscape Multibody. Étude de la cinématique directe (FK) et inverse (IK) pour la génération de trajectoires. Optimisation de la robustesse et du suivi de trajectoire, atteignant une précision avec une erreur latérale inférieure à 0.05 m.</p>
-            <div class="proj-links">
-              <a href="#" target="_blank" class="proj-link-btn"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> Consulter le code</a>
-            </div>
-            <div class="proj-tags">
-              <span class="pt tech">MATLAB / Simscape</span>
-              <span class="pt tech">PID</span>
-              <span class="pt tech">Cinématique (FK/IK)</span>
-              <span class="pt tech">Robotics System Toolbox</span>
-              <span class="pt type">Robotique Industrielle</span>
-            
-            </div>
-          </article>
-
-          <article class="proj-card">
-            <h3>■ Les Auto-Encodeurs (AE) — Compression & Détection d'Anomalies</h3>
-            <p>Étude approfondie et implémentation d'architectures d'apprentissage profond (Vanilla AE, Sparse, Denoising, et VAE). Application pratique dédiée au traitement d'images (filtrage du bruit) et au diagnostic industriel par détection d'anomalies, complétée par une analyse comparative des performances des modèles.</p>
-            <div class="proj-links">
-              <a href="#" target="_blank" class="proj-link-btn"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> Consulter le code</a>
-            </div>
-            <div class="proj-tags">
-              <span class="pt tech">Deep Learning</span>
-              <span class="pt tech">Auto-encodeurs (VAE)</span>
-              <span class="pt tech">Python / Keras</span>
-              <span class="pt type">Machine Learning</span>
-            </div>
-          </article>
-          
-          <article class="proj-card">
-            <h3>■ Convoyeur de tri automatique (Factory I/O)</h3>
-            <p>Programmation d'un automate Siemens S7-1200 (simulé) via TIA Portal pour trier des objets par couleur. Développement du programme Ladder avec gestion des modes automatique, manuel et arrêt d'urgence. Communication PLCSIM ↔ Factory I/O via OPC-DA.</p>
-            <div class="proj-links">
-              <a href="https://github.com/HoraEmbedded/Projets_GSEAs/blob/main/05_Projets_Globaux/MonPortfolio/index.html" target="_blank" class="proj-link-btn"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" style="vertical-align: middle; margin-right: 4px;"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> Consulter le code</a>
-            </div>
-            <div class="proj-tags">
-              <span class="pt tech">TIA Portal (Ladder)</span>
-              <span class="pt tech">Siemens S7-1200</span>
-              <span class="pt tech">Factory I/O</span>
-              <span class="pt type">Automatisme Industriel</span>
-            </div>
-          </article>
-          
-        </div>
-
-        <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-             SECTION : COMPÉTENCES
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-        <div class="sec" id="sec-competences">
-
-          <div class="doc-h2">Compétences Techniques</div>
-
-          <div class="skill-cat">
-            <div class="skill-cat-title">Embarqué & Hardware</div>
-            <div class="tag-cloud">
-              <span class="tag">C / C++</span>
-              <span class="tag">Assembleur C6000</span>
-              <span class="tag">ESP32 & STM32</span>
-              <span class="tag">Arduino</span>
-              <span class="tag">TMS320C6713 (DSP)</span>
-              <span class="tag lite">FPGA (notions)</span>
-            </div>
-          </div>
-
-          <div class="skill-cat">
-            <div class="skill-cat-title">Automatique & Régulation</div>
-            <div class="tag-cloud">
-              <span class="tag">MATLAB / Simulink</span>
-              <span class="tag">TIA Portal (Ladder, Grafcet)</span>
-              <span class="tag">PID & FOPDT</span>
-              <span class="tag">Factory I/O</span>
-              <span class="tag lite">OPC-DA</span>
-            </div>
-          </div>
-
-          <div class="skill-cat">
-            <div class="skill-cat-title">Robotique & Vision</div>
-            <div class="tag-cloud">
-              <span class="tag">Robotics System Toolbox</span>
-              <span class="tag">OpenCV</span>
-              <span class="tag">Python</span>
-              <span class="tag lite">Cinématique directe/inverse</span>
-            </div>
-          </div>
-
-          <div class="skill-cat">
-            <div class="skill-cat-title">IIoT & Réseaux Industriels</div>
-            <div class="tag-cloud">
-              <span class="tag">MQTT</span>
-              <span class="tag">Modbus</span>
-              <span class="tag">Node-RED</span>
-              <span class="tag">Raspberry Pi</span>
-              <span class="tag lite">OPC-UA (notions)</span>
-            </div>
-          </div>
-
-          <div class="skill-cat" style="margin-bottom:0">
-            <div class="skill-cat-title">Outils & Conception</div>
-            <div class="tag-cloud">
-              <span class="tag">Code Composer Studio</span>
-              <span class="tag">Linux / Ubuntu</span>
-              <span class="tag">Git / GitHub</span>
-              <span class="tag">OrCAD/PSpice </span>
-              <span class="tag lite">Microsoft Office</span>
-              <span class="tag lite">KiCad (notions)</span>
-              <span class="tag lite">LaTeX</span>
-            </div>
-          </div>
-
-        </div>
-
-
-        <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-             SECTION : CONTACT
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-        <div class="sec" id="sec-contact">
-
-          <div class="doc-h2">✉️ Informations de Contact</div>
-          <div class="contact-layout">
-            <div class="contact-left">
-              <form action="mailto:votre@email.com" method="post" enctype="text/plain">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Nom complet" required>
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" placeholder="Adresse email" required>
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" placeholder="Votre message..." required></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Envoyer le message</button>
-              </form>
-            </div>
-            
-            <div class="contact-right">
-              <p class="body-text" style="margin-bottom: 8px;">
-                Voici un espace idéal pour m'informer de la meilleure façon de vous recontacter concernant une opportunité de stage ou une collaboration.
-              </p>
-              
-              <div class="nav-item" onclick="window.open('mailto:votre@email.com', '_blank')" style="border:none; margin:0; padding: 6px 8px;">
-                <span class="nav-icon" style="font-size:16px;">✉</span> votre@email.com
-              </div>
-              <div class="nav-item" onclick="window.open('https://linkedin.com/in/votre-profil', '_blank')" style="border:none; margin:0; padding: 6px 8px;">
-                <span class="nav-icon" style="font-size:16px;">⚯</span> @votre-profil
-              </div>
-              <div class="nav-item" onclick="window.open('https://github.com/votre-profil', '_blank')" style="border:none; margin:0; padding: 6px 8px;">
-                <span class="nav-icon" style="font-size:16px;">⌨</span> votre-github
-              </div>
-            </div>
-          </div>
+    <main class="workspace" id="workspace">
+      <div class="page">
         
-        </div><!-- / sec-contact -->
+        <div id="sec-accueil" class="section-content active">
+          
+          <style>
+            @keyframes sysPulse {
+              0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+              70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+              100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+            }
+            @keyframes sysBlink {
+              0%, 100% { opacity: 1; }
+              50% { opacity: 0; }
+            }
+            .hero-social:hover svg { fill: #2060B8; transform: translateY(-2px); }
+            .hero-social svg { transition: all 0.2s; fill: #5A6A7A; }
+          </style>
 
+          <div style="border: 1px dashed #BDDAF0; background: linear-gradient(180deg, #F4F9FF 0%, #E8F3FE 100%); padding: 35px 40px; border-radius: 4px; margin-bottom: 30px; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(255,255,255,0.5);">
+            
+            <div style="position: absolute; right: 20px; top: 20px; opacity: 0.15; pointer-events: none;">
+               <svg width="120" height="120" viewBox="0 0 100 100">
+                 <path d="M10 50 L40 50 L40 90 L90 90" fill="none" stroke="#2060B8" stroke-width="2"/>
+                 <path d="M10 20 L70 20 L70 60" fill="none" stroke="#2060B8" stroke-width="1.5"/>
+                 <circle cx="90" cy="90" r="4" fill="#2060B8"/>
+                 <circle cx="70" cy="60" r="3" fill="#2060B8"/>
+                 <circle cx="10" cy="50" r="4" fill="#2060B8"/>
+               </svg>
+            </div>
 
-      </div><!-- / .page -->
-    </div><!-- / .doc-area -->
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid #BCD4EE; padding: 6px 14px; border-radius: 20px; margin-bottom: 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
+              <div style="width: 8px; height: 8px; background-color: #22c55e; border-radius: 50%; animation: sysPulse 2s infinite;"></div>
+              <span style="font-family: monospace; font-size: 10.5px; color: #5878A0; letter-spacing: 0.5px; font-weight: 600;">DISPONIBLE POUR STAGE — 2026</span>
+            </div>
 
-  </div><!-- / .main-area -->
+            <div style="font-family: monospace; font-size: 11px; color: #2060B8; margin-bottom: 8px; font-weight: bold; text-transform: uppercase;">>> Portfolio d'Ingénierie_</div>
+            
+            <h1 style="font-size: 28px; font-weight: 800; color: #102A70; line-height: 1.15; margin-bottom: 15px;">
+              Houénoumè Horacia Gloriéta<br>
+              <span style="color: #2060B8; font-size: 34px;">AZONHOUMON</span>
+            </h1>
 
+            <div style="font-family: monospace; font-size: 14.5px; color: #5878A0; font-weight: 600; margin-bottom: 20px;">
+              > Ingénieure en Automatisation & Systèmes de Contrôle<span style="color: #2060B8; animation: sysBlink 1s infinite;">_</span>
+            </div>
 
-  <!-- ═══════════════════════════════════════
-       BARRE D'ÉTAT
-  ═══════════════════════════════════════ -->
-  <div class="status-bar">
-    <div class="st">▤ Page 1 sur 1</div>
-    <div class="st">☑ Prêt</div>
-    <div class="st" id="st-section">ACCUEIL</div>
-    <div class="st-fill"></div>
-    <div class="st-right">
-      <button class="view-btn" title="Mode Page" onclick="setView('page',this)" style="background:rgba(255,255,255,0.18)">▤</button>
-      <button class="view-btn" title="Mode Plein écran" onclick="setView('full',this)">⛶</button>
-      <div class="zoom-wrap">
-        <button onclick="changeZoom(-10)">−</button>
-        <input type="range" class="zoom-slider" id="zoomSlider" min="50" max="200" value="100" oninput="applyZoom(this.value)">
-        <button onclick="changeZoom(+10)">+</button>
-        <span class="zoom-lbl" id="zoomLbl">100%</span>
+            <p class="body-text" style="max-width: 620px; font-size: 13.5px; margin-bottom: 30px;">
+              Étudiante ingénieure à l'<strong style="color: #102A70;">ENSA Tanger</strong> spécialisée en <strong style="color: #102A70;">Systèmes Électroniques et Automatique</strong>. Je me passionne pour l'Industrial IoT (IIoT) et la création de passerelles intelligentes entre les machines physiques et le monde numérique.
+            </p>
+
+            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 35px;">
+              <button onclick="switchTab('projets')" style="background: linear-gradient(180deg, #1E5CB8, #5898D8); color: white; border: 1px solid #1848A8; padding: 9px 18px; font-size: 12px; font-weight: bold; border-radius: 3px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 4px rgba(32, 96, 184, 0.2);">
+                Voir les Projets <span>➔</span>
+              </button>
+              <a href="cv-horacia-azonhoumon.pdf" target="_blank" style="text-decoration: none; background: white; color: #1848A8; border: 1px solid #B5D0EE; padding: 9px 18px; font-size: 12px; font-weight: bold; border-radius: 3px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background 0.2s;">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                Télécharger CV
+              </a>
+              <button onclick="switchTab('contact')" style="background: white; color: #1848A8; border: 1px solid #B5D0EE; padding: 9px 18px; font-size: 12px; font-weight: bold; border-radius: 3px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background 0.2s;">
+                ✉ Me Contacter
+              </button>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 15px;">
+              <span style="font-family: monospace; font-size: 10px; color: #5A6A7A; letter-spacing: 0.5px;">REJOIGNEZ-MOI SUR :</span>
+              <div style="width: 30px; height: 1px; background: #BDDAF0;"></div>
+              
+              <a href="https://github.com/HoraEmbedded" target="_blank" class="hero-social" title="GitHub">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+              <a href="https://linkedin.com/in/horacia-azonhoumon" target="_blank" class="hero-social" title="LinkedIn">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </a>
+              <a href="mailto:azonhoumonhoracia@gmail.com" class="hero-social" title="Email">
+                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </a>
+            </div>
+
+          </div>
+          
+
+        </div>
+
+        <div id="sec-apropos" class="section-content">
+          <h1 class="sys-title">[SYS] Historique & Configuration</h1>
+          <p class="body-text">
+            Je m'appelle <strong style="color: #102A70;">Horacia Azonhoumon</strong>, connue dans la communauté maker sous le nom de <strong style="color: #2060B8;">HoraEmbedded</strong>. J'ai 22 ans, je suis originaire du Bénin et étudiante ingénieure à l'ENSA Tanger (Maroc) en Génie des Systèmes Électronique et Automatique. Je serai diplômée en juin 2027.
+          </p>
+          <p class="body-text">
+            Mon parcours dans l'ingénierie a commencé par une simple question : <em style="color: #102A70; font-weight: 600;">« Comment les machines savent-elles ce qu'elles doivent faire ? »</em> Cette curiosité m'a poussée à étudier l'électronique, la programmation et l'automatisation. Chaque nouveau projet est une tentative de mieux répondre à cette question.
+          </p>
+          <p class="body-text">
+            Aujourd'hui, je me concentre sur la connexion entre les machines physiques et l'intelligence numérique — ce qu'on appelle l'IIoT (Industrial IoT). En dehors de l'ingénierie, j'aime les animes, l'électronique DIY et l'exploration de nouvelles technologies. Je suis convaincue que les meilleurs ingénieurs sont des personnes curieuses qui n'arrêtent jamais de se demander <em style="color: #102A70; font-weight: 600;">« Et si... ? »</em>.
+          </p>
+
+          <div class="blocks-title">PARCOURS ACADÉMIQUE</div>
+          <div class="timeline-item">
+            <div class="time-date">2024 – Présent</div>
+            <div class="time-title">École Nationale des Sciences Appliquées – Tanger</div>
+            <div class="time-org">Génie des Systèmes Électronique et Automatique (GSEA)</div>
+            <p class="text-body" style="font-size: 12px; margin: 0;">Spécialisation en contrôle automatique avancé, systèmes embarqués, électronique de puissance. Cours avancés : Systèmes de contrôle intelligents (Pr. EL JANATI EL IDRISSI).</p>
+          </div>
+          <div class="timeline-item">
+            <div class="time-date">2022 – 2024</div>
+            <div class="time-title">Classes Préparatoires intégrées</div>
+            <div class="time-org">Filière MPSI</div>
+            <p class="text-body" style="font-size: 12px; margin: 0;">Mathématiques, Physique & Sciences de l'Ingénieur.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="time-date">Antérieur</div>
+            <div class="time-title">Baccalauréat</div>
+            <div class="time-org">Sciences Mathématiques & Physique</div>
+            <p class="text-body" style="font-size: 12px; margin: 0;">Mention Bien.</p>
+          </div>
+
+          <div style="height: 1px; background: #BDDAF0; margin: 40px 0;"></div>
+
+          <div class="blocks-title">Au-delà du Code (Profil Personnel)</div>
+          <p class="body-text" style="margin-bottom: 25px;">
+            Les meilleurs ingénieurs sont d'abord des humains curieux. Voici ce qui me définit en dehors de l'industrie.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 40px;">
+            
+            <div style="border: 1px solid #BDDAF0; background: white; padding: 20px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='#2060B8'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='#BDDAF0'; this.style.transform='none';">
+              <div style="font-family: monospace; font-size: 18px; color: #2060B8; margin-bottom: 10px;">◈</div>
+              <h3 style="font-size: 14px; font-weight: 700; color: #102A70; margin-bottom: 8px;">Anime</h3>
+              <p style="font-size: 12.5px; color: #5A6A7A; line-height: 1.6;">L'anime m'enseigne la patience, l'imagination et la persévérance. Ma série préférée : <strong>Dr STONE</strong> (un ingénieur qui utilise la science pour changer le monde).</p>
+            </div>
+
+            <div style="border: 1px solid #BDDAF0; background: white; padding: 20px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='#2060B8'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='#BDDAF0'; this.style.transform='none';">
+              <div style="font-family: monospace; font-size: 18px; color: #2060B8; margin-bottom: 10px;">△</div>
+              <h3 style="font-size: 14px; font-weight: 700; color: #102A70; margin-bottom: 8px;">Exploration Tech</h3>
+              <p style="font-size: 12.5px; color: #5A6A7A; line-height: 1.6;">Je suis de près la robotique, l'IA embarquée et l'industrie intelligente. La technologie évolue vite — je veux être à l'avant-garde.</p>
+            </div>
+
+            <div style="border: 1px solid #BDDAF0; background: white; padding: 20px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='#2060B8'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='#BDDAF0'; this.style.transform='none';">
+              <div style="font-family: monospace; font-size: 18px; color: #2060B8; margin-bottom: 10px;">◇</div>
+              <h3 style="font-size: 14px; font-weight: 700; color: #102A70; margin-bottom: 8px;">Voyage & Découverte</h3>
+              <p style="font-size: 12.5px; color: #5A6A7A; line-height: 1.6;">Quitter le Bénin pour le Maroc m'a ouvert l'esprit à de nouvelles façons de penser. Je souhaite collaborer avec des ingénieurs du monde entier.</p>
+            </div>
+
+            <div style="border: 1px solid #BDDAF0; background: white; padding: 20px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='#2060B8'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='#BDDAF0'; this.style.transform='none';">
+              <div style="font-family: monospace; font-size: 18px; color: #2060B8; margin-bottom: 10px;">▦</div>
+              <h3 style="font-size: 14px; font-weight: 700; color: #102A70; margin-bottom: 8px;">Innovation</h3>
+              <p style="font-size: 12.5px; color: #5A6A7A; line-height: 1.6;">Je suis convaincue que les meilleures solutions sont simples. La solution la plus élégante à un problème complexe est toujours le but ultime.</p>
+            </div>
+
+            <div style="border: 1px solid #BDDAF0; background: white; padding: 20px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='#2060B8'; this.style.transform='translateY(-2px)';" onmouseout="this.style.borderColor='#BDDAF0'; this.style.transform='none';">
+              <div style="font-family: monospace; font-size: 18px; color: #2060B8; margin-bottom: 10px;">◈</div>
+              <h3 style="font-size: 14px; font-weight: 700; color: #102A70; margin-bottom: 8px;">Apprentissage Continu</h3>
+              <p style="font-size: 12.5px; color: #5A6A7A; line-height: 1.6;">Cours, documentation, YouTube, livres, forums, je lis constamment. J'essaie de comprendre en profondeur chaque technologie que j'utilise.</p>
+            </div>
+
+          </div>
+
+          <div style="text-align: center; padding: 35px 25px; border-radius: 6px; background: rgba(32, 96, 184, 0.04); border: 1px dashed #2060B8; position: relative; overflow: hidden;">
+            
+            <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, rgba(32, 96, 184, 0.08) 0%, transparent 70%); pointer-events: none;"></div>
+
+            <p style="font-family: 'Segoe UI', sans-serif; font-size: 15px; font-weight: 600; color: #102A70; line-height: 1.6; max-width: 750px; margin: 0 auto 15px; font-style: italic;">
+              
+            </p>
+            <div style="font-family: monospace; font-size: 11.5px; color: #5878A0; font-weight: bold; letter-spacing: 0.5px;">
+              >> Horacia Azonhoumon / HoraEmbedded
+            </div>
+          </div>
+
+        </div>
+
+        <div id="sec-projets" class="section-content">
+          
+          <style>
+            /* Styles spécifiques aux projets */
+            .filter-btn {
+              font-family: monospace; font-size: 11.5px; letter-spacing: 0.5px;
+              padding: 6px 14px; border-radius: 4px; cursor: pointer; transition: all 0.2s;
+              background: transparent; color: #5878A0; border: 1px solid var(--border-color);
+            }
+            .filter-btn:hover { background: #F4F9FF; border-color: #2060B8; color: #102A70; }
+            .filter-btn.active { background: #2060B8; color: white; border-color: #102A70; font-weight: bold; }
+            
+            .prj-card {
+              background: white; border: 1px solid var(--border-color); border-radius: 4px;
+              display: flex; flex-direction: column; overflow: hidden; transition: box-shadow 0.2s;
+            }
+            .prj-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-color: #BDDAF0; }
+            .prj-top-bar { height: 3px; width: 100%; }
+            
+            .prj-lbl { font-family: monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #5A6A7A; margin-bottom: 5px; }
+            .tech-chip { border: 1px solid #BDDAF0; background: #F4F9FF; color: #2060B8; font-size: 10.5px; padding: 2px 8px; border-radius: 12px; font-family: monospace; }
+            
+            /* Couleurs des catégories */
+            .cat-Automatisme { color: #F5A623; background: rgba(245, 166, 35, 0.1); border: 1px solid rgba(245, 166, 35, 0.3); }
+            .cat-Embarqué { color: #00CFEE; background: rgba(0, 207, 238, 0.1); border: 1px solid rgba(0, 207, 238, 0.3); }
+            .cat-IoT { color: #22c55e; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
+            .cat-IA { color: #a855f7; background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); }
+            .cat-Électronique { color: #f43f5e; background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.3); }
+          </style>
+
+          <h1 class="sys-title" style="margin-bottom: 5px;">[PRJ] Problèmes d'ingénierie résolus</h1>
+          <p class="body-text" style="font-size: 14px; margin-bottom: 30px; max-width: 700px;">
+            Des problèmes réels. Des solutions concrètes. Chaque projet part d'un cahier des charges strict pour aboutir à un système fonctionnel et optimisé.
+          </p>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px;" id="filter-container">
+            <button class="filter-btn active" onclick="filterProjects('Tous')">Tous</button>
+            <button class="filter-btn" onclick="filterProjects('Automatisme')">Automatisme</button>
+            <button class="filter-btn" onclick="filterProjects('Embarqué')">Embarqué</button>
+            <button class="filter-btn" onclick="filterProjects('IoT')">IoT</button>
+            <button class="filter-btn" onclick="filterProjects('IA')">IA</button>
+            <button class="filter-btn" onclick="filterProjects('Électronique')">Électronique</button>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;" id="projects-grid">
+
+            <div class="prj-card" data-category="Embarqué">
+              <div class="prj-top-bar" style="background: linear-gradient(90deg, #00CFEE, transparent);"></div>
+              <div style="padding: 20px; flex: 1;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span class="cat-Embarqué" style="font-family: monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px;">Embarqué</span>
+                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">Terminé · 2026</span>
+                </div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">Programmation DSP — TMS320C6713 DSK</h3>
+                
+                <div style="margin-bottom: 15px;">
+                  <div class="prj-lbl">> PROBLÈME</div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">Nécessité de traiter des signaux complexes en temps réel avec une haute précision mathématique et un délai d'exécution minimal.</p>
+                </div>
+
+                <div class="prj-details" style="display: none; margin-bottom: 15px;">
+                  <div class="prj-lbl" style="color: #00CFEE;">> SOLUTION & RÉSULTATS</div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">Mise en œuvre du DSP TI sous Code Composer Studio. Développement mixte C/Assembleur pour optimiser le temps cycle.</p>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#00CFEE;">›</strong> Filtrage FIR/IIR en temps réel stable.</div>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#00CFEE;">›</strong> Maîtrise complète de la toolchain DSP.</div>
+                </div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                  <span class="tech-chip">C/C++</span><span class="tech-chip">Assembleur</span><span class="tech-chip">DSP TI</span>
+                </div>
+              </div>
+              <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
+                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
+                <div style="display: flex; gap: 10px;">
+                  <a href="https://github.com/HoraEmbedded" target="_blank" style="color: #5A6A7A;" title="Code Source"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="prj-card" data-category="Électronique">
+              <div class="prj-top-bar" style="background: linear-gradient(90deg, #f43f5e, transparent);"></div>
+              <div style="padding: 20px; flex: 1;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span class="cat-Électronique" style="font-family: monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px;">Électronique</span>
+                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">Terminé · 2026</span>
+                </div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">Dimensionnement Transistor NMOS (Commutation)</h3>
+                
+                <div style="margin-bottom: 15px;">
+                  <div class="prj-lbl">> PROBLÈME</div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">Besoin d'isoler et de commuter une charge de puissance de manière sécurisée sans risquer d'endommager l'unité de contrôle logique.</p>
+                </div>
+
+                <div class="prj-details" style="display: none; margin-bottom: 15px;">
+                  <div class="prj-lbl" style="color: #f43f5e;">> SOLUTION & RÉSULTATS</div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">Conception d'un canal de commande avec NMOS, intégration d'un optocoupleur pour l'isolation et calcul des dissipations thermiques.</p>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#f43f5e;">›</strong> Isolation galvanique validée.</div>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#f43f5e;">›</strong> Protection contre les surtensions inductives.</div>
+                </div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                  <span class="tech-chip">Élec. Puissance</span><span class="tech-chip">Calcul HW</span><span class="tech-chip">PCB</span>
+                </div>
+              </div>
+              <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
+                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
+                <div style="display: flex; gap: 10px;">
+                  <a href="#" onclick="openPreview('Routage PCB NMOS', '<img src=\'chemin_image.jpg\'>')" style="color: #5A6A7A;" title="Aperçu Visuel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                  <a href="https://github.com/HoraEmbedded/Projets_GSEAs" target="_blank" style="color: #5A6A7A;"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="prj-card" data-category="IoT">
+              <div class="prj-top-bar" style="background: linear-gradient(90deg, #22c55e, transparent);"></div>
+              <div style="padding: 20px; flex: 1;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span class="cat-IoT" style="font-family: monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px;">IoT</span>
+                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">Terminé · 2026</span>
+                </div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">Smart Greenhouse System (Bare-Metal)</h3>
+                
+                <div style="margin-bottom: 15px;">
+                  <div class="prj-lbl">> PROBLÈME</div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">La gestion climatique manuelle d'une serre agricole entraîne des pertes de rendement et une surconsommation énergétique.</p>
+                </div>
+
+                <div class="prj-details" style="display: none; margin-bottom: 15px;">
+                  <div class="prj-lbl" style="color: #22c55e;">> SOLUTION & RÉSULTATS</div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">Conception d'un système Bare-Metal sur ATmega2560 piloté par interruptions (Timer1) avec contrôle par hystérésis à double seuil.</p>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#22c55e;">›</strong> Temps de réponse déterministe garanti.</div>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#22c55e;">›</strong> Simulation complète en Software-in-the-Loop.</div>
+                </div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                  <span class="tech-chip">C (Bare-Metal)</span><span class="tech-chip">ATmega2560</span><span class="tech-chip">Wokwi</span>
+                </div>
+              </div>
+              <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
+                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
+                <div style="display: flex; gap: 10px;">
+                  <a href="https://github.com/HoraEmbedded/Projets_GSEAs" target="_blank" style="color: #5A6A7A;"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="prj-card" data-category="Automatisme">
+              <div class="prj-top-bar" style="background: linear-gradient(90deg, #F5A623, transparent);"></div>
+              <div style="padding: 20px; flex: 1;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span class="cat-Automatisme" style="font-family: monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px;">Automatisme</span>
+                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">Terminé · 2026</span>
+                </div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">Robot Manipulateur (2DDL) - Modélisation</h3>
+                
+                <div style="margin-bottom: 15px;">
+                  <div class="prj-lbl">> PROBLÈME</div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">Difficulté à maintenir la précision de la trajectoire d'un bras robotique face aux perturbations dynamiques.</p>
+                </div>
+
+                <div class="prj-details" style="display: none; margin-bottom: 15px;">
+                  <div class="prj-lbl" style="color: #F5A623;">> SOLUTION & RÉSULTATS</div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">Implémentation d'une commande PID sous MATLAB/Simscape avec étude cinématique complète (FK/IK).</p>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#F5A623;">›</strong> Erreur latérale de suivi < 0.05 m.</div>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#F5A623;">›</strong> Validation du modèle physique en simulation 3D.</div>
+                </div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                  <span class="tech-chip">MATLAB</span><span class="tech-chip">Simscape</span><span class="tech-chip">PID</span>
+                </div>
+              </div>
+              <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
+                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
+              </div>
+            </div>
+
+            <div class="prj-card" data-category="IA">
+              <div class="prj-top-bar" style="background: linear-gradient(90deg, #a855f7, transparent);"></div>
+              <div style="padding: 20px; flex: 1;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span class="cat-IA" style="font-family: monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px;">IA</span>
+                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">Terminé · 2026</span>
+                </div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">Auto-Encodeurs — Détection d'Anomalies</h3>
+                
+                <div style="margin-bottom: 15px;">
+                  <div class="prj-lbl">> PROBLÈME</div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">La détection visuelle des défauts sur chaîne de production est lente, coûteuse et sujette à l'erreur humaine.</p>
+                </div>
+
+                <div class="prj-details" style="display: none; margin-bottom: 15px;">
+                  <div class="prj-lbl" style="color: #a855f7;">> SOLUTION & RÉSULTATS</div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">Création de modèles Deep Learning (Vanilla, VAE) sous Keras capables de reconstruire une image saine et d'isoler les anomalies.</p>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#a855f7;">›</strong> Réduction drastique des faux positifs.</div>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#a855f7;">›</strong> Diagnostic industriel prédictif automatisé.</div>
+                </div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                  <span class="tech-chip">Python</span><span class="tech-chip">Keras</span><span class="tech-chip">Deep Learning</span>
+                </div>
+              </div>
+              <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
+                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
+              </div>
+            </div>
+
+            <div class="prj-card" data-category="Automatisme">
+              <div class="prj-top-bar" style="background: linear-gradient(90deg, #F5A623, transparent);"></div>
+              <div style="padding: 20px; flex: 1;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span class="cat-Automatisme" style="font-family: monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px;">Automatisme</span>
+                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">Terminé · 2026</span>
+                </div>
+                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">Convoyeur de Tri Automatique</h3>
+                
+                <div style="margin-bottom: 15px;">
+                  <div class="prj-lbl">> PROBLÈME</div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">Besoin de simuler un environnement industriel complet pour valider la logique de tri sans risque matériel.</p>
+                </div>
+
+                <div class="prj-details" style="display: none; margin-bottom: 15px;">
+                  <div class="prj-lbl" style="color: #F5A623;">> SOLUTION & RÉSULTATS</div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">Programmation Ladder (S7-1200) sur TIA Portal et interfaçage avec le jumeau numérique Factory I/O via OPC-DA.</p>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#F5A623;">›</strong> Gestion fluide des modes Auto/Manuel/Arrêt d'urgence.</div>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#F5A623;">›</strong> Tri optique fonctionnel à 100%.</div>
+                </div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                  <span class="tech-chip">TIA Portal</span><span class="tech-chip">Factory I/O</span><span class="tech-chip">PLC</span>
+                </div>
+              </div>
+              <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
+                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
+                <div style="display: flex; gap: 10px;">
+                  <a href="#" onclick="openPreview('Simulation Factory I/O', '<video autoplay loop muted controls><source src=\'chemin_video.mp4\' type=\'video/mp4\'></video>')" style="color: #5A6A7A;" title="Lancer Simulation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div style="text-align: center; margin-top: 50px; padding: 35px; background: rgba(32, 96, 184, 0.03); border: 1px dashed #BDDAF0; border-radius: 6px;">
+            <p style="font-size: 14px; color: #5A6A7A; margin-bottom: 20px;">
+              Tous mes projets sont open source. Consultez le code complet sur GitHub.
+            </p>
+            <a href="https://github.com/horaembedded" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: #102A70; color: white; padding: 10px 22px; text-decoration: none; font-size: 13px; font-weight: bold; border-radius: 4px; transition: background 0.2s;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              Voir le profil GitHub
+            </a>
+          </div>
+
+          <script>
+            // Fonction pour déplier/replier les détails d'un projet
+            function toggleCard(btn) {
+              const card = btn.closest('.prj-card');
+              const details = card.querySelector('.prj-details');
+              if (details.style.display === 'none') {
+                details.style.display = 'block';
+                btn.innerHTML = '[-] MASQUER';
+              } else {
+                details.style.display = 'none';
+                btn.innerHTML = '[+] DÉTAILS';
+              }
+            }
+
+            // Fonction pour filtrer les projets par catégorie
+            function filterProjects(category) {
+              // Mettre à jour les boutons
+              document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.innerText === category) btn.classList.add('active');
+              });
+
+              // Filtrer les cartes
+              const cards = document.querySelectorAll('.prj-card');
+              cards.forEach(card => {
+                if (category === 'Tous' || card.getAttribute('data-category') === category) {
+                  card.style.display = 'flex';
+                } else {
+                  card.style.display = 'none';
+                }
+              });
+            }
+          </script>
+
+         </div>
+         
+
+        <div id="sec-competences" class="section-content">
+          
+          <h1 class="sys-title">[SYS] Bibliothèques & Composants Maîtrisés</h1>
+          <p class="body-text" style="font-size: 14px; margin-bottom: 35px;">
+            <strong>Identité Technique :</strong> Synthèse des langages, microcontrôleurs et outils de développement utilisés dans la conception, la simulation et l'implémentation de mes systèmes.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px;">
+
+            <div style="background: white; border: 1px solid var(--border-color); border-radius: 0; padding: 25px;">
+              <div style="font-family: monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #2060B8; margin-bottom: 24px; font-weight: bold; border-bottom: 1px dashed #BDDAF0; padding-bottom: 8px;">
+                > Programmation
+              </div>
+              
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">MATLAB / Scripts</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">9/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 90%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">C / C++ (Bare-Metal)</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8.5/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 85%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Python (IA, Scripts)</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7.5/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 75%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Assembleur (C6000)</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 70%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">VHDL</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">6/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 60%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background: white; border: 1px solid var(--border-color); border-radius: 0; padding: 25px;">
+              <div style="font-family: monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #2060B8; margin-bottom: 24px; font-weight: bold; border-bottom: 1px dashed #BDDAF0; padding-bottom: 8px;">
+                > Hardware & Embarqué
+              </div>
+              
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Microcontrôleurs (STM32, AVR)</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8.5/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 85%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Conception PCB (Schémas/Routage)</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 80%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">DSP (TMS320)</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7.5/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 75%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Électronique de Puissance</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7.5/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 75%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Architecture FPGA</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">6.5/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 65%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background: white; border: 1px solid var(--border-color); border-radius: 0; padding: 25px;">
+              <div style="font-family: monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #2060B8; margin-bottom: 24px; font-weight: bold; border-bottom: 1px dashed #BDDAF0; padding-bottom: 8px;">
+                > Communication & IIoT
+              </div>
+              
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">MQTT</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 80%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">ESP32 (Connectivité)</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 80%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">OPC-DA / OPC-UA</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7.5/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 75%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Modbus</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 70%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background: white; border: 1px solid var(--border-color); border-radius: 0; padding: 25px;">
+              <div style="font-family: monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #2060B8; margin-bottom: 24px; font-weight: bold; border-bottom: 1px dashed #BDDAF0; padding-bottom: 8px;">
+                > Outils & Plateformes
+              </div>
+              
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Simulink / Simscape</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">9/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 90%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">TIA Portal (Ladder)</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8.5/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 85%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Factory I/O</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8.5/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 85%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Git / GitHub</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 80%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Code Composer Studio</span>
+                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7.5/10</span>
+                </div>
+                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
+                  <div style="height: 100%; width: 75%; background: #2060B8; border-radius: 0;"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <p style="margin-top: 30px; font-family: monospace; font-size: 10.5px; color: #5A6A7A; font-style: italic; border-top: 1px dashed var(--border-color); padding-top: 15px;">
+            * Échelle basée sur le niveau de maîtrise et d'autonomie actuel, non sur les années d'expérience.
+          </p>
+
+        </div>
+
+        
+        
+        <div id="sec-contact" class="section-content">
+          <h1 class="sys-title">Construisons quelque chose ensemble</h1>
+          <p class="text-body" style="font-size: 14px; max-width: 800px;">
+            À la recherche d'une ingénieure stagiaire passionnée par l'automatisation et l'IoT ? Je serais ravie d'échanger avec vous.
+          </p>
+          
+          <div style="display:flex; gap: 30px; margin-top: 30px; flex-wrap: wrap;">
+            
+            <div style="flex: 1; min-width: 250px;">
+              <div class="functional-block" style="padding: 20px;">
+                <form action="https://formspree.io/f/xgonpprj" method="POST">
+                  
+                  <input type="text" name="name" class="form-control" placeholder="Votre Nom (ex: John Doe)" required style="margin-bottom: 12px;">
+                  
+                  <input type="email" name="email" class="form-control" placeholder="Adresse Email (ex: vous@entreprise.com)" required style="margin-bottom: 12px;">
+                  
+                  <select name="subject" class="form-control" required style="margin-bottom: 12px; cursor: pointer;">
+                    <option value="" disabled selected>-- Sélectionner l'objet de la requête --</option>
+                    <option value="internship">Opportunité de Stage</option>
+                    <option value="collaboration">Collaboration sur un Projet</option>
+                    <option value="question">Question Technique</option>
+                    <option value="other">Autre</option>
+                  </select>
+                  
+                  <textarea name="message" class="form-control" placeholder="Détails de l'opportunité ou de votre question..." rows="5" required style="margin-bottom: 15px; resize: vertical; min-height: 100px;"></textarea>
+                  
+                  <button type="submit" class="btn-source" style="width: 100%; justify-content: center; margin-bottom:0; background: var(--color-blue); color: white; border: none; padding: 12px 20px; font-weight: bold; cursor: pointer; border-radius: 2px;">
+                    📩 Envoyer
+                  </button>
+                  
+                  <div style="margin-top: 15px; font-family: monospace; font-size: 10.5px; color: var(--text-muted); text-align: center; border-top: 1px dashed var(--border-color); padding-top: 10px;">
+                    >> Temps de réponse estimé : 24h.<br>Pour les urgences, privilégiez l'email direct.
+                  </div>
+                </form>
+              </div>
+            </div>
+            
+            <div style="flex: 1; min-width: 250px;">
+              <div class="target-box" style="margin-top:0; display: flex; flex-direction: column; gap: 18px; padding: 25px; background: rgba(26, 91, 156, 0.02); border: 1px dashed var(--color-blue);">
+                
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 5px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
+                  <div style="display: flex; align-items: center; gap: 10px; color: var(--text-main);">
+                    <span style="color: var(--color-blue); font-size: 14px;">🎓</span>
+                    <span style="font-size: 12px;"><strong>École :</strong> ENSA Tanger — 4ème</span>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 10px; color: var(--text-main);">
+                    <span style="color: var(--color-blue); font-size: 14px;">✓</span>
+                    <span style="font-size: 12px;"><strong>Statut :</strong> Ouverte aux opportunités de Stage — 2026</span>
+                  </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 2px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="color: var(--color-blue); display: flex; align-items: center;">
+                      <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    </span>
+                    <a href="mailto:azonhoumonhoracia@gmail.com" style="font-size: 13px; font-weight: 600;">azonhoumonhoracia@gmail.com</a>
+                  </div>
+                  <span style="font-size: 11px; color: var(--text-muted); margin-left: 30px;">Idéal pour les opportunités professionnelles</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 2px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="color: var(--color-blue); display: flex; align-items: center;">
+                      <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M19 0H5C2.239 0 0 2.239 0 5V19C0 21.761 2.239 24 5 24H19C21.762 24 24 21.761 24 19V5C24 2.239 21.762 0 19 0ZM8 19H5V9H8V19ZM6.5 7.732C5.534 7.732 4.75 6.942 4.75 5.968C4.75 4.994 5.534 4.204 6.5 4.204C7.466 4.204 8.25 4.994 8.25 5.968C8.25 6.942 7.466 7.732 6.5 7.732ZM20.5 19H17.5V13.396C17.5 10.028 13.5 10.283 13.5 13.396V19H10.5V9H13.5V10.765C14.896 8.179 20.5 7.988 20.5 13.241V19Z"/></svg>
+                    </span>
+                    <a href="https://linkedin.com/in/horacia-azonhoumon" target="_blank" style="font-size: 13px; font-weight: 600;">Horacia Azonhoumon</a>
+                  </div>
+                  <span style="font-size: 11px; color: var(--text-muted); margin-left: 30px;">Profil académique et professionnel</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 2px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="color: var(--color-blue); display: flex; align-items: center;">
+                      <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M12 0C5.37 0 0 5.37 0 12C0 17.3 3.438 21.8 8.205 23.385C8.805 23.495 9.025 23.125 9.025 22.815C9.025 22.535 9.015 21.715 9.01 20.615C5.67 21.34 4.965 19.005 4.965 19.005C4.42 17.62 3.635 17.25 3.635 17.25C2.545 16.505 3.715 16.52 3.715 16.52C4.92 16.605 5.555 17.765 5.555 17.765C6.625 19.595 8.365 19.065 9.05 18.755C9.16 17.97 9.475 17.44 9.825 17.135C7.165 16.83 4.37 15.8 4.37 11.365C4.37 10.1 4.82 9.065 5.555 8.25C5.435 7.95 5.04 6.775 5.67 5.17C5.67 5.17 6.64 4.86 8.995 6.455C9.915 6.2 10.96 6.07 12 6.065C13.04 6.07 14.085 6.2 15.005 6.455C17.355 4.86 18.32 5.17 18.32 5.17C18.955 6.775 18.565 7.95 18.445 8.25C19.18 9.065 19.625 10.1 19.625 11.365C19.625 15.81 16.82 16.825 14.15 17.12C14.585 17.495 14.975 18.23 14.975 19.385C14.975 21.035 14.96 22.365 14.96 22.815C14.96 23.13 15.18 23.505 15.79 23.385C20.565 21.795 24 17.295 24 12C24 5.37 18.625 0 12 0Z"/></svg>
+                    </span>
+                    <a href="https://github.com/HoraEmbedded" target="_blank" style="font-size: 13px; font-weight: 600;">@HoraEmbedded</a>
+                  </div>
+                  <span style="font-size: 11px; color: var(--text-muted); margin-left: 30px;">Tous mes projets open source</span>
+                </div>
+
+                <div style="height: 1px; background: var(--border-color); margin: 5px 0;"></div>
+
+                <div style="display: flex; flex-direction: column; gap: 2px;">
+                  <div style="display: flex; align-items: center; gap: 12px; color: var(--text-muted);">
+                    <span style="color: var(--color-blue); display: flex; align-items: center;">
+                      <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    </span>
+                    <span style="font-size: 13px; font-weight: 600;">Tanger, Maroc</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </main>
   </div>
 
-</div><!-- / .ms-window -->
+  <script>
+    function switchTab(tabId, element) {
+      // Retirer la classe active de tous les menus
+      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+      // Ajouter la classe active au menu cliqué
+      element.classList.add('active');
 
+      // Masquer toutes les sections
+      document.querySelectorAll('.section-content').forEach(sec => sec.classList.remove('active'));
+      // Afficher la section cible
+      document.getElementById('sec-' + tabId).classList.add('active');
 
-<script>
-  /* ── Navigation principale ── */
-  const SECTIONS = ['accueil','apropos','projets','competences','contact'];
-  const LABELS   = { accueil:'ACCUEIL', apropos:'À PROPOS', projets:'PROJETS', competences:'COMPÉTENCES', contact:'CONTACT' };
-
-  function switchTab(id) {
-    if (!SECTIONS.includes(id)) return;
-
-    /* onglets */
-    SECTIONS.forEach(s => {
-      const t = document.getElementById('tab-' + s);
-      const n = document.getElementById('nav-' + s);
-      const r = document.getElementById('rp-'  + s);
-      const c = document.getElementById('sec-' + s);
-      const active = s === id;
-      t && t.classList.toggle('active', active);
-      n && n.classList.toggle('active', active);
-      r && r.classList.toggle('active', active);
-      c && c.classList.toggle('active', active);
-    });
-
-    /* statut */
-    document.getElementById('st-section').textContent = LABELS[id] || id.toUpperCase();
-
-    /* scroll haut */
-    document.getElementById('docArea').scrollTop = 0;
-  }
-
-  /* ── Zoom ── */
-  function applyZoom(val) {
-    val = Math.min(200, Math.max(50, parseInt(val)));
-    document.getElementById('zoomSlider').value = val;
-    document.getElementById('zoomLbl').textContent = val + '%';
-    document.getElementById('mainPage').style.transform = 'scale(' + val/100 + ')';
-    document.getElementById('mainPage').style.transformOrigin = 'top center';
-  }
-
-  function changeZoom(delta) {
-    const cur = parseInt(document.getElementById('zoomSlider').value) || 100;
-    applyZoom(cur + delta);
-  }
-
-  /* ── Vue ── */
-  function setView(mode, btn) {
-    document.querySelectorAll('.view-btn').forEach(b => b.style.background = '');
-    btn.style.background = 'rgba(255,255,255,0.18)';
-    const area = document.getElementById('docArea');
-    if (mode === 'full') {
-      area.style.padding = '0';
-      document.getElementById('mainPage').style.boxShadow = 'none';
-      document.getElementById('mainPage').style.maxWidth  = '100%';
-    } else {
-      area.style.padding = '22px 22px 40px';
-      document.getElementById('mainPage').style.boxShadow = '';
-      document.getElementById('mainPage').style.maxWidth  = '720px';
+      // Remonter en haut de la page
+      document.getElementById('workspace').scrollTop = 0;
     }
-  }
-</script>
+
+    /* ── Gestion des Aperçus (Modale) ── */
+    function openPreview(title, mediaHTML) {
+      document.getElementById('modalTitle').textContent = '>> SYS_VIEWER : ' + title;
+      document.getElementById('modalBody').innerHTML = mediaHTML;
+      document.getElementById('previewModal').classList.add('active');
+    }
+
+    function closePreview(event) {
+      document.getElementById('previewModal').classList.remove('active');
+      // Vider le contenu permet de couper le son d'une vidéo si elle était en cours de lecture
+      setTimeout(() => { document.getElementById('modalBody').innerHTML = ''; }, 200);
+    }
+
+  </script>
+
+<div class="modal-overlay" id="previewModal" onclick="closePreview(event)">
+    <div class="modal-window" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span class="modal-title" id="modalTitle">>> SYS_VIEWER : Aperçu</span>
+        <button class="modal-close" onclick="closePreview()">✕</button>
+      </div>
+      <div class="modal-content" id="modalBody">
+        </div>
+    </div>
+  </div>
 
 </body>
 </html>
