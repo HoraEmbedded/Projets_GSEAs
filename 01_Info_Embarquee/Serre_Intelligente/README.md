@@ -1,47 +1,51 @@
-# Système Embarqué de Gestion de Serre Intelligente
+# Système Embarqué de Gestion de Serre Intelligente (Validation par Simulation)
 
 ## Description du Projet
-Ce projet consiste en la conception et l'implémentation d'un système de contrôle automatisé pour une serre agricole. Le micrologiciel est développé intégralement en C pur (approche *bare-metal*) pour un microcontrôleur ATmega2560, sans utilisation de bibliothèques de haut niveau (comme celles de l'écosystème Arduino standard) ni de système d'exploitation temps réel (RTOS). 
+Ce projet consiste en la conception et l'implémentation d'un micrologiciel de contrôle automatisé pour une serre agricole. Le code est développé intégralement en C pur (approche *bare-metal*) pour l'architecture AVR (ATmega2560), garantissant une exécution déterministe et non-bloquante via une gestion par interruptions matérielles.
 
-L'objectif est d'assurer une régulation autonome de la température ambiante et de l'humidité du sol via un contrôle par hystérésis, tout en garantissant un fonctionnement non-bloquant grâce à une architecture logicielle pilotée par les interruptions (*Interrupt-Driven*).
+Afin de valider la logique de commande (hystérésis) et l'intégrité des communications bas niveau (I2C, 1-Wire, ADC) avant le déploiement matériel, l'intégralité du système a été modélisée et testée sur l'environnement de simulation industrielle **Wokwi**.
 
-## Fonctionnalités Principales
-* **Acquisition de données capteurs :** Lecture de la température et de l'humidité de l'air (protocole 1-Wire) et de l'humidité du sol (conversion analogique-numérique).
-* **Régulation par hystérésis :** Contrôle de deux actionneurs (ventilateur et pompe) pour éviter les oscillations d'état.
-* **Architecture Non-Bloquante :** Utilisation du Timer 1 en mode CTC pour cadencer le système toutes les 2 secondes sans figer le processeur principal.
-* **Interface Homme-Machine (IHM) :** Affichage en temps réel des métriques sur un écran LCD 16x2 via un bus I2C logiciel.
-* **Télémétrie :** Transmission des logs de fonctionnement et des mesures via l'interface série UART vers un terminal externe.
+## Modélisation de l'Environnement Virtuel (Wokwi)
 
-## Architecture Matérielle
-* **Microcontrôleur :** Arduino Mega 2560 (ATmega2560 à 16 MHz).
-* **Capteurs :** DHT22 (Air) et Potentiomètre 10 kΩ (simulation de la sonde d'humidité du sol).
-* **Actionneurs :** Modules relais 5V pour le pilotage de la puissance (Ventilation et Pompe).
-* **Affichage :** Écran LCD 16x2 avec module contrôleur I2C (PCF8574).
+Dans le cadre de la simulation, les composants physiques de puissance ont été substitués par des modèles virtuels équivalents pour valider les signaux électriques générés par le microcontrôleur. La topologie est définie dans le fichier `diagram.json`.
 
-### Plan de Câblage (Pinout)
-| Composant | Rôle | Connexion ATmega2560 | Registre / Port |
-| :--- | :--- | :--- | :--- |
-| **DHT22** | Données (1-Wire) | Pin 2 | PE4 |
-| **Sonde Sol** | Signal Analogique | A0 | PF0 (ADC0) |
-| **Relais 1** | Commande Ventilateur | Pin 9 | PH6 |
-| **Relais 2** | Commande Pompe | Pin 8 | PH5 |
-| **Module I2C** | SDA (Données) | Pin 20 | PD0 |
-| **Module I2C** | SCL (Horloge) | Pin 21 | PD1 |
+### Rôle des Composants Simulés
+* **ATmega2560 (`wokwi-arduino-mega2560`) :** Cœur du système. Il exécute le fichier binaire `.hex` généré par le compilateur AVR-GCC et gère les registres matériels virtuels.
+* **Afficheur LCD I2C (`wokwi-lcd1602-i2c`) :** Modélise l'écran physique et son module PCF8574. Permet de valider l'implémentation logicielle du protocole TWI/I2C (adressage `0x27`) et l'affichage de l'IHM.
+* **Capteur DHT22 (`wokwi-dht22`) :** Simule les variations environnementales de l'air. Il répond aux requêtes du microcontrôleur en générant les chronogrammes stricts du protocole 1-Wire (impulsions de 40µs à 80µs).
+* **Potentiomètre Linéaire (`wokwi-potentiometer`) :** Remplace la sonde capacitive d'humidité du sol. Il agit comme un diviseur de tension modifiant le signal de 0V à 5V sur la broche `A0`, permettant de valider la configuration du convertisseur analogique-numérique (ADC).
+* **LEDs de Signalisation (`wokwi-led`) et Résistances :** Remplacent les modules relais électromécaniques 5V. 
+    * La **LED Bleue** valide la tension haute (5V) sur la broche 9, modélisant la fermeture du contacteur du **ventilateur**.
+    * La **LED Verte** valide la tension haute (5V) sur la broche 8, modélisant la fermeture du contacteur de la **pompe d'irrigation**.
 
 ## Architecture Logicielle (Pilotes Bare-Metal)
-Le projet est structuré autour de pilotes développés spécifiquement par manipulation directe des registres :
-1. **UART :** Configuration des registres `UBRR0` et `UCSR0` pour une communication asynchrone à 9600 bauds.
-2. **I2C (TWI) :** Implémentation de la machine d'état I2C matérielle à 100 kHz via le registre `TWCR`.
-3. **ADC :** Configuration de l'échantillonnage avec un facteur de division de 128 via `ADCSRA`.
-4. **Timer 1 :** Configuration en mode CTC (Clear Timer on Compare) générant une interruption via l'ISR `TIMER1_COMPA_vect`.
+Le projet n'utilise aucune bibliothèque externe. Les pilotes suivants ont été écrits via la manipulation directe des registres :
+1. **Machine d'état Asynchrone :** Le Timer 1 est configuré en mode CTC (prescaler 1024) pour déclencher une interruption `TIMER1_COMPA_vect` toutes les 2 secondes, éliminant tout appel bloquant dans la boucle principale.
+2. **UART :** Configuration des registres `UBRR0` et `UCSR0` pour la télémétrie asynchrone (9600 bauds).
+3. **I2C (TWI) :** Gestion du registre `TWCR` pour cadencer l'horloge SCL à 100 kHz.
+4. **ADC :** Configuration de l'échantillonnage avec un facteur de division de 128 via `ADCSRA`.
 
-## Installation et Compilation
+## Instructions de Déploiement et de Simulation
 
-### Prérequis
-* Un environnement de développement compatible avec le framework AVR (ex: **PlatformIO** sous VS Code ou AVR-GCC en ligne de commande).
+### 1. Compilation du Firmware
+Le projet est configuré pour l'environnement de construction PlatformIO.
+```bash
+git clone <url-du-depot>
+cd <nom-du-dossier>
+pio run```
 
-### Instructions (PlatformIO)
-1. Cloner le dépôt :
-   ```bash
-   git clone <url-du-depot>
-   cd <nom-du-dossier>
+Cette commande génère le fichier exécutable firmware.hex dans le répertoire .pio/build/megaatmega2560/.
+
+### 2. Exécution de la Simulation
+Ouvrir l'environnement de simulation Wokwi.
+
+Importer le fichier de routage diagram.json pour générer le circuit virtuel.
+
+Importer les fichiers sources (main.c) ou charger directement le firmware.hex compilé.
+
+Lancer la simulation. Le comportement des actionneurs (LEDs) peut être observé en modifiant interactivement les valeurs du DHT22 et du potentiomètre via l'interface graphique.
+
+### Télémétrie
+Les données d'état et les mesures environnementales sont retransmises en temps réel sur le terminal série virtuel, permettant le profilage des algorithmes d'hystérésis.
+
+Projet réalisé dans le cadre d'un cursus en ingénierie des systèmes embarqués.
