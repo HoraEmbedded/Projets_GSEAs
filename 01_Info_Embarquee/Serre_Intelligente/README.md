@@ -18,6 +18,8 @@ Dans le cadre de la simulation, les composants physiques de puissance ont été 
 * **LEDs de Signalisation (`wokwi-led`) et Résistances :** Remplacent les modules relais électromécaniques 5V. 
   * La **LED Bleue** valide la tension haute (5V) sur la broche 9, modélisant la fermeture du contacteur du **ventilateur**.
   * La **LED Verte** valide la tension haute (5V) sur la broche 8, modélisant la fermeture du contacteur de la **pompe d'irrigation**.
+ 
+    ![Texte alternatif de description](Projets_GSEAs/blob/main/01_Info_Embarquee/Serre_Intelligente/pictures/serre.png)
 
 ---
 
