@@ -1,6 +1,7 @@
 #  Interface de Commande de Puissance (Driver MOS)
 
-![Vue 3D de la carte de puissance](./Pictures/vue_3D.png)
+<img width="1385" height="754" alt="vue_3D" src="https://github.com/user-attachments/assets/d406a3fd-11ff-45a0-9b64-94e05c69020e" />
+
 
 ## Description du projet
 Ce projet a été réalisé dans le cadre du Bureau d'Étude N°3 d'Électronique de Puissance (ENSAT). Il consiste à analyser, dimensionner et concevoir une interface de commande basée sur un transistor MOS en mode commutation. 
