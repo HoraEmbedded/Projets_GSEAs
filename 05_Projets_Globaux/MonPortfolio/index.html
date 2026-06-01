@@ -12,6 +12,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
+
+    /* ─── NOUVELLES POLICES (Écrasement automatique) ─── */
+    :root {
+      --font-main: 'Inter', sans-serif;
+      --font-tech: 'JetBrains Mono', monospace;
+    }
+
+    /* Applique Inter à tout le texte standard */
+    body, p, h1, h2, h3, h4, .body-text {
+      font-family: var(--font-main) !important;
+    }
+
+    /* Remplace automatiquement les anciennes polices inline par Inter */
+    [style*="Segoe UI"], [style*="DM Sans"], [style*="Arial"] {
+      font-family: var(--font-main) !important;
+    }
+
+    /* Applique JetBrains Mono à tous les éléments techniques et codes */
+    [style*="monospace"], .sys-title, .filter-btn, .tech-chip, .prj-lbl, .time-date {
+      font-family: var(--font-tech) !important;
+    }
+
     /* ════════════════════════════════════════
        VARIABLES & THÈME (Style Logiciel CAO)
     ════════════════════════════════════════ */
@@ -20,10 +42,14 @@
       --toolbar-bg: #e4e4e4;
       --sidebar-bg: #f4f4f4;
       --sidebar-header: #c8c8c8;
-      --workspace-bg: #7a7a7a;
+      
+      /* 1. Le fond gris derrière (Workspace) à 40% d'opacité */
+      --workspace-bg: rgba(122, 122, 122, 0.4); 
       
       --page-bg: #ffffff;
-      --grid-dot: #b0c4de;
+      
+      /* 2. Les pointillés (Grid dot) à 30% d'opacité */
+      --grid-dot: rgba(176, 196, 222, 0.3); 
       
       --text-main: #333333;
       --text-muted: #666666;
@@ -360,7 +386,20 @@
       .page { padding: 20px; min-height: auto; }
       .blocks-grid { grid-template-columns: 1fr; }
     }
-  </style>
+ 
+    /* ─── CORRECTION : SUPPRESSION DU VIDE (ACCUEIL) ─── */
+    #sec-accueil {
+      padding-bottom: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* Force le tout dernier élément de l'accueil à ne pas pousser le bas de la page */
+    #sec-accueil > *:last-child {
+      margin-bottom: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+ </style>
 </head>
 <body>
 
@@ -417,104 +456,37 @@
     <main class="workspace" id="workspace">
       <div class="page">
         
+        <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+             SECTION : ACCUEIL & À PROPOS (COMBINÉS)
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
         <div id="sec-accueil" class="section-content active">
           
-          <style>
-            @keyframes sysPulse {
-              0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
-              70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-              100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-            }
-            @keyframes sysBlink {
-              0%, 100% { opacity: 1; }
-              50% { opacity: 0; }
-            }
-            .hero-social:hover svg { fill: #2060B8; transform: translateY(-2px); }
-            .hero-social svg { transition: all 0.2s; fill: #5A6A7A; }
-          </style>
-
-          <div style="border: 1px dashed #BDDAF0; background: linear-gradient(180deg, #F4F9FF 0%, #E8F3FE 100%); padding: 35px 40px; border-radius: 4px; margin-bottom: 30px; position: relative; overflow: hidden; box-shadow: inset 0 0 20px rgba(255,255,255,0.5);">
+          <!-- 1. ZONE HÉRO (Ancien Accueil) -->
+          <div style="margin-bottom: 40px;">
+            <h1 style="font-size: 32px; color: var(--color-blue); margin-bottom: 5px; font-weight: 800; text-transform: uppercase;">Horacia AZONHOUMON</h1>
+            <h2 style="font-size: 16px; color: var(--text-muted); margin-bottom: 25px; font-weight: 500;">Élève Ingénieure — Systèmes Embarqués & Automatique</h2>
             
-            <div style="position: absolute; right: 20px; top: 20px; opacity: 0.15; pointer-events: none;">
-               <svg width="120" height="120" viewBox="0 0 100 100">
-                 <path d="M10 50 L40 50 L40 90 L90 90" fill="none" stroke="#2060B8" stroke-width="2"/>
-                 <path d="M10 20 L70 20 L70 60" fill="none" stroke="#2060B8" stroke-width="1.5"/>
-                 <circle cx="90" cy="90" r="4" fill="#2060B8"/>
-                 <circle cx="70" cy="60" r="3" fill="#2060B8"/>
-                 <circle cx="10" cy="50" r="4" fill="#2060B8"/>
-               </svg>
-            </div>
-
-            <div style="display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid #BCD4EE; padding: 6px 14px; border-radius: 20px; margin-bottom: 25px; box-shadow: 0 2px 5px rgba(0,0,0,0.02);">
-              <div style="width: 8px; height: 8px; background-color: #22c55e; border-radius: 50%; animation: sysPulse 2s infinite;"></div>
-              <span style="font-family: monospace; font-size: 10.5px; color: #5878A0; letter-spacing: 0.5px; font-weight: 600;">DISPONIBLE POUR STAGE — 2026</span>
-            </div>
-
-            <div style="font-family: monospace; font-size: 11px; color: #2060B8; margin-bottom: 8px; font-weight: bold; text-transform: uppercase;">>> Portfolio d'Ingénierie_</div>
-            
-            <h1 style="font-size: 28px; font-weight: 800; color: #102A70; line-height: 1.15; margin-bottom: 15px;">
-              Houénoumè Horacia Gloriéta<br>
-              <span style="color: #2060B8; font-size: 34px;">AZONHOUMON</span>
-            </h1>
-
-            <div style="font-family: monospace; font-size: 14.5px; color: #5878A0; font-weight: 600; margin-bottom: 20px;">
-              > Ingénieure en Automatisation & Systèmes de Contrôle<span style="color: #2060B8; animation: sysBlink 1s infinite;">_</span>
-            </div>
-
-            <p class="body-text" style="max-width: 620px; font-size: 13.5px; margin-bottom: 30px;">
-              Étudiante ingénieure à l'<strong style="color: #102A70;">ENSA Tanger</strong> spécialisée en <strong style="color: #102A70;">Systèmes Électroniques et Automatique</strong>. Je me passionne pour l'Industrial IoT (IIoT) et la création de passerelles intelligentes entre les machines physiques et le monde numérique.
-            </p>
-
-            <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 35px;">
-              <button onclick="switchTab('projets')" style="background: linear-gradient(180deg, #1E5CB8, #5898D8); color: white; border: 1px solid #1848A8; padding: 9px 18px; font-size: 12px; font-weight: bold; border-radius: 3px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 4px rgba(32, 96, 184, 0.2);">
-                Voir les Projets <span>➔</span>
-              </button>
-              <a href="cv-horacia-azonhoumon.pdf" target="_blank" style="text-decoration: none; background: white; color: #1848A8; border: 1px solid #B5D0EE; padding: 9px 18px; font-size: 12px; font-weight: bold; border-radius: 3px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background 0.2s;">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-                Télécharger CV
-              </a>
-              <button onclick="switchTab('contact')" style="background: white; color: #1848A8; border: 1px solid #B5D0EE; padding: 9px 18px; font-size: 12px; font-weight: bold; border-radius: 3px; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background 0.2s;">
-                ✉ Me Contacter
-              </button>
-            </div>
-
-            <div style="display: flex; align-items: center; gap: 15px;">
-              <span style="font-family: monospace; font-size: 10px; color: #5A6A7A; letter-spacing: 0.5px;">REJOIGNEZ-MOI SUR :</span>
-              <div style="width: 30px; height: 1px; background: #BDDAF0;"></div>
-              
-              <a href="https://github.com/HoraEmbedded" target="_blank" class="hero-social" title="GitHub">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              </a>
-              <a href="https://linkedin.com/in/horacia-azonhoumon" target="_blank" class="hero-social" title="LinkedIn">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-              </a>
-              <a href="mailto:azonhoumonhoracia@gmail.com" class="hero-social" title="Email">
-                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-              </a>
-            </div>
-
+            <!-- Bouton de téléchargement du CV -->
+            <a href="cv-horacia-azonhoumon.pdf" download="cv-horacia-azonhoumon.pdf" target="_blank" style="text-decoration: none; background: white; color: #1848A8; border: 1px solid #B5D0EE; padding: 9px 18px; font-size: 12px; font-weight: bold; border-radius: 3px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s;">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+              Télécharger CV
+            </a>
           </div>
-          
 
-        </div>
+          <div style="height: 1px; background: var(--border-color); margin: 0 0 35px 0; opacity: 0.5;"></div>
 
-        <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-             SECTION : À PROPOS
-        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-        <div id="sec-apropos" class="section-content">
+          <!-- 2. ZONE PROFIL (Ancien À Propos) -->
           <h1 class="sys-title">[SYS] Historique & Configuration</h1>
           
-          <div class="about-short">
-  <h3 style="color: #102A70; margin-bottom: 12px; font-size: 1.2em;">
-    <strong style="color: #2060B8;">HoraEmbedded</strong> | Étudiante ingénieure originaire du Bénin
-  </h3>
-  
-  <p class="body-text" style="margin-bottom: 8px;">
-    Passionnée d'électronique, de programmation et de l'automatisation, j'aime construire des ponts entre le monde physique et l'intelligence numérique à travers l'IIoT
-    </p>
-    <p class="body-text" style="margin-bottom: 8px;"></p>
-    <em style="color: #102A70; font-weight: 600;">« Comment les machines savent-elles ce qu'elles doivent faire ? »</em> est la curiosité qui m'a menée dans ce domaine et je suis convaincue que les meilleurs ingénieurs sont avant tout des curieux qui se demandent toujours : <em style="color: #102A70; font-weight: 600;">« Et si... ? »</em>.
-</div>
+          <p class="body-text" style="font-size: 14.5px; line-height: 1.65; margin-bottom: 12px; color: var(--text-main);">
+            Mon approche de l'ingénierie repose sur une obsession simple : maîtriser la manière dont le matériel physique et la logique logicielle interagissent pour prendre des décisions autonomes. 
+          </p>
+          <p class="body-text" style="font-size: 13.5px; line-height: 1.6; margin-bottom: 12px; color: var(--text-muted);">
+            Spécialisée dans l'<strong>IIoT (Industrial IoT)</strong> et les systèmes embarqués, je conçois les architectures et les algorithmes qui connectent les machines industrielles à l'intelligence numérique. Au-delà du code, j'accorde une importance capitale à la rigueur industrielle : respect du cycle en V, conception modulaire et documentation exhaustive.
+          </p>
+          <p class="body-text" style="font-size: 13.5px; line-height: 1.6; margin-bottom: 35px; color: var(--text-muted); border-left: 3px solid var(--color-blue); padding-left: 12px; background: var(--color-blue-light); padding-top: 8px; padding-bottom: 8px;">
+            <strong>Statut actuel :</strong> À l'écoute d'opportunités pour un <strong>Stage PFA (2026)</strong>. Je cible des équipes techniques où je pourrai intervenir sur l'ensemble d'un projet, du prototypage matériel à l'intégration logicielle.
+          </p>
 
           <!-- Chronogramme Académique -->
           <div class="blocks-title">CHRONOGRAMME ACADÉMIQUE</div>
@@ -522,24 +494,24 @@
             <div class="time-date">2024 – Présent</div>
             <div class="time-title">École Nationale des Sciences Appliquées – Tanger</div>
             <div class="time-org">Génie des Systèmes Électronique et Automatique (GSEA)</div>
-            <p class="text-body" style="font-size: 12px; margin: 0; color: #5A6A7A;">Spécialisation en contrôle automatique avancé, systèmes embarqués, électronique de puissance. Cours avancés : Systèmes de contrôle intelligents.</p>
+            <p class="text-body" style="font-size: 12px; margin: 0; color: var(--text-muted);">Spécialisation en contrôle automatique avancé, systèmes embarqués, électronique de puissance. Cours avancés : Systèmes de contrôle intelligents.</p>
           </div>
           <div class="timeline-item">
             <div class="time-date">2022 – 2024</div>
             <div class="time-title">Classes Préparatoires intégrées</div>
             <div class="time-org">Filière MPSI</div>
-            <p class="text-body" style="font-size: 12px; margin: 0; color: #5A6A7A;">Mathématiques, Physique & Sciences de l'Ingénieur.</p>
+            <p class="text-body" style="font-size: 12px; margin: 0; color: var(--text-muted);">Mathématiques, Physique & Sciences de l'Ingénieur.</p>
           </div>
           <div class="timeline-item">
             <div class="time-date">Antérieur</div>
             <div class="time-title">Baccalauréat</div>
             <div class="time-org">Sciences Mathématiques & Physique</div>
-            <p class="text-body" style="font-size: 12px; margin: 0; color: #5A6A7A;">Mention Bien.</p>
+            <p class="text-body" style="font-size: 12px; margin: 0; color: var(--text-muted);">Mention Bien.</p>
           </div>
 
-          <div style="height: 1px; background: #BDDAF0; margin: 35px 0;"></div>
+          <div style="height: 1px; background: var(--border-color); margin: 35px 0; opacity: 0.5;"></div>
 
-          <!-- Au-delà du Code : Format Liste Horizontale Compacte (Textes Initiaux) -->
+          <!-- Au-delà du Code -->
           <div class="blocks-title">AU-DELÀ DU CODE (PROFIL PERSONNEL)</div>
           <p class="body-text" style="margin-bottom: 20px; font-size: 13.5px;">
             Les meilleurs ingénieurs sont d'abord des humains curieux. Voici ce qui me définit en dehors de l'industrie.
@@ -547,64 +519,59 @@
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; margin-bottom: 40px;">
             
-            <!-- Carte 1 -->
-            <div style="display: flex; align-items: flex-start; border: 1px solid #BDDAF0; background: white; padding: 15px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='#2060B8'; this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='#BDDAF0'; this.style.transform='none';">
-              <div style="font-family: monospace; font-size: 20px; color: #2060B8; margin-right: 15px; line-height: 1;">◈</div>
+            <div style="display: flex; align-items: flex-start; border: 1px solid var(--border-color); background: white; padding: 15px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='var(--color-blue)'; this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.transform='none';">
+              <div style="font-family: monospace; font-size: 20px; color: var(--color-blue); margin-right: 15px; line-height: 1;">◈</div>
               <div>
-                <h3 style="font-size: 13px; font-weight: 700; color: #102A70; margin-bottom: 4px;">Anime</h3>
-                <p style="font-size: 11.5px; color: #5A6A7A; line-height: 1.45; margin: 0;">L'anime m'enseigne la patience, l'imagination et la persévérance. Ma série préférée : <strong>DR STONE</strong> (un ingénieur qui utilise la science pour changer le monde).</p>
+                <h3 style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Anime (Dr STONE)</h3>
+                <p style="font-size: 11.5px; color: var(--text-muted); line-height: 1.45; margin: 0;">M'enseigne la patience et l'imagination. Une preuve inspirante qu'un ingénieur peut utiliser la science pour changer le monde.</p>
               </div>
             </div>
 
-            <!-- Carte 2 -->
-            <div style="display: flex; align-items: flex-start; border: 1px solid #BDDAF0; background: white; padding: 15px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='#2060B8'; this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='#BDDAF0'; this.style.transform='none';">
-              <div style="font-family: monospace; font-size: 20px; color: #2060B8; margin-right: 15px; line-height: 1;">△</div>
+            <div style="display: flex; align-items: flex-start; border: 1px solid var(--border-color); background: white; padding: 15px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='var(--color-blue)'; this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.transform='none';">
+              <div style="font-family: monospace; font-size: 20px; color: var(--color-blue); margin-right: 15px; line-height: 1;">△</div>
               <div>
-                <h3 style="font-size: 13px; font-weight: 700; color: #102A70; margin-bottom: 4px;">Exploration Tech</h3>
-                <p style="font-size: 11.5px; color: #5A6A7A; line-height: 1.45; margin: 0;">Je suis de près la robotique, l'IA embarquée et l'industrie intelligente. La technologie évolue vite — je veux être à l'avant-garde.</p>
+                <h3 style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Exploration Tech</h3>
+                <p style="font-size: 11.5px; color: var(--text-muted); line-height: 1.45; margin: 0;">Je suis de près la robotique et l'IA embarquée. La technologie évolue vite, je m'assure de toujours rester à l'avant-garde.</p>
               </div>
             </div>
 
-            <!-- Carte 3 -->
-            <div style="display: flex; align-items: flex-start; border: 1px solid #BDDAF0; background: white; padding: 15px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='#2060B8'; this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='#BDDAF0'; this.style.transform='none';">
-              <div style="font-family: monospace; font-size: 20px; color: #2060B8; margin-right: 15px; line-height: 1;">◇</div>
+            <div style="display: flex; align-items: flex-start; border: 1px solid var(--border-color); background: white; padding: 15px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='var(--color-blue)'; this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.transform='none';">
+              <div style="font-family: monospace; font-size: 20px; color: var(--color-blue); margin-right: 15px; line-height: 1;">◇</div>
               <div>
-                <h3 style="font-size: 13px; font-weight: 700; color: #102A70; margin-bottom: 4px;">Voyage & Découverte</h3>
-                <p style="font-size: 11.5px; color: #5A6A7A; line-height: 1.45; margin: 0;">Quitter le Bénin pour le Maroc m'a ouvert l'esprit à de nouvelles façons de penser. Je souhaite collaborer avec des ingénieurs du monde entier.</p>
+                <h3 style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Voyage & Découverte</h3>
+                <p style="font-size: 11.5px; color: var(--text-muted); line-height: 1.45; margin: 0;">Quitter mon pays natal pour le Maroc a ouvert mon esprit. Mon but : collaborer avec des ingénieurs du monde entier.</p>
               </div>
             </div>
 
-            <!-- Carte 4 -->
-            <div style="display: flex; align-items: flex-start; border: 1px solid #BDDAF0; background: white; padding: 15px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='#2060B8'; this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='#BDDAF0'; this.style.transform='none';">
-              <div style="font-family: monospace; font-size: 20px; color: #2060B8; margin-right: 15px; line-height: 1;">▦</div>
+            <div style="display: flex; align-items: flex-start; border: 1px solid var(--border-color); background: white; padding: 15px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='var(--color-blue)'; this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.transform='none';">
+              <div style="font-family: monospace; font-size: 20px; color: var(--color-blue); margin-right: 15px; line-height: 1;">▦</div>
               <div>
-                <h3 style="font-size: 13px; font-weight: 700; color: #102A70; margin-bottom: 4px;">Innovation</h3>
-                <p style="font-size: 11.5px; color: #5A6A7A; line-height: 1.45; margin: 0;">Je suis convaincue que les meilleures solutions sont simples. La solution la plus élégante à un problème complexe est toujours le but ultime.</p>
+                <h3 style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Innovation Minimaliste</h3>
+                <p style="font-size: 11.5px; color: var(--text-muted); line-height: 1.45; margin: 0;">Je suis convaincue que les meilleures solutions sont simples. L'élégance face à un problème complexe est mon but ultime.</p>
               </div>
             </div>
 
-            <!-- Carte 5 -->
-            <div style="display: flex; align-items: flex-start; border: 1px solid #BDDAF0; background: white; padding: 15px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='#2060B8'; this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='#BDDAF0'; this.style.transform='none';">
-              <div style="font-family: monospace; font-size: 20px; color: #2060B8; margin-right: 15px; line-height: 1;">◈</div>
+            <div style="display: flex; align-items: flex-start; border: 1px solid var(--border-color); background: white; padding: 15px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s;" onmouseover="this.style.borderColor='var(--color-blue)'; this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.transform='none';">
+              <div style="font-family: monospace; font-size: 20px; color: var(--color-blue); margin-right: 15px; line-height: 1;">◈</div>
               <div>
-                <h3 style="font-size: 13px; font-weight: 700; color: #102A70; margin-bottom: 4px;">Apprentissage Continu</h3>
-                <p style="font-size: 11.5px; color: #5A6A7A; line-height: 1.45; margin: 0;">Cours, documentation, YouTube, livres, forums : je lis constamment. J'essaie de comprendre en profondeur chaque technologie que j'utilise.</p>
+                <h3 style="font-size: 13px; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Apprentissage Continu</h3>
+                <p style="font-size: 11.5px; color: var(--text-muted); line-height: 1.45; margin: 0;">Documentation, forums, livres : je lis constamment pour comprendre en profondeur chaque composant que je manipule.</p>
               </div>
             </div>
 
           </div>
 
-          <!-- Citation Finale (Épurée) -->
-          <div style="text-align: center; padding: 25px 20px; border-top: 1px dashed #BDDAF0; border-bottom: 1px dashed #BDDAF0; margin-top: 20px;">
-            <p style="font-family: 'Segoe UI', sans-serif; font-size: 15px; font-weight: 600; color: #102A70; line-height: 1.5; max-width: 650px; margin: 0 auto 10px; font-style: italic;">
+          <!-- Citation Finale -->
+          <div style="text-align: center; padding: 25px 20px; border-top: 1px dashed var(--border-color); border-bottom: 1px dashed var(--border-color); margin-top: 20px;">
+            <p style="font-family: var(--font-main, 'Segoe UI'), sans-serif; font-size: 15px; font-weight: 600; color: var(--text-main); line-height: 1.5; max-width: 650px; margin: 0 auto 10px; font-style: italic;">
               « Ceux qui sont vraiment sérieux au sujet du logiciel devraient fabriquer leur propre matériel. »
             </p>
-            <div style="font-family: monospace; font-size: 11px; color: #5878A0; font-weight: bold; text-transform: uppercase;">
+            <div style="font-family: var(--font-tech, monospace); font-size: 11px; color: var(--text-muted); font-weight: bold; text-transform: uppercase;">
               — Alan Kay (Pionnier de l'informatique)
             </div>
           </div>
 
-        </div><!-- / sec-apropos -->
+        </div><!-- / sec-accueil -->
         
         <div id="sec-projets" class="section-content">
           
