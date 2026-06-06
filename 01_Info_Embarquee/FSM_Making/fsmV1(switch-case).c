@@ -29,7 +29,7 @@ MachineEvent currentEvent = NO_EVENT;
 
 while(1) {
 
-    currentEvent = read_sensor(); // Hypothetical function to get the next event
+    currentEvent = read_sensor(); 
 
     switch(currentState) {
         case IDLE:
@@ -86,13 +86,13 @@ while(1) {
 
 }
 
-// 5. Simulation du capteur (Pour que le code puisse compiler)
+// 5. Simulation du capteur 
 MachineEvent read_sensor(void) {
-    // Dans la réalité, cette fonction lirait les vrais boutons du STM32
+    
     return NO_EVENT; 
 }
 
-// 6. Point d'entrée du programme
+
 int main(void) {
     printf("Starting Vending Machine FSM...\n");
     run_fsm();
