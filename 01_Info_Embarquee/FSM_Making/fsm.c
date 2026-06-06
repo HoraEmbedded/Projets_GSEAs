@@ -4,8 +4,8 @@
 typedef enum{
     IDLE,
     SELECTION,
-    DISTRIBUTION,
     PAYMENT,
+    DISTRIBUTION,
     ERROR
 } MachineState;
 
@@ -20,7 +20,9 @@ typedef enum{
     INVALID_ACTION
 } MachineEvent;
 
-void run_fsm(){
+MachineEvent read_sensor(void);
+
+void run_fsm(void){
 
 MachineState currentState = IDLE;
 MachineEvent currentEvent = NO_EVENT;
@@ -39,34 +41,34 @@ while(1) {
 
         case SELECTION:
             if(currentEvent == SELECT_ITEM) {
-                currentState = DISTRIBUTION;
-                printf("Transition to DISTRIBUTION\n");
+                currentState = PAYMENT;
+                printf("Transition to PAYMENT\n");
             } else if(currentEvent == TIMEOUT30S) {
                 currentState = IDLE;
                 printf("Transition to IDLE due to timeout\n");
             }
             break;
 
-        case DISTRIBUTION:
-            if(currentEvent == DISPENSE_ITEM) {
-                currentState = PAYMENT;
-                printf("Transition to PAYMENT\n");
-            } else if(currentEvent == INVALID_ACTION) {
-                currentState = ERROR;
-                printf("Transition to ERROR due to invalid action\n");
-            }
-            break;
-
         case PAYMENT:
             if(currentEvent == INSERT_COIN) {
-                currentState = IDLE;
-                printf("Transition to IDLE after payment\n");
+                currentState = DISTRIBUTION;
+                printf("Transition to DISTRIBUTION after payment\n");
             } else if(currentEvent == RETURN_CHANGE) {
                 currentState = IDLE;
                 printf("Transition to IDLE after returning change\n");
             } else if(currentEvent == TIMEOUT30S) {
                 currentState = ERROR;
                 printf("Transition to ERROR due to timeout\n");
+            }
+            break;
+
+            case DISTRIBUTION:
+            if(currentEvent == DISPENSE_ITEM) {
+                currentState = IDLE;
+                printf("Transition to IDLE after dispensing item\n");
+            } else if(currentEvent == INVALID_ACTION) {
+                currentState = ERROR;
+                printf("Transition to ERROR due to invalid action\n");
             }
             break;
 
@@ -82,4 +84,17 @@ while(1) {
     }
 }
 
+}
+
+// 5. Simulation du capteur (Pour que le code puisse compiler)
+MachineEvent read_sensor(void) {
+    // Dans la réalité, cette fonction lirait les vrais boutons du STM32
+    return NO_EVENT; 
+}
+
+// 6. Point d'entrée du programme
+int main(void) {
+    printf("Starting Vending Machine FSM...\n");
+    run_fsm();
+    return 0;
 }
