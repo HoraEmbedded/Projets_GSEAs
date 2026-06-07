@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "author": "PlatformIO STM32 Vending Machine Touch Screen",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-st-nucleo-c031c6", "id": "nucleo", "top": 200, "left": 50, "attrs": {} },
+    { "type": "wokwi-ili9341-touch", "id": "touch_screen", "top": -220, "left": 0, "attrs": {} },
+    { "type": "wokwi-pushbutton", "id": "btn_cancel", "top": 230, "left": 450, "attrs": { "color": "red", "label": "Annuler" } },
+    { "type": "wokwi-led", "id": "led_prod", "top": 120, "left": -120, "attrs": { "color": "green", "label": "Moteur" } },
+    { "type": "wokwi-led", "id": "led_pay", "top": 200, "left": -120, "attrs": { "color": "yellow", "label": "Paiement" } },
+    { "type": "wokwi-led", "id": "led_err", "top": 280, "left": -120, "attrs": { "color": "red", "label": "Erreur" } }
+  ],
+  "connections": [
+    [ "$serialMonitor:TX", "nucleo:PA3", "", [] ],
+    [ "$serialMonitor:RX", "nucleo:PA2", "", [] ],
+
+    [ "nucleo:GND.1", "touch_screen:GND", "black", [ "v0" ] ],
+    [ "nucleo:5V.1", "touch_screen:VCC", "red", [ "v0" ] ],
+    [ "nucleo:3V3.1", "touch_screen:LED", "red", [ "v0" ] ],
+    
+    [ "nucleo:PA5", "touch_screen:CLK", "blue", [ "v0" ] ],
+    [ "nucleo:PA6", "touch_screen:MISO", "green", [ "v0" ] ],
+    [ "nucleo:PA7", "touch_screen:MOSI", "orange", [ "v0" ] ],
+    
+    [ "nucleo:PB0", "touch_screen:CS", "yellow", [ "v0" ] ],
+    [ "nucleo:PB1", "touch_screen:D/C", "purple", [ "v0" ] ],
+    [ "nucleo:PB2", "touch_screen:RESET", "white", [ "v0" ] ],
+
+    [ "nucleo:PB10", "touch_screen:T_CS", "cyan", [ "v0" ] ],
+    [ "nucleo:PB11", "touch_screen:T_IRQ", "brown", [ "v0" ] ],
+
+    [ "nucleo:PC6", "btn_cancel:1.l", "red", [ "v0" ] ],
+    [ "nucleo:GND.2", "btn_cancel:2.r", "black", [ "v0" ] ],
+
+    [ "nucleo:PB4", "led_prod:A", "green", [ "v0" ] ],
+    [ "nucleo:GND.3", "led_prod:C", "black", [ "v0" ] ],
+    
+    [ "nucleo:PB5", "led_pay:A", "yellow", [ "v0" ] ],
+    [ "nucleo:GND.3", "led_pay:C", "black", [ "v0" ] ],
+
+    [ "nucleo:PB6", "led_err:A", "red", [ "v0" ] ],
+    [ "nucleo:GND.3", "led_err:C", "black", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

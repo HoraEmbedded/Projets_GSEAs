@@ -127,7 +127,7 @@ int main(void) {
     while (1) {
         if (currentEvent == EVENT_NONE) {
             // Lecture du Bouton Utilisateur PC13 (Le bouton est à 0 lorsqu'il est pressé)
-            if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) {
+            if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) == GPIO_PIN_RESET) {
                 currentEvent = EVENT_BTN_MENU;
                 HAL_Delay(300); 
             }

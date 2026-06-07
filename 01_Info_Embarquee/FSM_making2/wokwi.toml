@@ -1,4 +1,4 @@
 [wokwi]
 version = 1
-firmware = '.pio/build/nucleo_fe401re/firmware.bin'
-elf = '.pio/build/nucleo_fe401re/firmware.elf'
+firmware = '.pio/build/nucleo_f401re/firmware.bin'
+elf = '.pio/build/nucleo_f401re/firmware.elf'
