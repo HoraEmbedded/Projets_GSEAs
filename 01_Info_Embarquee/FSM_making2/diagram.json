@@ -1,45 +1,39 @@
 {
   "version": 1,
-  "author": "PlatformIO STM32 Vending Machine Touch Screen",
+  "author": "Horacia",
   "editor": "wokwi",
   "parts": [
-    { "type": "board-st-nucleo-c031c6", "id": "nucleo", "top": 200, "left": 50, "attrs": {} },
-    { "type": "wokwi-ili9341-touch", "id": "touch_screen", "top": -220, "left": 0, "attrs": {} },
-    { "type": "wokwi-pushbutton", "id": "btn_cancel", "top": 230, "left": 450, "attrs": { "color": "red", "label": "Annuler" } },
-    { "type": "wokwi-led", "id": "led_prod", "top": 120, "left": -120, "attrs": { "color": "green", "label": "Moteur" } },
-    { "type": "wokwi-led", "id": "led_pay", "top": 200, "left": -120, "attrs": { "color": "yellow", "label": "Paiement" } },
-    { "type": "wokwi-led", "id": "led_err", "top": 280, "left": -120, "attrs": { "color": "red", "label": "Erreur" } }
+    { "type": "board-stm32-bluepill", "id": "bluepill", "top": 150, "left": 0, "attrs": {} },
+    { "type": "wokwi-lcd2004", "id": "lcd", "top": -150, "left": -50, "attrs": { "pins": "i2c" } },
+    { "type": "wokwi-pushbutton", "id": "btn_menu", "top": 150, "left": 400, "attrs": { "color": "blue", "label": "Menu (PA0)" } },
+    { "type": "wokwi-pushbutton", "id": "btn_cancel", "top": 210, "left": 400, "attrs": { "color": "red", "label": "Cancel (PA4)" } },
+    { "type": "wokwi-led", "id": "led_prod", "top": 100, "left": -150, "attrs": { "color": "green", "label": "Moteur" } },
+    { "type": "wokwi-led", "id": "led_pay", "top": 170, "left": -150, "attrs": { "color": "yellow", "label": "Paiement" } },
+    { "type": "wokwi-led", "id": "led_err", "top": 240, "left": -150, "attrs": { "color": "red", "label": "Erreur" } }
   ],
   "connections": [
-    [ "$serialMonitor:TX", "nucleo:PA3", "", [] ],
-    [ "$serialMonitor:RX", "nucleo:PA2", "", [] ],
-
-    [ "nucleo:GND.1", "touch_screen:GND", "black", [ "v0" ] ],
-    [ "nucleo:5V.1", "touch_screen:VCC", "red", [ "v0" ] ],
-    [ "nucleo:3V3.1", "touch_screen:LED", "red", [ "v0" ] ],
+    [ "$serialMonitor:TX", "bluepill:PA3", "", [] ],
+    [ "$serialMonitor:RX", "bluepill:PA2", "", [] ],
     
-    [ "nucleo:PA5", "touch_screen:CLK", "blue", [ "v0" ] ],
-    [ "nucleo:PA6", "touch_screen:MISO", "green", [ "v0" ] ],
-    [ "nucleo:PA7", "touch_screen:MOSI", "orange", [ "v0" ] ],
+    [ "bluepill:PB6", "lcd:SCL", "blue", [ "v0" ] ],
+    [ "bluepill:PB7", "lcd:SDA", "green", [ "v0" ] ],
+    [ "bluepill:GND.1", "lcd:GND", "black", [ "v0" ] ],
+    [ "bluepill:5V.1", "lcd:VCC", "red", [ "v0" ] ],
     
-    [ "nucleo:PB0", "touch_screen:CS", "yellow", [ "v0" ] ],
-    [ "nucleo:PB1", "touch_screen:D/C", "purple", [ "v0" ] ],
-    [ "nucleo:PB2", "touch_screen:RESET", "white", [ "v0" ] ],
-
-    [ "nucleo:PB10", "touch_screen:T_CS", "cyan", [ "v0" ] ],
-    [ "nucleo:PB11", "touch_screen:T_IRQ", "brown", [ "v0" ] ],
-
-    [ "nucleo:PC6", "btn_cancel:1.l", "red", [ "v0" ] ],
-    [ "nucleo:GND.2", "btn_cancel:2.r", "black", [ "v0" ] ],
-
-    [ "nucleo:PB4", "led_prod:A", "green", [ "v0" ] ],
-    [ "nucleo:GND.3", "led_prod:C", "black", [ "v0" ] ],
+    [ "bluepill:PA0", "btn_menu:1.l", "blue", [ "v0" ] ],
+    [ "bluepill:GND.2", "btn_menu:2.r", "black", [ "v0" ] ],
     
-    [ "nucleo:PB5", "led_pay:A", "yellow", [ "v0" ] ],
-    [ "nucleo:GND.3", "led_pay:C", "black", [ "v0" ] ],
-
-    [ "nucleo:PB6", "led_err:A", "red", [ "v0" ] ],
-    [ "nucleo:GND.3", "led_err:C", "black", [ "v0" ] ]
+    [ "bluepill:PA4", "btn_cancel:1.l", "red", [ "v0" ] ],
+    [ "bluepill:GND.2", "btn_cancel:2.r", "black", [ "v0" ] ],
+    
+    [ "bluepill:PA5", "led_prod:A", "green", [ "v0" ] ],
+    [ "bluepill:GND.3", "led_prod:C", "black", [ "v0" ] ],
+    
+    [ "bluepill:PA6", "led_pay:A", "yellow", [ "v0" ] ],
+    [ "bluepill:GND.3", "led_pay:C", "black", [ "v0" ] ],
+    
+    [ "bluepill:PA7", "led_err:A", "red", [ "v0" ] ],
+    [ "bluepill:GND.3", "led_err:C", "black", [ "v0" ] ]
   ],
   "dependencies": {}
 }
