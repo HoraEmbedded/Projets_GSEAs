@@ -1,0 +1,30 @@
+=== MES RÉPONSES AU CDC P1-01 ===
+
+Q1: Combien de couleurs à détecter ?
+R: 3 : Rouge, bleu,vert
+
+Q2: Combien de coulissoirs de sortie ?
+R: 3 coulissoirs
+
+Q3: Que faire si couleur inconnue ?
+R: Alerte si couleur inconnue
+
+Q4: Quels sont les 3 modes ?
+R: Mode 1 : Automatique
+   Mode 2 : Manuel
+   Mode 3 : Arrêt d'urgence
+
+Q5: Quels logiciels utiliser ?
+R: TIA PORTAL,
+
+Q6: Quels sont les livrables attendus ?
+R: •	Projet TIA Portal complet (.ap17) versionné sur GitHub
+•	Tableau d'adressage E/S (Excel)
+•	GRAFCET de la séquence principale
+•	Notice technique avec captures d'écran
+•	Vidéo de démonstration de la simulation (screen recording)
+
+outils
+Light Array (Emitter and Receiver)
+A set of parallel light beams used to create a sensing field. 
+
