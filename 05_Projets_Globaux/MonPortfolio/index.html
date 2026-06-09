@@ -13,7 +13,7 @@
 
   <style>
 
-    /* ─── NOUVELLES POLICES (Écrasement automatique) ─── */
+   
     :root {
       --font-main: 'Inter', sans-serif;
       --font-tech: 'JetBrains Mono', monospace;
@@ -37,25 +37,46 @@
     /* ════════════════════════════════════════
        VARIABLES & THÈME (Style Logiciel CAO)
     ════════════════════════════════════════ */
+    /* ── THÈME CLAIR (Par défaut) ── */
     :root {
+      --font-main: 'Inter', sans-serif;
+      --font-tech: 'JetBrains Mono', monospace;
+      
       --menu-bg: #f0f0f0;
       --toolbar-bg: #e4e4e4;
       --sidebar-bg: #f4f4f4;
       --sidebar-header: #c8c8c8;
-      
-      /* 1. Le fond gris derrière (Workspace) à 40% d'opacité */
       --workspace-bg: rgba(122, 122, 122, 0.4); 
-      
       --page-bg: #ffffff;
-      
-      /* 2. Les pointillés (Grid dot) à 30% d'opacité */
       --grid-dot: rgba(176, 196, 222, 0.3); 
       
       --text-main: #333333;
       --text-muted: #666666;
-      --color-blue: #1a5b9c; /* Bleu typique Proteus/Altium */
+      --color-blue: #1a5b9c; 
       --color-blue-light: #e6f0fa;
       --border-color: #d0d0d0;
+    }
+
+    /* ── THÈME SOMBRE ── */
+    [data-theme="dark"] {
+      --menu-bg: #2d2d30;
+      --toolbar-bg: #3e3e42;
+      --sidebar-bg: #252526;
+      --sidebar-header: #1e1e1e;
+      --workspace-bg: rgba(20, 20, 20, 0.85); 
+      --page-bg: #1e1e1e;
+      --grid-dot: rgba(255, 255, 255, 0.08);
+      
+      --text-main: #d4d4d4;
+      --text-muted: #858585;
+      --color-blue: #5caeff; 
+      --color-blue-light: #2a2d32;
+      --border-color: #555555;
+    }
+
+    /* Transition douce entre les deux modes */
+    body, .sidebar, .page, .top-menu, .toolbar, .nav-item, .prj-card, .functional-block {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -399,29 +420,33 @@
       padding-bottom: 0 !important;
     }
 
+    /* ─── GESTION DES LANGUES (FR/EN) ─── */
+    /* Cache l'anglais quand la langue principale est le français */
+    html[lang="fr"] .lang-en { display: none !important; }
+    
+    /* Cache le français quand la langue principale est l'anglais */
+    html[lang="en"] .lang-fr { display: none !important; }
+
  </style>
 </head>
 <body>
 
   <div class="toolbar">
     <div class="toolbar-group">
-      <button class="toolbar-btn" title="Sauvegarder CV" onclick="window.open('chemin_vers_ton_CV.pdf', '_blank')">
-        <svg viewBox="0 0 24 24"><path d="M19 21H5C3.895 21 3 20.105 3 19V5C3 3.895 3.895 3 5 3H16L21 8V19C21 20.105 20.105 21 19 21ZM5 5V19H19V8.828L15.172 5H5ZM15 19V15H9V19H15ZM15 5V9H9V5H15Z"/></svg>
-      </button>
-      <button class="toolbar-btn" title="Imprimer" onclick="window.print()">
-        <svg viewBox="0 0 24 24"><path d="M19 8H5V3H19V8ZM16 5H8V6H16V5ZM21 10C21.552 10 22 10.448 22 11V18H18V21H6V18H2C1.448 18 1 17.552 1 17V11C1 10.448 1.448 10 2 10H21ZM16 19V15H8V19H16ZM18 12C18 11.448 18.448 11 19 11C19.552 11 20 11.448 20 12C20 12.552 19.552 13 19 13C18.448 13 18 12.552 18 12Z"/></svg>
-      </button>
+      
     </div>
     <div class="toolbar-group" style="border-right: none;">
-      <button class="toolbar-btn" title="Exécuter la simulation (Aller aux projets)" onclick="switchTab('projets', document.querySelectorAll('.nav-item')[2])" style="color: #008f39;">
-        <svg viewBox="0 0 24 24"><path d="M8 5V19L19 12L8 5Z"/></svg>
-      </button>
-      <button class="toolbar-btn" title="Arrêter (Retour à l'accueil)" onclick="switchTab('accueil', document.querySelectorAll('.nav-item')[0])" style="color: #cc0000;">
-        <svg viewBox="0 0 24 24"><path d="M6 6H18V18H6V6Z"/></svg>
+      
+      <button class="toolbar-btn" title="Traduire / Translate" onclick="toggleLanguage()">
+        <span id="lang-btn-text" style="font-family: var(--font-tech, monospace); font-weight: bold; font-size: 13px; color: var(--color-blue);">EN</span>
       </button>
       
       <div style="width: 1px; background: #c0c0c0; margin: 0 5px;"></div>
       
+      <button class="toolbar-btn" title="Changer de thème" onclick="toggleTheme()">
+        <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+      </button>
+
       <button class="toolbar-btn" title="Mode Plein Écran" onclick="if(!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen();">
         <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
       </button>
@@ -436,7 +461,6 @@
 
       <nav class="nav-items" style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 8px;">
         <div class="nav-item active" onclick="switchTab('accueil', this)">01. Accueil</div>
-        
         <div class="nav-item" onclick="switchTab('projets', this)">03. Projets Techniques</div>
         <div class="nav-item" onclick="switchTab('competences', this)">04. Compétences</div>
         <div class="nav-item" onclick="switchTab('contact', this)">05. Contact</div>
@@ -602,7 +626,7 @@
               > Ingénieure en Automatisation & Systèmes de Contrôle<span style="color: #2060B8; animation: sysBlink 1s infinite;">_</span>
             </div>
 
-            <!-- Description Courte -->
+            <!-- Description -->
             <p class="body-text" style="max-width: 600px; font-size: 14.5px; line-height: 1.6; margin-bottom: 35px; color: #4A5A6A;">
               Passionnée par l'Industrial IoT et l'automatique, je conçois des solutions à l'intersection du matériel (STM32, S7-1200) et du logiciel (C/C++, Ladder). Mon objectif : créer des passerelles intelligentes pour l'industrie 4.0.
             </p>
@@ -635,7 +659,7 @@
 
           <div style="height: 1px; background: #BDDAF0; margin: 0 0 50px 0;"></div>
 
-          <div class="blocks-title">// 01 — À PROPOS : QUI SUIS-JE ?</div>
+          <div class="blocks-title">//À PROPOS : QUI SUIS-JE ?</div>
           
           <div class="about-grid">
             <!-- Colonne Gauche : Photo -->
@@ -703,7 +727,7 @@
             </div>
           </div>
           
-          <div class="blocks-title" style="margin-top: 40px;">// 02 — CHRONOGRAMME ACADÉMIQUE</div>
+          <div class="blocks-title" style="margin-top: 40px;">//CHRONOGRAMME ACADÉMIQUE</div>
 
           <div class="sys-timeline">
             
@@ -727,7 +751,7 @@
               <h3 style="font-size: 14px; color: #102A70; margin-bottom: 2px;">Classes Préparatoires Intégrées (CPGE)</h3>
               <div style="font-size: 12.5px; color: #5878A0; font-weight: 600; margin-bottom: 8px;">ENSA Tanger — Filière MPSI</div>
               <p class="body-text" style="font-size: 12.5px; margin-bottom: 10px;">
-                Formation intensive en Mathématiques, Physique et Sciences de l'Ingénieur, forgeant une base solide en analyse logique et résolution de problèmes complexes.
+                Formation en Mathématiques, Physique et Sciences de l'Ingénieur, forgeant une base solide en analyse logique et résolution de problèmes complexes.
               </p>
               <div style="display: flex; gap: 6px; flex-wrap: wrap;">
                 <span style="font-family: var(--font-tech, monospace); font-size: 10px; background: white; border: 1px solid #BDDAF0; padding: 2px 8px; border-radius: 12px; color: #5A6A7A;">Mathématiques</span>
@@ -751,7 +775,8 @@
 
           <div style="height: 1px; background: #BDDAF0; margin: 35px 0;"></div>
 
-          <div class="blocks-title">AU-DELÀ DU CODE (PROFIL PERSONNEL)</div>
+          <div class="blocks-title" style="margin-top: 40px;">//AU-DELÀ DU CODE (PROFIL PERSONNEL)</div>
+            
           <p class="body-text" style="margin-bottom: 20px; font-size: 13.5px;">
             Les meilleurs ingénieurs sont d'abord des humains curieux. Voici ce qui me définit en dehors de l'industrie.
           </p>
@@ -803,7 +828,7 @@
               « Ceux qui sont vraiment sérieux au sujet du logiciel devraient fabriquer leur propre matériel. »
             </p>
             <div style="font-family: monospace; font-size: 11px; color: #5878A0; font-weight: bold; text-transform: uppercase;">
-              — Alan Kay (Pionnier de l'informatique)
+              — Alan Kay
             </div>
           </div>
 
@@ -950,7 +975,7 @@
               <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
                 <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
                 <div style="display: flex; gap: 10px;">
-                  <a href="https://github.com/HoraEmbedded/Projets_GSEAs" target="_blank" style="color: #5A6A7A;"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                  <a href="https://github.com/HoraEmbedded/Projets_GSEAs/tree/main/01_Info_Embarquee/greenhouse" target="_blank" style="color: #5A6A7A;"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
                 </div>
               </div>
             </div>
@@ -1043,6 +1068,7 @@
               <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
                 <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
                 <div style="display: flex; gap: 10px;">
+                  <a href="https://github.com/HoraEmbedded/P1-01-Sorting-by-height" target="_blank" style="color: #5A6A7A;"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
                   <a href="#" onclick="openPreview('Simulation Factory I/O', '<video autoplay loop muted controls><source src=\'chemin_video.mp4\' type=\'video/mp4\'></video>')" style="color: #5A6A7A;" title="Lancer Simulation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
                 </div>
               </div>
@@ -1099,232 +1125,71 @@
 
         <div id="sec-competences" class="section-content">
           
-          <h1 class="sys-title">[SYS] Bibliothèques & Composants Maîtrisés</h1>
-          <p class="body-text" style="font-size: 14px; margin-bottom: 35px;">
+          <h1 class="sys-title">
+  <span class="lang-fr">[SYS] Historique & Configuration</span>
+  <span class="lang-en">[SYS] History & Setup</span>
+</h1>
+
+          £<p class="body-text" style="font-size: 14px; margin-bottom: 35px;">
             <strong>Identité Technique :</strong> Synthèse des langages, microcontrôleurs et outils de développement utilisés dans la conception, la simulation et l'implémentation de mes systèmes.
           </p>
 
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px;">
 
-            <div style="background: white; border: 1px solid var(--border-color); border-radius: 0; padding: 25px;">
-              <div style="font-family: monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #2060B8; margin-bottom: 24px; font-weight: bold; border-bottom: 1px dashed #BDDAF0; padding-bottom: 8px;">
+            <div style="background: white; border: 1px solid var(--border-color); padding: 25px; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(32,96,184,0.08)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+              <div style="font-family: monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #2060B8; margin-bottom: 20px; font-weight: bold; border-bottom: 1px dashed #BDDAF0; padding-bottom: 8px;">
                 > Programmation
               </div>
-              
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">MATLAB / Scripts</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">9/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 90%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">C / C++ (Bare-Metal)</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8.5/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 85%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Python (IA, Scripts)</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7.5/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 75%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Assembleur (C6000)</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 70%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">VHDL</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">6/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 60%; background: #2060B8; border-radius: 0;"></div>
-                </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">C / C++ (Bare-Metal)</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">MATLAB / Scripts</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">Python (IA, Scripts)</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">Assembleur (C6000)</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">VHDL</span>
               </div>
             </div>
 
-            <div style="background: white; border: 1px solid var(--border-color); border-radius: 0; padding: 25px;">
-              <div style="font-family: monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #2060B8; margin-bottom: 24px; font-weight: bold; border-bottom: 1px dashed #BDDAF0; padding-bottom: 8px;">
+            <div style="background: white; border: 1px solid var(--border-color); padding: 25px; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(32,96,184,0.08)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+              <div style="font-family: monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #2060B8; margin-bottom: 20px; font-weight: bold; border-bottom: 1px dashed #BDDAF0; padding-bottom: 8px;">
                 > Hardware & Embarqué
               </div>
-              
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Microcontrôleurs (STM32, AVR)</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8.5/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 85%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Conception PCB (Schémas/Routage)</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 80%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">DSP (TMS320)</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7.5/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 75%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Électronique de Puissance</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7.5/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 75%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Architecture FPGA</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">6.5/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 65%; background: #2060B8; border-radius: 0;"></div>
-                </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">Microcontrôleurs (STM32, AVR)</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">Conception PCB (Routage)</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">DSP (TMS320)</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">Électronique de Puissance</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">PSpiceFPGA</span>
               </div>
             </div>
 
-            <div style="background: white; border: 1px solid var(--border-color); border-radius: 0; padding: 25px;">
-              <div style="font-family: monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #2060B8; margin-bottom: 24px; font-weight: bold; border-bottom: 1px dashed #BDDAF0; padding-bottom: 8px;">
+            <div style="background: white; border: 1px solid var(--border-color); padding: 25px; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(32,96,184,0.08)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+              <div style="font-family: monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #2060B8; margin-bottom: 20px; font-weight: bold; border-bottom: 1px dashed #BDDAF0; padding-bottom: 8px;">
                 > Communication & IIoT
               </div>
-              
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">MQTT</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 80%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">ESP32 (Connectivité)</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 80%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">OPC-DA / OPC-UA</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7.5/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 75%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Modbus</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 70%; background: #2060B8; border-radius: 0;"></div>
-                </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">MQTT</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">OPC-DA / OPC-UA</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">Modbus</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">I2C / SPI / UART</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">ESP32 (Connectivité)</span>
               </div>
             </div>
 
-            <div style="background: white; border: 1px solid var(--border-color); border-radius: 0; padding: 25px;">
-              <div style="font-family: monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #2060B8; margin-bottom: 24px; font-weight: bold; border-bottom: 1px dashed #BDDAF0; padding-bottom: 8px;">
+            <div style="background: white; border: 1px solid var(--border-color); padding: 25px; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(32,96,184,0.08)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+              <div style="font-family: monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: #2060B8; margin-bottom: 20px; font-weight: bold; border-bottom: 1px dashed #BDDAF0; padding-bottom: 8px;">
                 > Outils & Plateformes
               </div>
-              
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Simulink / Simscape</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">9/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 90%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">TIA Portal (Ladder)</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8.5/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 85%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Factory I/O</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8.5/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 85%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Git / GitHub</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">8/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 80%; background: #2060B8; border-radius: 0;"></div>
-                </div>
-              </div>
-
-              <div style="margin-bottom: 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #102A70;">Code Composer Studio</span>
-                  <span style="font-family: monospace; font-size: 11px; color: #5A6A7A;">7.5/10</span>
-                </div>
-                <div style="width: 100%; height: 4px; background: #E8F3FE; border-radius: 0; overflow: hidden;">
-                  <div style="height: 100%; width: 75%; background: #2060B8; border-radius: 0;"></div>
-                </div>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">Simulink / Simscape</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">TIA Portal (Ladder)</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">Factory I/O</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">Code Composer Studio</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">Linux</span>
+                <span style="background: #F4F9FF; border: 1px solid #BDDAF0; color: #102A70; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; font-weight: 600;">Git / GitHub</span>
               </div>
             </div>
 
           </div>
-
-          <p style="margin-top: 30px; font-family: monospace; font-size: 10.5px; color: #5A6A7A; font-style: italic; border-top: 1px dashed var(--border-color); padding-top: 15px;">
-            * Échelle basée sur le niveau de maîtrise et d'autonomie actuel, non sur les années d'expérience.
-          </p>
 
         </div>
 
@@ -1468,6 +1333,57 @@
       document.getElementById('previewModal').classList.remove('active');
       // Vider le contenu permet de couper le son d'une vidéo si elle était en cours de lecture
       setTimeout(() => { document.getElementById('modalBody').innerHTML = ''; }, 200);
+    }
+
+    /* ── Gestion des Langues (FR / EN) sécurisée ── */
+    function toggleLanguage() {
+      const htmlElement = document.documentElement;
+      // Par défaut, si rien n'est défini, on est en français
+      const currentLang = htmlElement.getAttribute('lang') || 'fr';
+      const newLang = currentLang === 'fr' ? 'en' : 'fr';
+      
+      // On applique la nouvelle langue
+      htmlElement.setAttribute('lang', newLang);
+      
+      // On met à jour le texte du bouton (S'il est en anglais, le bouton propose de repasser en 'FR')
+      document.getElementById('lang-btn-text').innerText = newLang === 'fr' ? 'EN' : 'FR';
+      
+      // Sauvegarde dans le navigateur
+      try { localStorage.setItem('site-lang', newLang); } catch(e) { console.warn('Sauvegarde locale non disponible'); }
+    }
+
+    /* Au chargement de la page : Restauration de la langue */
+    try {
+      const savedLang = localStorage.getItem('site-lang');
+      if (savedLang === 'en') {
+        document.documentElement.setAttribute('lang', 'en');
+        document.getElementById('lang-btn-text').innerText = 'FR';
+      }
+    } catch(e) {
+      console.warn('Sauvegarde locale non disponible');
+    }
+
+    /* ── Gestion du Mode Sombre / Clair sécurisée ── */
+    function toggleTheme() {
+      const htmlElement = document.documentElement;
+      const isDark = htmlElement.getAttribute('data-theme') === 'dark';
+      
+      if (isDark) {
+        htmlElement.removeAttribute('data-theme');
+        try { localStorage.setItem('theme', 'light'); } catch(e) { console.warn('Sauvegarde locale non disponible'); }
+      } else {
+        htmlElement.setAttribute('data-theme', 'dark');
+        try { localStorage.setItem('theme', 'dark'); } catch(e) { console.warn('Sauvegarde locale non disponible'); }
+      }
+    }
+
+    /* Au chargement de la page */
+    try {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch(e) {
+      console.warn('Sauvegarde locale non disponible');
     }
 
   </script>
