@@ -839,66 +839,96 @@
           <style>
             /* Styles spécifiques aux projets */
             .filter-btn {
-              font-family: monospace; font-size: 11.5px; letter-spacing: 0.5px;
+              font-family: var(--font-tech, monospace); font-size: 11.5px; letter-spacing: 0.5px;
               padding: 6px 14px; border-radius: 4px; cursor: pointer; transition: all 0.2s;
               background: transparent; color: #5878A0; border: 1px solid var(--border-color);
             }
-            .filter-btn:hover { background: #F4F9FF; border-color: #2060B8; color: #102A70; }
-            .filter-btn.active { background: #2060B8; color: white; border-color: #102A70; font-weight: bold; }
+            .filter-btn:hover { background: #F4F9FF; border-color: var(--color-blue); color: #102A70; }
+            .filter-btn.active { background: var(--color-blue); color: white; border-color: #102A70; font-weight: bold; }
             
             .prj-card {
               background: white; border: 1px solid var(--border-color); border-radius: 4px;
               display: flex; flex-direction: column; overflow: hidden; transition: box-shadow 0.2s;
             }
             .prj-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-color: #BDDAF0; }
-            .prj-top-bar { height: 3px; width: 100%; }
+            .prj-top-bar { height: 3px; width: 100%; background: linear-gradient(90deg, var(--color-blue), transparent); }
             
-            .prj-lbl { font-family: monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #5A6A7A; margin-bottom: 5px; }
-            .tech-chip { border: 1px solid #BDDAF0; background: #F4F9FF; color: #2060B8; font-size: 10.5px; padding: 2px 8px; border-radius: 12px; font-family: monospace; }
+            .prj-lbl { font-family: var(--font-tech, monospace); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #5A6A7A; margin-bottom: 5px; }
+            .tech-chip { border: 1px solid #BDDAF0; background: #F4F9FF; color: var(--color-blue); font-size: 10.5px; padding: 2px 8px; border-radius: 12px; font-family: var(--font-tech, monospace); }
             
-            /* Couleurs des catégories */
-            .cat-Automatisme { color: #F5A623; background: rgba(245, 166, 35, 0.1); border: 1px solid rgba(245, 166, 35, 0.3); }
-            .cat-Embarqué { color: #00CFEE; background: rgba(0, 207, 238, 0.1); border: 1px solid rgba(0, 207, 238, 0.3); }
-            .cat-IoT { color: #22c55e; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
-            .cat-IA { color: #a855f7; background: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); }
-            .cat-Électronique { color: #f43f5e; background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.3); }
+            /* Catégorie unifiée (Bleu système) */
+            .cat-badge { 
+              font-family: var(--font-tech, monospace); font-size: 10px; padding: 3px 8px; border-radius: 3px;
+              color: var(--color-blue); background: rgba(26, 91, 156, 0.08); border: 1px solid #BDDAF0; 
+            }
           </style>
 
-          <h1 class="sys-title" style="margin-bottom: 5px;">[PRJ] Problèmes d'ingénierie résolus</h1>
+          <h1 class="sys-title" style="margin-bottom: 5px;">
+            <span class="lang-fr">[PRJ] Problèmes d'ingénierie résolus</span>
+            <span class="lang-en">[PRJ] Engineering Problems Solved</span>
+          </h1>
           <p class="body-text" style="font-size: 14px; margin-bottom: 30px; max-width: 700px;">
-            Des problèmes réels. Des solutions concrètes. Chaque projet part d'un cahier des charges strict pour aboutir à un système fonctionnel et optimisé.
+            <span class="lang-fr">Des problèmes réels. Des solutions concrètes. Chaque projet part d'un cahier des charges strict pour aboutir à un système fonctionnel et optimisé.</span>
+            <span class="lang-en">Real problems. Concrete solutions. Every project starts with strict specifications to deliver a functional and optimized system.</span>
           </p>
 
           <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px;" id="filter-container">
-            <button class="filter-btn active" onclick="filterProjects('Tous')">Tous</button>
-            <button class="filter-btn" onclick="filterProjects('Automatisme')">Automatisme</button>
-            <button class="filter-btn" onclick="filterProjects('Embarqué')">Embarqué</button>
-            <button class="filter-btn" onclick="filterProjects('IoT')">IoT</button>
-            <button class="filter-btn" onclick="filterProjects('IA')">IA</button>
-            <button class="filter-btn" onclick="filterProjects('Électronique')">Électronique</button>
+            <button class="filter-btn active" data-cat="Tous" onclick="filterProjects('Tous')">
+              <span class="lang-fr">Tous</span><span class="lang-en">All</span>
+            </button>
+            <button class="filter-btn" data-cat="Automatisme" onclick="filterProjects('Automatisme')">
+              <span class="lang-fr">Automatisme</span><span class="lang-en">Automation</span>
+            </button>
+            <button class="filter-btn" data-cat="Embarqué" onclick="filterProjects('Embarqué')">
+              <span class="lang-fr">Embarqué</span><span class="lang-en">Embedded</span>
+            </button>
+            <button class="filter-btn" data-cat="IoT" onclick="filterProjects('IoT')">IoT</button>
+            <button class="filter-btn" data-cat="IA" onclick="filterProjects('IA')">
+              <span class="lang-fr">IA</span><span class="lang-en">AI</span>
+            </button>
+            <button class="filter-btn" data-cat="Électronique" onclick="filterProjects('Électronique')">
+              <span class="lang-fr">Électronique</span><span class="lang-en">Electronics</span>
+            </button>
           </div>
 
           <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;" id="projects-grid">
 
             <div class="prj-card" data-category="Embarqué">
-              <div class="prj-top-bar" style="background: linear-gradient(90deg, #00CFEE, transparent);"></div>
+              <div class="prj-top-bar"></div>
               <div style="padding: 20px; flex: 1;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                  <span class="cat-Embarqué" style="font-family: monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px;">Embarqué</span>
-                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">Terminé · 2026</span>
+                  <span class="cat-badge">
+                    <span class="lang-fr">Embarqué</span><span class="lang-en">Embedded</span>
+                  </span>
+                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">
+                    <span class="lang-fr">Terminé · 2024</span><span class="lang-en">Completed · 2024</span>
+                  </span>
                 </div>
-                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">Programmation DSP — TMS320C6713 DSK</h3>
+                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">
+                  <span class="lang-fr">Programmation DSP — TMS320C6713 DSK</span>
+                  <span class="lang-en">DSP Programming — TMS320C6713 DSK</span>
+                </h3>
                 
                 <div style="margin-bottom: 15px;">
-                  <div class="prj-lbl">> PROBLÈME</div>
-                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">Nécessité de traiter des signaux complexes en temps réel avec une haute précision mathématique et un délai d'exécution minimal.</p>
+                  <div class="prj-lbl">
+                    <span class="lang-fr">> PROBLÈME</span><span class="lang-en">> PROBLEM</span>
+                  </div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">
+                    <span class="lang-fr">Nécessité de traiter des signaux complexes en temps réel avec une haute précision mathématique et un délai d'exécution minimal.</span>
+                    <span class="lang-en">Need to process complex signals in real-time with high mathematical precision and minimal execution delay.</span>
+                  </p>
                 </div>
 
                 <div class="prj-details" style="display: none; margin-bottom: 15px;">
-                  <div class="prj-lbl" style="color: #00CFEE;">> SOLUTION & RÉSULTATS</div>
-                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">Mise en œuvre du DSP TI sous Code Composer Studio. Développement mixte C/Assembleur pour optimiser le temps cycle.</p>
-                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#00CFEE;">›</strong> Filtrage FIR/IIR en temps réel stable.</div>
-                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#00CFEE;">›</strong> Maîtrise complète de la toolchain DSP.</div>
+                  <div class="prj-lbl" style="color: var(--color-blue);">
+                    <span class="lang-fr">> SOLUTION & RÉSULTATS</span><span class="lang-en">> SOLUTION & RESULTS</span>
+                  </div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">
+                    <span class="lang-fr">Mise en œuvre du DSP TI sous Code Composer Studio. Développement mixte C/Assembleur pour optimiser le temps cycle.</span>
+                    <span class="lang-en">Implementation of TI DSP via Code Composer Studio. Mixed C/Assembly development to optimize cycle time.</span>
+                  </p>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:var(--color-blue);">›</strong> <span class="lang-fr">Filtrage FIR/IIR en temps réel stable.</span><span class="lang-en">Stable real-time FIR/IIR filtering.</span></div>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:var(--color-blue);">›</strong> <span class="lang-fr">Maîtrise complète de la toolchain DSP.</span><span class="lang-en">Complete mastery of the DSP toolchain.</span></div>
                 </div>
 
                 <div style="display: flex; flex-wrap: wrap; gap: 6px;">
@@ -906,32 +936,52 @@
                 </div>
               </div>
               <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
-                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
+                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: var(--color-blue); cursor: pointer; font-weight: bold;">
+                  <span class="lang-fr">[+] DÉTAILS</span><span class="lang-en">[+] DETAILS</span>
+                </button>
                 <div style="display: flex; gap: 10px;">
-                  <a href="https://github.com/HoraEmbedded" target="_blank" style="color: #5A6A7A;" title="Code Source"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                  <a href="#" onclick="openPreview('Simulation DSP', '<img src=\'chemin_image.jpg\' style=\'max-width:100%;\'>')" style="color: #5A6A7A;" title="Aperçu / View"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                  <a href="https://github.com/HoraEmbedded/Projets_GSEAs/tree/main/01_Info_Embarquee/Traitement_Signal_DSP" target="_blank" style="color: #5A6A7A;" title="GitHub"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
                 </div>
               </div>
             </div>
 
             <div class="prj-card" data-category="Électronique">
-              <div class="prj-top-bar" style="background: linear-gradient(90deg, #f43f5e, transparent);"></div>
+              <div class="prj-top-bar"></div>
               <div style="padding: 20px; flex: 1;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                  <span class="cat-Électronique" style="font-family: monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px;">Électronique</span>
-                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">Terminé · 2026</span>
+                  <span class="cat-badge">
+                    <span class="lang-fr">Électronique</span><span class="lang-en">Electronics</span>
+                  </span>
+                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">
+                    <span class="lang-fr">Terminé · 2025</span><span class="lang-en">Completed · 2025</span>
+                  </span>
                 </div>
-                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">Dimensionnement Transistor NMOS (Commutation)</h3>
+                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">
+                  <span class="lang-fr">Dimensionnement Transistor NMOS</span>
+                  <span class="lang-en">NMOS Transistor Sizing</span>
+                </h3>
                 
                 <div style="margin-bottom: 15px;">
-                  <div class="prj-lbl">> PROBLÈME</div>
-                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">Besoin d'isoler et de commuter une charge de puissance de manière sécurisée sans risquer d'endommager l'unité de contrôle logique.</p>
+                  <div class="prj-lbl">
+                    <span class="lang-fr">> PROBLÈME</span><span class="lang-en">> PROBLEM</span>
+                  </div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">
+                    <span class="lang-fr">Besoin d'isoler et de commuter une charge de puissance de manière sécurisée sans risquer d'endommager l'unité de contrôle logique.</span>
+                    <span class="lang-en">Need to safely isolate and switch a power load without risking damage to the logic control unit.</span>
+                  </p>
                 </div>
 
                 <div class="prj-details" style="display: none; margin-bottom: 15px;">
-                  <div class="prj-lbl" style="color: #f43f5e;">> SOLUTION & RÉSULTATS</div>
-                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">Conception d'un canal de commande avec NMOS, intégration d'un optocoupleur pour l'isolation et calcul des dissipations thermiques.</p>
-                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#f43f5e;">›</strong> Isolation galvanique validée.</div>
-                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#f43f5e;">›</strong> Protection contre les surtensions inductives.</div>
+                  <div class="prj-lbl" style="color: var(--color-blue);">
+                    <span class="lang-fr">> SOLUTION & RÉSULTATS</span><span class="lang-en">> SOLUTION & RESULTS</span>
+                  </div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">
+                    <span class="lang-fr">Conception d'un canal de commande avec NMOS, intégration d'un optocoupleur pour l'isolation et calcul des dissipations thermiques.</span>
+                    <span class="lang-en">Design of a control channel with NMOS, integration of an optocoupler for isolation, and calculation of thermal dissipation.</span>
+                  </p>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:var(--color-blue);">›</strong> <span class="lang-fr">Isolation galvanique validée.</span><span class="lang-en">Galvanic isolation validated.</span></div>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:var(--color-blue);">›</strong> <span class="lang-fr">Protection contre les surtensions inductives.</span><span class="lang-en">Protection against inductive overvoltages.</span></div>
                 </div>
 
                 <div style="display: flex; flex-wrap: wrap; gap: 6px;">
@@ -939,33 +989,47 @@
                 </div>
               </div>
               <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
-                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
+                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: var(--color-blue); cursor: pointer; font-weight: bold;">
+                  <span class="lang-fr">[+] DÉTAILS</span><span class="lang-en">[+] DETAILS</span>
+                </button>
                 <div style="display: flex; gap: 10px;">
-                  <a href="#" onclick="openPreview('Routage PCB NMOS', '<img src=\'chemin_image.jpg\'>')" style="color: #5A6A7A;" title="Aperçu Visuel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
-                  <a href="https://github.com/HoraEmbedded/Projets_GSEAs" target="_blank" style="color: #5A6A7A;"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                  <a href="#" onclick="openPreview('Routage PCB NMOS', '<img src=\'chemin_image.jpg\' style=\'max-width:100%;\'>')" style="color: #5A6A7A;" title="Aperçu / View"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                  <a href="https://github.com/HoraEmbedded/Projets_GSEAs/tree/main/03_Conception_PCB/BE3_Driver_Relais_MOS" target="_blank" style="color: #5A6A7A;" title="GitHub"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
                 </div>
               </div>
             </div>
 
             <div class="prj-card" data-category="IoT">
-              <div class="prj-top-bar" style="background: linear-gradient(90deg, #22c55e, transparent);"></div>
+              <div class="prj-top-bar"></div>
               <div style="padding: 20px; flex: 1;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                  <span class="cat-IoT" style="font-family: monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px;">IoT</span>
-                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">Terminé · 2026</span>
+                  <span class="cat-badge">IoT</span>
+                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">
+                    <span class="lang-fr">Terminé · 2026</span><span class="lang-en">Completed · 2026</span>
+                  </span>
                 </div>
                 <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">Smart Greenhouse System (Bare-Metal)</h3>
                 
                 <div style="margin-bottom: 15px;">
-                  <div class="prj-lbl">> PROBLÈME</div>
-                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">La gestion climatique manuelle d'une serre agricole entraîne des pertes de rendement et une surconsommation énergétique.</p>
+                  <div class="prj-lbl">
+                    <span class="lang-fr">> PROBLÈME</span><span class="lang-en">> PROBLEM</span>
+                  </div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">
+                    <span class="lang-fr">La gestion climatique manuelle d'une serre agricole entraîne des pertes de rendement et une surconsommation énergétique.</span>
+                    <span class="lang-en">Manual climate management of an agricultural greenhouse leads to yield losses and energy overconsumption.</span>
+                  </p>
                 </div>
 
                 <div class="prj-details" style="display: none; margin-bottom: 15px;">
-                  <div class="prj-lbl" style="color: #22c55e;">> SOLUTION & RÉSULTATS</div>
-                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">Conception d'un système Bare-Metal sur ATmega2560 piloté par interruptions (Timer1) avec contrôle par hystérésis à double seuil.</p>
-                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#22c55e;">›</strong> Temps de réponse déterministe garanti.</div>
-                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#22c55e;">›</strong> Simulation complète en Software-in-the-Loop.</div>
+                  <div class="prj-lbl" style="color: var(--color-blue);">
+                    <span class="lang-fr">> SOLUTION & RÉSULTATS</span><span class="lang-en">> SOLUTION & RESULTS</span>
+                  </div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">
+                    <span class="lang-fr">Conception d'un système Bare-Metal sur ATmega2560 piloté par interruptions (Timer1) avec contrôle par hystérésis à double seuil.</span>
+                    <span class="lang-en">Design of a Bare-Metal system on ATmega2560 driven by hardware interrupts (Timer1) with double-threshold hysteresis control.</span>
+                  </p>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:var(--color-blue);">›</strong> <span class="lang-fr">Temps de réponse déterministe garanti.</span><span class="lang-en">Guaranteed deterministic response time.</span></div>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:var(--color-blue);">›</strong> <span class="lang-fr">Simulation complète en Software-in-the-Loop.</span><span class="lang-en">Complete Software-in-the-Loop simulation.</span></div>
                 </div>
 
                 <div style="display: flex; flex-wrap: wrap; gap: 6px;">
@@ -973,32 +1037,52 @@
                 </div>
               </div>
               <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
-                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
+                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: var(--color-blue); cursor: pointer; font-weight: bold;">
+                  <span class="lang-fr">[+] DÉTAILS</span><span class="lang-en">[+] DETAILS</span>
+                </button>
                 <div style="display: flex; gap: 10px;">
-                  <a href="https://github.com/HoraEmbedded/Projets_GSEAs/tree/main/01_Info_Embarquee/greenhouse" target="_blank" style="color: #5A6A7A;"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                  <a href="#" onclick="openPreview('Greenhouse Simulation', '<img src=\'chemin_image.jpg\' style=\'max-width:100%;\'>')" style="color: #5A6A7A;" title="Aperçu / View"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                  <a href="https://github.com/HoraEmbedded/Projets_GSEAs/tree/main/01_Info_Embarquee/greenhouse" target="_blank" style="color: #5A6A7A;" title="GitHub"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
                 </div>
               </div>
             </div>
 
             <div class="prj-card" data-category="Automatisme">
-              <div class="prj-top-bar" style="background: linear-gradient(90deg, #F5A623, transparent);"></div>
+              <div class="prj-top-bar"></div>
               <div style="padding: 20px; flex: 1;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                  <span class="cat-Automatisme" style="font-family: monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px;">Automatisme</span>
-                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">Terminé · 2026</span>
+                  <span class="cat-badge">
+                    <span class="lang-fr">Automatisme</span><span class="lang-en">Automation</span>
+                  </span>
+                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">
+                    <span class="lang-fr">Terminé · 2026</span><span class="lang-en">Completed · 2026</span>
+                  </span>
                 </div>
-                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">Robot Manipulateur (2DDL) - Modélisation</h3>
+                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">
+                  <span class="lang-fr">Robot Manipulateur (2DDL) - Modélisation</span>
+                  <span class="lang-en">Manipulator Robot (2DOF) - Modeling</span>
+                </h3>
                 
                 <div style="margin-bottom: 15px;">
-                  <div class="prj-lbl">> PROBLÈME</div>
-                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">Difficulté à maintenir la précision de la trajectoire d'un bras robotique face aux perturbations dynamiques.</p>
+                  <div class="prj-lbl">
+                    <span class="lang-fr">> PROBLÈME</span><span class="lang-en">> PROBLEM</span>
+                  </div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">
+                    <span class="lang-fr">Difficulté à maintenir la précision de la trajectoire d'un bras robotique face aux perturbations dynamiques.</span>
+                    <span class="lang-en">Difficulty in maintaining the trajectory precision of a robotic arm against dynamic perturbations.</span>
+                  </p>
                 </div>
 
                 <div class="prj-details" style="display: none; margin-bottom: 15px;">
-                  <div class="prj-lbl" style="color: #F5A623;">> SOLUTION & RÉSULTATS</div>
-                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">Implémentation d'une commande PID sous MATLAB/Simscape avec étude cinématique complète (FK/IK).</p>
-                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#F5A623;">›</strong> Erreur latérale de suivi < 0.05 m.</div>
-                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#F5A623;">›</strong> Validation du modèle physique en simulation 3D.</div>
+                  <div class="prj-lbl" style="color: var(--color-blue);">
+                    <span class="lang-fr">> SOLUTION & RÉSULTATS</span><span class="lang-en">> SOLUTION & RESULTS</span>
+                  </div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">
+                    <span class="lang-fr">Implémentation d'une commande PID sous MATLAB/Simscape avec étude cinématique complète (FK/IK).</span>
+                    <span class="lang-en">Implementation of a PID controller in MATLAB/Simscape with complete kinematic study (FK/IK).</span>
+                  </p>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:var(--color-blue);">›</strong> <span class="lang-fr">Erreur latérale de suivi &lt; 0.05 m.</span><span class="lang-en">Lateral tracking error &lt; 0.05 m.</span></div>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:var(--color-blue);">›</strong> <span class="lang-fr">Validation du modèle physique en simulation 3D.</span><span class="lang-en">Physical model validation in 3D simulation.</span></div>
                 </div>
 
                 <div style="display: flex; flex-wrap: wrap; gap: 6px;">
@@ -1006,29 +1090,52 @@
                 </div>
               </div>
               <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
-                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
+                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: var(--color-blue); cursor: pointer; font-weight: bold;">
+                  <span class="lang-fr">[+] DÉTAILS</span><span class="lang-en">[+] DETAILS</span>
+                </button>
+                <div style="display: flex; gap: 10px;">
+                  <a href="#" onclick="openPreview('Simulation Robot', '<img src=\'chemin_image.jpg\' style=\'max-width:100%;\'>')" style="color: #5A6A7A;" title="Aperçu / View"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                  <a href="https://github.com/HoraEmbedded" target="_blank" style="color: #5A6A7A;" title="GitHub"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                </div>
               </div>
             </div>
 
             <div class="prj-card" data-category="IA">
-              <div class="prj-top-bar" style="background: linear-gradient(90deg, #a855f7, transparent);"></div>
+              <div class="prj-top-bar"></div>
               <div style="padding: 20px; flex: 1;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                  <span class="cat-IA" style="font-family: monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px;">IA</span>
-                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">Terminé · 2026</span>
+                  <span class="cat-badge">
+                    <span class="lang-fr">IA</span><span class="lang-en">AI</span>
+                  </span>
+                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">
+                    <span class="lang-fr">Terminé · 2026</span><span class="lang-en">Completed · 2026</span>
+                  </span>
                 </div>
-                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">Auto-Encodeurs — Détection d'Anomalies</h3>
+                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">
+                  <span class="lang-fr">Auto-Encodeurs — Détection d'Anomalies</span>
+                  <span class="lang-en">Autoencoders — Anomaly Detection</span>
+                </h3>
                 
                 <div style="margin-bottom: 15px;">
-                  <div class="prj-lbl">> PROBLÈME</div>
-                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">La détection visuelle des défauts sur chaîne de production est lente, coûteuse et sujette à l'erreur humaine.</p>
+                  <div class="prj-lbl">
+                    <span class="lang-fr">> PROBLÈME</span><span class="lang-en">> PROBLEM</span>
+                  </div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">
+                    <span class="lang-fr">La détection visuelle des défauts sur chaîne de production est lente, coûteuse et sujette à l'erreur humaine.</span>
+                    <span class="lang-en">Visual defect detection on production lines is slow, costly, and prone to human error.</span>
+                  </p>
                 </div>
 
                 <div class="prj-details" style="display: none; margin-bottom: 15px;">
-                  <div class="prj-lbl" style="color: #a855f7;">> SOLUTION & RÉSULTATS</div>
-                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">Création de modèles Deep Learning (Vanilla, VAE) sous Keras capables de reconstruire une image saine et d'isoler les anomalies.</p>
-                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#a855f7;">›</strong> Réduction drastique des faux positifs.</div>
-                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#a855f7;">›</strong> Diagnostic industriel prédictif automatisé.</div>
+                  <div class="prj-lbl" style="color: var(--color-blue);">
+                    <span class="lang-fr">> SOLUTION & RÉSULTATS</span><span class="lang-en">> SOLUTION & RESULTS</span>
+                  </div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">
+                    <span class="lang-fr">Création de modèles Deep Learning (Vanilla, VAE) sous Keras capables de reconstruire une image saine et d'isoler les anomalies.</span>
+                    <span class="lang-en">Creation of Deep Learning models (Vanilla, VAE) using Keras capable of reconstructing a healthy image and isolating anomalies.</span>
+                  </p>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:var(--color-blue);">›</strong> <span class="lang-fr">Réduction drastique des faux positifs.</span><span class="lang-en">Drastic reduction of false positives.</span></div>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:var(--color-blue);">›</strong> <span class="lang-fr">Diagnostic industriel prédictif automatisé.</span><span class="lang-en">Automated predictive industrial diagnosis.</span></div>
                 </div>
 
                 <div style="display: flex; flex-wrap: wrap; gap: 6px;">
@@ -1036,29 +1143,52 @@
                 </div>
               </div>
               <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
-                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
+                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: var(--color-blue); cursor: pointer; font-weight: bold;">
+                  <span class="lang-fr">[+] DÉTAILS</span><span class="lang-en">[+] DETAILS</span>
+                </button>
+                <div style="display: flex; gap: 10px;">
+                  <a href="#" onclick="openPreview('Modèle IA', '<img src=\'chemin_image.jpg\' style=\'max-width:100%;\'>')" style="color: #5A6A7A;" title="Aperçu / View"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                  <a href="https://github.com/HoraEmbedded" target="_blank" style="color: #5A6A7A;" title="GitHub"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                </div>
               </div>
             </div>
 
             <div class="prj-card" data-category="Automatisme">
-              <div class="prj-top-bar" style="background: linear-gradient(90deg, #F5A623, transparent);"></div>
+              <div class="prj-top-bar"></div>
               <div style="padding: 20px; flex: 1;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                  <span class="cat-Automatisme" style="font-family: monospace; font-size: 10px; padding: 3px 8px; border-radius: 3px;">Automatisme</span>
-                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">Terminé · 2026</span>
+                  <span class="cat-badge">
+                    <span class="lang-fr">Automatisme</span><span class="lang-en">Automation</span>
+                  </span>
+                  <span style="font-family: monospace; font-size: 10px; color: #22c55e;">
+                    <span class="lang-fr">Terminé · 2024</span><span class="lang-en">Completed · 2024</span>
+                  </span>
                 </div>
-                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">Convoyeur de Tri Automatique</h3>
+                <h3 style="font-size: 16px; font-weight: 700; color: #102A70; margin-bottom: 15px; line-height: 1.3;">
+                  <span class="lang-fr">Convoyeur de Tri Automatique</span>
+                  <span class="lang-en">Automatic Sorting Conveyor</span>
+                </h3>
                 
                 <div style="margin-bottom: 15px;">
-                  <div class="prj-lbl">> PROBLÈME</div>
-                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">Besoin de simuler un environnement industriel complet pour valider la logique de tri sans risque matériel.</p>
+                  <div class="prj-lbl">
+                    <span class="lang-fr">> PROBLÈME</span><span class="lang-en">> PROBLEM</span>
+                  </div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6;">
+                    <span class="lang-fr">Besoin de simuler un environnement industriel complet pour valider la logique de tri sans risque matériel.</span>
+                    <span class="lang-en">Need to simulate a complete industrial environment to validate sorting logic without hardware risks.</span>
+                  </p>
                 </div>
 
                 <div class="prj-details" style="display: none; margin-bottom: 15px;">
-                  <div class="prj-lbl" style="color: #F5A623;">> SOLUTION & RÉSULTATS</div>
-                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">Programmation Ladder (S7-1200) sur TIA Portal et interfaçage avec le jumeau numérique Factory I/O via OPC-DA.</p>
-                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#F5A623;">›</strong> Gestion fluide des modes Auto/Manuel/Arrêt d'urgence.</div>
-                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:#F5A623;">›</strong> Tri optique fonctionnel à 100%.</div>
+                  <div class="prj-lbl" style="color: var(--color-blue);">
+                    <span class="lang-fr">> SOLUTION & RÉSULTATS</span><span class="lang-en">> SOLUTION & RESULTS</span>
+                  </div>
+                  <p style="font-size: 13px; color: #5A6A7A; line-height: 1.6; margin-bottom: 8px;">
+                    <span class="lang-fr">Programmation Ladder (S7-1200) sur TIA Portal et interfaçage avec le jumeau numérique Factory I/O via OPC-DA.</span>
+                    <span class="lang-en">Ladder programming (S7-1200) on TIA Portal and interfacing with Factory I/O digital twin via OPC-DA.</span>
+                  </p>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:var(--color-blue);">›</strong> <span class="lang-fr">Gestion fluide des modes Auto/Manuel/Arrêt d'urgence.</span><span class="lang-en">Smooth management of Auto/Manual/E-Stop modes.</span></div>
+                  <div style="font-size: 12.5px; color: #5A6A7A;"><strong style="color:var(--color-blue);">›</strong> <span class="lang-fr">Tri optique fonctionnel à 100%.</span><span class="lang-en">100% functional optical sorting.</span></div>
                 </div>
 
                 <div style="display: flex; flex-wrap: wrap; gap: 6px;">
@@ -1066,37 +1196,41 @@
                 </div>
               </div>
               <div style="padding: 12px 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: #F8FBFF;">
-                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: #2060B8; cursor: pointer; font-weight: bold;">[+] DÉTAILS</button>
+                <button onclick="toggleCard(this)" style="background: none; border: none; font-family: monospace; font-size: 11px; color: var(--color-blue); cursor: pointer; font-weight: bold;">
+                  <span class="lang-fr">[+] DÉTAILS</span><span class="lang-en">[+] DETAILS</span>
+                </button>
                 <div style="display: flex; gap: 10px;">
-                  <a href="https://github.com/HoraEmbedded/P1-01-Sorting-by-height" target="_blank" style="color: #5A6A7A;"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
-                  <a href="#" onclick="openPreview('Simulation Factory I/O', '<video autoplay loop muted controls><source src=\'chemin_video.mp4\' type=\'video/mp4\'></video>')" style="color: #5A6A7A;" title="Lancer Simulation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                  <a href="#" onclick="openPreview('Simulation Factory I/O', '<video autoplay loop muted controls style=\'max-width:100%;\'><source src=\'chemin_video.mp4\' type=\'video/mp4\'></video>')" style="color: #5A6A7A;" title="Aperçu / View"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
+                  <a href="https://github.com/HoraEmbedded/P1-01-Sorting-by-height" target="_blank" style="color: #5A6A7A;" title="GitHub"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
                 </div>
               </div>
             </div>
 
-          </div>
-
-          <div style="text-align: center; margin-top: 50px; padding: 35px; background: rgba(32, 96, 184, 0.03); border: 1px dashed #BDDAF0; border-radius: 6px;">
+          </div> <div style="text-align: center; margin-top: 50px; padding: 35px; background: rgba(32, 96, 184, 0.03); border: 1px dashed #BDDAF0; border-radius: 6px;">
             <p style="font-size: 14px; color: #5A6A7A; margin-bottom: 20px;">
-              Tous mes projets sont open source. Consultez le code complet sur GitHub.
+              <span class="lang-fr">Tous mes projets sont open source. Consultez le code complet sur GitHub.</span>
+              <span class="lang-en">All my projects are open source. View the full code on GitHub.</span>
             </p>
             <a href="https://github.com/horaembedded" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: #102A70; color: white; padding: 10px 22px; text-decoration: none; font-size: 13px; font-weight: bold; border-radius: 4px; transition: background 0.2s;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              Voir le profil GitHub
+              <span class="lang-fr">Voir le profil GitHub</span>
+              <span class="lang-en">View GitHub Profile</span>
             </a>
           </div>
 
           <script>
-            // Fonction pour déplier/replier les détails d'un projet
+            // Fonction pour déplier/replier les détails d'un projet avec gestion de la langue
             function toggleCard(btn) {
               const card = btn.closest('.prj-card');
               const details = card.querySelector('.prj-details');
+              const isFr = document.documentElement.getAttribute('lang') !== 'en';
+              
               if (details.style.display === 'none') {
                 details.style.display = 'block';
-                btn.innerHTML = '[-] MASQUER';
+                btn.innerHTML = isFr ? '[-] MASQUER' : '[-] HIDE';
               } else {
                 details.style.display = 'none';
-                btn.innerHTML = '[+] DÉTAILS';
+                btn.innerHTML = isFr ? '[+] DÉTAILS' : '[+] DETAILS';
               }
             }
 
@@ -1105,7 +1239,7 @@
               // Mettre à jour les boutons
               document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if(btn.innerText === category) btn.classList.add('active');
+                if(btn.getAttribute('data-cat') === category) btn.classList.add('active');
               });
 
               // Filtrer les cartes
@@ -1120,7 +1254,7 @@
             }
           </script>
 
-         </div>
+        </div>
          
 
         <div id="sec-competences" class="section-content">
