@@ -20,8 +20,9 @@ typedef enum {
     EVENT_ERROR_OCCURRED
 } Event_t;
 
-// Function prototypes for our FSM logic
+
 void FSM_Init(void);
 void FSM_Run(Event_t event);
+State_t FSM_GetCurrentState(void);
 
 #endif // FSM_H

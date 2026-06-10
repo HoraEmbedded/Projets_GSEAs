@@ -4,10 +4,13 @@
   "editor": "wokwi",
   "parts": [
     { "type": "board-stm32-bluepill", "id": "stm32", "top": 0, "left": 0, "attrs": {} },
-    { "type": "wokwi-led", "id": "led_verte", "top": -100, "left": 120, "attrs": { "color": "green" } }
+    { "type": "wokwi-led", "id": "led_verte", "top": -100, "left": 120, "attrs": { "color": "green" } },
+    { "type": "wokwi-pushbutton", "id": "btn_menu", "top": 50, "left": 150, "attrs": { "color": "blue" } }
   ],
   "connections": [
     [ "stm32:A5", "led_verte:A", "green", [ "v0" ] ],
-    [ "stm32:GND.1", "led_verte:C", "black", [ "v0" ] ]
+    [ "stm32:GND.1", "led_verte:C", "black", [ "v0" ] ],
+    [ "stm32:B0", "btn_menu:1.l", "blue", [ "v0" ] ],
+    [ "stm32:GND.2", "btn_menu:2.l", "black", [ "v0" ] ]
   ]
 }

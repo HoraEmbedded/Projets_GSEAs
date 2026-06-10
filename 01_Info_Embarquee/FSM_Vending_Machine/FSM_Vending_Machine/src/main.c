@@ -1,26 +1,54 @@
 #include "stm32f1xx_hal.h"
+#include "hardware.h"
+#include "fsm.h"
 
-
+// Required by HAL for timing functions (HAL_Delay)
 void SysTick_Handler(void) {
     HAL_IncTick();
 }
 
 int main(void) {
-    
+    // 1. System Initialization
     HAL_Init();
+    HW_Init();
+    FSM_Init();
 
-    
-    __HAL_RCC_GPIOA_CLK_ENABLE();
+    // Variables to track the button state and prevent spamming events
+    bool previousButtonState = false;
+    bool currentButtonState = false;
 
-    GPIO_InitStruct.Pin = GPIO_PIN_5;
-    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-    HAL_GPIOInit (GPIOA, &GPIO_InitStruct);
+    // 2. The Super Loop
+    while (1) {
+        
+        // --- Phase A: READ INPUTS ---
+        currentButtonState = HW_IsMenuButtonPressed();
+        Event_t currentEvent = EVENT_NONE;
 
-    While(1) {
-        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+        // Edge Detection: We only want to trigger the event exactly when 
+        // the button transitions from "not pressed" to "pressed"
+        if (currentButtonState == true && previousButtonState == false) {
+            currentEvent = EVENT_BUTTON_MENU;
+        }
+        
+        // Save the state for the next loop iteration
+        previousButtonState = currentButtonState;
 
-        HAL_Delay(500);
+        // --- Phase B: PROCESS LOGIC (FSM) ---
+        if (currentEvent != EVENT_NONE) {
+            FSM_Run(currentEvent);
+        }
+
+        // --- Phase C: WRITE OUTPUTS ---
+        State_t currentState = FSM_GetCurrentState();
+        
+        // The Green LED is only ON during the IDLE state
+        if (currentState == STATE_IDLE) {
+            HW_SetIdleLed(true);
+        } else {
+            HW_SetIdleLed(false);
+        }
+
+        // Small delay for basic "debouncing" (anti-rebond)
+        HAL_Delay(50);
     }
 }
