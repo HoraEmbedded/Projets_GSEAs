@@ -2,53 +2,66 @@
 #include "hardware.h"
 #include "fsm.h"
 
-// Required by HAL for timing functions (HAL_Delay)
-void SysTick_Handler(void) {
-    HAL_IncTick();
-}
+void SysTick_Handler(void) { HAL_IncTick(); }
 
 int main(void) {
-    // 1. System Initialization
     HAL_Init();
     HW_Init();
     FSM_Init();
 
-    // Variables to track the button state and prevent spamming events
-    bool previousButtonState = false;
-    bool currentButtonState = false;
+    // Arrays to handle edge detection for 3 buttons cleanly: [0]=Menu, [1]=Select, [2]=Coin
+    bool prevBtn[3] = {false, false, false};
+    bool currBtn[3] = {false, false, false};
 
-    // 2. The Super Loop
+    // Variables for the Non-Blocking Timer
+    uint32_t stateEntryTime = HAL_GetTick(); 
+    State_t previousFsmState = STATE_IDLE;
+
     while (1) {
-        
-        // --- Phase A: READ INPUTS ---
-        currentButtonState = HW_IsMenuButtonPressed();
         Event_t currentEvent = EVENT_NONE;
+        State_t currentFsmState = FSM_GetCurrentState();
 
-        // Edge Detection: We only want to trigger the event exactly when 
-        // the button transitions from "not pressed" to "pressed"
-        if (currentButtonState == true && previousButtonState == false) {
-            currentEvent = EVENT_BUTTON_MENU;
+        // --- PHASE 1: TIMEOUT CHECK ---
+        // If the state just changed, reset our stopwatch
+        if (currentFsmState != previousFsmState) {
+            stateEntryTime = HAL_GetTick();
+            previousFsmState = currentFsmState;
         }
-        
-        // Save the state for the next loop iteration
-        previousButtonState = currentButtonState;
 
-        // --- Phase B: PROCESS LOGIC (FSM) ---
+        // If we are in SELECTION state and 5 seconds have passed (testing value)
+        if (currentFsmState == STATE_SELECTION) {
+            if ((HAL_GetTick() - stateEntryTime) >= 5000) {
+                currentEvent = EVENT_TIMEOUT;
+            }
+        }
+
+        // --- PHASE 2: READ BUTTONS (If no timeout occurred) ---
+        if (currentEvent == EVENT_NONE) {
+            currBtn[0] = HW_IsMenuButtonPressed();
+            currBtn[1] = HW_IsSelectButtonPressed();
+            currBtn[2] = HW_IsCoinButtonPressed();
+
+            if (currBtn[0] == true && prevBtn[0] == false) currentEvent = EVENT_BUTTON_MENU;
+            else if (currBtn[1] == true && prevBtn[1] == false) currentEvent = EVENT_PRODUCT_SELECTED;
+            else if (currBtn[2] == true && prevBtn[2] == false) currentEvent = EVENT_COIN_INSERTED;
+
+            prevBtn[0] = currBtn[0];
+            prevBtn[1] = currBtn[1];
+            prevBtn[2] = currBtn[2];
+        }
+
+        // --- PHASE 3: PROCESS LOGIC ---
         if (currentEvent != EVENT_NONE) {
             FSM_Run(currentEvent);
         }
 
-        // --- Phase C: WRITE OUTPUTS ---
-        State_t currentState = FSM_GetCurrentState();
-        
-        // The Green LED is only ON during the IDLE state
-        if (currentState == STATE_IDLE) {
+        // --- PHASE 4: WRITE OUTPUTS ---
+        if (FSM_GetCurrentState() == STATE_IDLE) {
             HW_SetIdleLed(true);
         } else {
             HW_SetIdleLed(false);
         }
 
-        // Small delay for basic "debouncing" (anti-rebond)
-        HAL_Delay(50);
+        HAL_Delay(50); // Debouncing
     }
 }

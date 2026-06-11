@@ -5,12 +5,18 @@
   "parts": [
     { "type": "board-stm32-bluepill", "id": "stm32", "top": 0, "left": 0, "attrs": {} },
     { "type": "wokwi-led", "id": "led_verte", "top": -100, "left": 120, "attrs": { "color": "green" } },
-    { "type": "wokwi-pushbutton", "id": "btn_menu", "top": 50, "left": 150, "attrs": { "color": "blue" } }
+    { "type": "wokwi-pushbutton", "id": "btn_menu", "top": 50, "left": 150, "attrs": { "color": "blue", "label": "Menu" } },
+    { "type": "wokwi-pushbutton", "id": "btn_select", "top": 50, "left": 250, "attrs": { "color": "yellow", "label": "Select" } },
+    { "type": "wokwi-pushbutton", "id": "btn_coin", "top": 50, "left": 350, "attrs": { "color": "red", "label": "Coin" } }
   ],
   "connections": [
     [ "stm32:A5", "led_verte:A", "green", [ "v0" ] ],
     [ "stm32:GND.1", "led_verte:C", "black", [ "v0" ] ],
     [ "stm32:B0", "btn_menu:1.l", "blue", [ "v0" ] ],
-    [ "stm32:GND.2", "btn_menu:2.l", "black", [ "v0" ] ]
+    [ "stm32:GND.2", "btn_menu:2.l", "black", [ "v0" ] ],
+    [ "stm32:B1", "btn_select:1.l", "yellow", [ "v0" ] ],
+    [ "stm32:GND.3", "btn_select:2.l", "black", [ "v0" ] ],
+    [ "stm32:B4", "btn_coin:1.l", "red", [ "v0" ] ],
+    [ "stm32:GND.3", "btn_coin:2.l", "black", [ "v0" ] ]
   ]
 }
