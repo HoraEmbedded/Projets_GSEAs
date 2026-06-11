@@ -3,20 +3,41 @@
   "author": "Horacia",
   "editor": "wokwi",
   "parts": [
-    { "type": "board-stm32-bluepill", "id": "stm32", "top": 0, "left": 0, "attrs": {} },
-    { "type": "wokwi-led", "id": "led_verte", "top": -100, "left": 120, "attrs": { "color": "green" } },
-    { "type": "wokwi-pushbutton", "id": "btn_menu", "top": 50, "left": 150, "attrs": { "color": "blue", "label": "Menu" } },
-    { "type": "wokwi-pushbutton", "id": "btn_select", "top": 50, "left": 250, "attrs": { "color": "yellow", "label": "Select" } },
-    { "type": "wokwi-pushbutton", "id": "btn_coin", "top": 50, "left": 350, "attrs": { "color": "red", "label": "Coin" } }
+    { "type": "board-stm32-bluepill", "id": "stm32", "top": 267.44, "left": 466.77, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led_verte",
+      "top": -22.8,
+      "left": 224.6,
+      "attrs": { "color": "green", "label": "IDLE" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led_bleue",
+      "top": -22.8,
+      "left": 176.6,
+      "attrs": { "color": "blue", "label": "DIST" }
+    },
+    { "type": "board-ssd1306", "id": "oled", "top": -35.26, "left": 57.83, "attrs": {} },
+    { "type": "wokwi-membrane-keypad", "id": "keypad", "top": 103.6, "left": -138.4, "attrs": {} }
   ],
   "connections": [
-    [ "stm32:A5", "led_verte:A", "green", [ "v0" ] ],
-    [ "stm32:GND.1", "led_verte:C", "black", [ "v0" ] ],
-    [ "stm32:B0", "btn_menu:1.l", "blue", [ "v0" ] ],
-    [ "stm32:GND.2", "btn_menu:2.l", "black", [ "v0" ] ],
-    [ "stm32:B1", "btn_select:1.l", "yellow", [ "v0" ] ],
-    [ "stm32:GND.3", "btn_select:2.l", "black", [ "v0" ] ],
-    [ "stm32:B4", "btn_coin:1.l", "red", [ "v0" ] ],
-    [ "stm32:GND.3", "btn_coin:2.l", "black", [ "v0" ] ]
-  ]
+    [ "keypad:R1", "stm32:A8", "green", [ "v19.2", "h374.4", "v-192" ] ],
+    [ "stm32:A9", "keypad:R2", "green", [ "h-38.4", "v211.2", "h-19.2" ] ],
+    [ "stm32:A10", "keypad:R3", "green", [ "h-67.2", "v201.6", "h-9.6" ] ],
+    [ "stm32:A11", "keypad:R4", "green", [ "h-76.8", "v192", "h-9.6" ] ],
+    [ "stm32:A12", "keypad:C1", "green", [ "h-57.6", "v182.4", "h-307.2", "v-9.6" ] ],
+    [ "stm32:A15", "keypad:C2", "green", [ "h-86.4", "v163.2", "h-268.8" ] ],
+    [ "stm32:B3", "keypad:C3", "green", [ "h-96", "v153.6", "h-249.6" ] ],
+    [ "stm32:B4", "keypad:C4", "green", [ "h-48", "v144", "h-278.4" ] ],
+    [ "stm32:A5", "led_verte:A", "green", [ "h65.27", "v-182.4" ] ],
+    [ "stm32:GND.1", "led_verte:C", "black", [ "h0" ] ],
+    [ "stm32:GND.1", "led_bleue:C", "black", [ "h-211.2", "v-403.2", "h-28.8" ] ],
+    [ "stm32:B7", "oled:SDA", "green", [ "h-192", "v-460.8", "h-153.6" ] ],
+    [ "stm32:B6", "oled:SCL", "green", [ "h-172.8", "v-470.4", "h-9.6" ] ],
+    [ "stm32:5V.1", "oled:VCC", "red", [ "h-163.2", "v-508.8", "h-201.6" ] ],
+    [ "stm32:GND.1", "oled:GND", "black", [ "h-192", "v-518.4", "h-192" ] ],
+    [ "led_bleue:A", "stm32:A1", "green", [ "v57.6", "h355.2", "v124.8", "h19.2", "v192" ] ]
+  ],
+  "dependencies": {}
 }

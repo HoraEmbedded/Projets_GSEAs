@@ -12,7 +12,6 @@ bool HW_IsMenuButtonPressed(void);
 // Write outputs
 void HW_SetIdleLed(bool state);
 
-bool HW_IsSelectButtonPressed(void);
-bool HW_IsCoinButtonPressed(void);
+void HW_SetDistLed(bool state);
 
 #endif // HARDWARE_H
