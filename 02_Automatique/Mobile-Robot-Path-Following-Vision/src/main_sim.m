@@ -2,40 +2,46 @@
 % Description: Main script to initialize, run and plot the trajectory tracking simulation.
 % Author: Horacia
 
+clear all;
+clc;
+close all;
+
 %% 1. Initialization and Waypoints Extraction
 disp('Extracting waypoints from image...');
-% Runt the script we created earlier
 run('waypoint.m');
 
 %% 2. Simulation Parameters
-% Set the distance the robot looks ahead (in meters or pixels)
-lookahead_dist = 5; 
-% Set the robot's constant speed
-desired_vel = 2; 
+% Scaled up for pixel-based coordinates
+lookahead_dist = 20; 
+desired_vel = 50; 
 
 %% 3. Run Simulink Model
 disp('Running Simulink model...');
-% Run the simulation for 30 seconds
-out = sim('../models/trajectory_tracking_model.slx', 'StopTime', '30');
+% Increased StopTime to allow the robot to complete the path
+out = sim('../models/trajectory_tracking_model.slx', 'StopTime', '28');
 
 %% 4. Plot Results (Performance Visualization)
 disp('Plotting results...');
 figure;
 
-% Plot the desired trajectory (the black line we extracted)
+% Plot the desired trajectory
 plot(waypoints(:,1), waypoints(:,2), 'k--', 'LineWidth', 2); 
 hold on;
 
-% Extract actual X and Y coordinates the robot drove through
-% Assuming the output is an N x 3 matrix [X, Y, Theta]
-robot_X = out.robot_state_sim(:, 1);
-robot_Y = out.robot_state_sim(:, 2);
+% Robust data extraction: ensure matrix is N x 3
+state_data = out.robot_state_sim;
+if size(state_data, 1) == 3
+    state_data = state_data'; % Transpose if Simulink outputs 3 x N
+end
 
-% Plot the actual path the robot took in blue
+robot_X = state_data(:, 1);
+robot_Y = state_data(:, 2);
+
+% Plot the actual path
 plot(robot_X, robot_Y, 'b-', 'LineWidth', 1.5); 
 
 legend('Desired Trajectory', 'Actual Robot Path');
 title('Trajectory Tracking Performance');
-xlabel('X Position');
-ylabel('Y Position');
+xlabel('X Position (pixels)');
+ylabel('Y Position (pixels)');
 grid on;
