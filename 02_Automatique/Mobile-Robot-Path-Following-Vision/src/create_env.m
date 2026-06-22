@@ -17,7 +17,7 @@ map.LocalOriginInWorld = [min_x, min_y];
 %% 3. Add Multiple Obstacles Automatically
 % PARAMÈTRES : Ajustez ici le nombre d'obstacles et leur taille
 num_obstacles = 2; 
-obstacle_size = 40; % Taille du bloc carré en pixels
+obstacle_size = 10; % Taille du bloc carré en pixels
 half_size = round(obstacle_size / 2);
 
 % Répartition des indices le long de la trajectoire
