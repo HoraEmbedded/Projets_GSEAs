@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>CV Horacia Azonhoumon - Ingénierie Systèmes Embarqués & Automatique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Configuration globale condensée pour format 1 page (A4) */
+    :root {
+      --primary-color: #1e3a8a; /* Bleu marine institutionnel */
+      --text-color: #222222;
+      --border-color: #cbd5e1;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: var(--text-color); line-height: 1.35; font-size: 12px; background: #fff; }
+    
+    /* Conteneur principal avec marges réduites */
+    .resume-container { max-width: 800px; margin: 0 auto; padding: 15px 30px; }
+    
+    /* En-tête : Sobre et sans émojis */
+    header { text-align: center; border-bottom: 2px solid var(--primary-color); padding-bottom: 8px; margin-bottom: 12px; }
+    h1 { font-size: 22px; color: var(--primary-color); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 3px; }
+    .job-title { font-size: 13px; font-weight: bold; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    
+    .contact-info { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; font-size: 10.5px; color: #475569; }
+    .contact-info span { display: flex; align-items: center; }
+    /* Ajout d'une puce de séparation propre via CSS */
+    .contact-info span:not(:last-child)::after { content: "•"; margin-left: 10px; color: #94a3b8; }
+    .contact-info a { color: var(--primary-color); text-decoration: none; font-weight: 500; }
+    
+    /* Sections : Espacements ajustés */
+    section { margin-bottom: 18px; }
+    h2 { font-size: 13px; color: var(--primary-color); text-transform: uppercase; border-bottom: 1px solid var(--border-color); padding-bottom: 2px; margin-bottom: 10px; letter-spacing: 0.5px; }
+    
+    /* Profil */
+    .summary { text-align: justify; font-size: 11px; }
+
+    /* Grille des compétences compactée */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 15px; }
+    .skill-category strong { color: var(--primary-color); display: block; margin-bottom: 1px; }
+
+    /* Blocs d'expérience / Projets / Formation */
+    .block { margin-bottom: 8px; }
+    .block-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1px; }
+    .block-title { font-size: 11.5px; font-weight: bold; color: #111827; }
+    .block-date { font-weight: 600; color: var(--primary-color); font-size: 10.5px; white-space: nowrap; }
+    .block-subtitle { font-size: 11px; font-style: italic; color: #475569; margin-bottom: 3px; }
+    
+    /* Listes pour ATS */
+    ul { padding-left: 18px; margin-bottom: 3px; }
+    li { margin-bottom: 2px; text-align: justify; }
+    .tech-stack { font-size: 10px; color: #475569; font-weight: 600; margin-top: 2px; }
+    .tech-stack span { color: var(--primary-color); }
+
+    /* Footer (Langues et Soft Skills) */
+    .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 0; }
+  </style>
+</head>
+<body>
+  <main class="resume-container">
+    
+    <header>
+      <h1>Horacia Azonhoumon</h1>
+      <div class="job-title">Élève Ingénieure : Systèmes Embarqués & Automatique Industrielle</div>
+      <div class="contact-info">
+        <span>Tanger, Maroc</span>
+        <span><a href="mailto:azonhoumonhoracia@gmail.com">azonhoumonhoracia@gmail.com</a></span>
+        <span>+212 7 74 44 69 95</span>
+        <span><a href="https://linkedin.com/in/horaembedded">in/horaembedded</a></span>
+        <span><a href="https://github.com/HoraEmbedded">GitHub: HoraEmbedded</a></span>
+        <span><a href="https://horaembedded.github.io/HoraPortFolio">Portfolio en ligne</a></span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Profil Professionnel</h2>
+      <p class="summary">
+        Élève-ingénieure en 4<sup>e</sup> année spécialisée en Génie des Systèmes Électroniques & Automatiques. Je travaille à la frontière entre les systèmes embarqués et l'Industrie 4.0, en associant développement bas niveau et ingénierie des procédés industriels. Je recherche un <strong>stage technique (Projet de Fin d'Année - PFA) pour l'été 2026</strong> en automatisation ou en architecture embarquée.
+      </p>
+    </section>
+
+    <section>
+      <h2>Expertise Technique</h2>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <strong>Systèmes Embarqués & Bas Niveau</strong>
+          <span>C, C++, Assembleur C6000, Microcontrôleurs (STM32, ESP32, ATmega), DSP (TMS320C6713), Bare-metal, Interruptions.</span>
+        </div>
+        <div class="skill-category">
+          <strong>Automatisme & Régulation</strong>
+          <span>Siemens S7-1200, TIA Portal, Langage Ladder, Régulation PID & FOPDT, MATLAB, Simulink, Factory I/O.</span>
+        </div>
+        <div class="skill-category">
+          <strong>Protocoles Industriels & IIoT</strong>
+          <span>MQTT, Modbus, OPC-DA, Linux/Ubuntu, Git/GitHub, Code Composer Studio, PlatformIO.</span>
+        </div>
+        <div class="skill-category">
+          <strong>Robotique, Vision & IA</strong>
+          <span>Python, OpenCV, Deep Learning (VAE), Robotics System Toolbox, Cinématique directe/inverse.</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projets Académiques Appliqués</h2>
+      
+      <div class="block">
+        <div class="block-header">
+          <span class="block-title">Système Intelligent de Gestion de Serre (Smart Greenhouse)</span>
+          <span class="block-date">2026</span>
+        </div>
+        <div class="block-subtitle">Développement Embarqué & Contrôle - Microcontrôleur ATmega2560</div>
+        <ul>
+          <li>Développement d'un système de contrôle en C (bare-metal) piloté par interruptions (Timer1) pour optimiser les ressources CPU.</li>
+          <li>Implémentation d'un algorithme par hystérésis à double seuil visant à réduire l'usure mécanique (chattering) des actionneurs.</li>
+        </ul>
+        <div class="tech-stack"><span>Environnement :</span> C, ATmega2560, PlatformIO, Wokwi, I2C.</div>
+      </div>
+
+      <div class="block">
+        <div class="block-header">
+          <span class="block-title">Modélisation & Commande d'un Robot Manipulateur (2 DDL)</span>
+          <span class="block-date">2026</span>
+        </div>
+        <div class="block-subtitle">Automatique Avancée & Robotique Industrielle</div>
+        <ul>
+          <li>Simulation complète d'un bras articulé et développement d'une commande articulaire PID robuste.</li>
+          <li>Génération de profils de mouvement optimisés via l'application de matrices de cinématique directe et inverse, garantissant une erreur de suivi inférieure à 0,05 m.</li>
+        </ul>
+        <div class="tech-stack"><span>Environnement :</span> MATLAB, Simulink, Simscape Multibody, Régulation PID.</div>
+      </div>
+
+      <div class="block">
+        <div class="block-header">
+          <span class="block-title">Traitement Numérique du Signal Temps Réel</span>
+          <span class="block-date">2026</span>
+        </div>
+        <div class="block-subtitle">Architecture DSP - Texas Instruments TMS320C6713 DSK</div>
+        <ul>
+          <li>Programmation optimisée en C embarqué et assembleur C6000 pour la gestion et le traitement de signaux.</li>
+          <li>Mise en œuvre d'algorithmes de filtrage numérique FIR/IIR en temps réel.</li>
+        </ul>
+        <div class="tech-stack"><span>Environnement :</span> C Embarqué, Assembleur C6000, Code Composer Studio v7.</div>
+      </div>
+
+      <div class="block">
+        <div class="block-header">
+          <span class="block-title">Convoyeur de Tri Automatique et Jumeau Numérique</span>
+          <span class="block-date">2025</span>
+        </div>
+        <div class="block-subtitle">Supervision IIoT & Programmation Automate</div>
+        <ul>
+          <li>Élaboration d'un algorithme de tri d'objets sur automate Siemens S7-1200 en langage Ladder (gestion des modes auto/manuel).</li>
+          <li>Intégration d'une communication OPC-DA avec le jumeau numérique Factory I/O pour la supervision du procédé.</li>
+        </ul>
+        <div class="tech-stack"><span>Environnement :</span> TIA Portal, Langage Ladder, Factory I/O, Siemens S7.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Formation Initiale</h2>
+      <div class="block">
+        <div class="block-header">
+          <span class="block-title">Cycle Ingénieur - Génie des Systèmes Électronique & Automatique (GSEA)</span>
+          <span class="block-date">2024 - Présent</span>
+        </div>
+        <div class="block-subtitle">ENSA Tanger - École Nationale des Sciences Appliquées</div>
+      </div>
+      <div class="block" style="margin-bottom: 0;">
+        <div class="block-header">
+          <span class="block-title">Classes Préparatoires Intégrées (MPSI)</span>
+          <span class="block-date">2022 - 2024</span>
+        </div>
+        <div class="block-subtitle">ENSA Tanger - Mathématiques, Physique & Sciences de l'Ingénieur</div>
+      </div>
+    </section>
+
+    <section class="footer-grid">
+      <div>
+        <h2>Langues</h2>
+        <ul>
+          <li><strong>Français :</strong> Courant (C1)</li>
+          <li><strong>Anglais :</strong> Intermédiaire(B2)</li>
+          <li><strong>Espagnol :</strong> Notions (A1)</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Aptitudes</h2>
+        <ul>
+          <li>Travail en équipe</li>
+          <li>Esprit d'analyse et de synthèse</li>
+          <li>Autonomie technique et proactivité</li>
+          <li>Forte capacité d'adaptation</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
