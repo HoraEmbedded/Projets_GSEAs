@@ -123,3 +123,9 @@ La Phase P1 est terminée. Le projet possède un socle mathématique prouvant qu
 
 
 Fin de Phase P1 — CLÔTURÉE. Decision record d'architecture posée : STM32U073 (sleep 0,985 µA), SX1262 (TX 45 mA @+14 dBm typ., RX 4,6 mA), SHT4x (mesure 6,9 ms), PV polycristallin 2×2 cm (ratio résiduel ~107), PMIC différé en P2 (critères : η≥80 %, autodécharge, DoD, + cold-start). Cohérence archi↔budget vérifiée. Corrections rigueur : « typique » ≠ « optimisé » ; justifier un dimensionnement par son chiffre de marge. Bilan P1 : budget 8,47 µA prouvé, harvesting prouvé, « 10 ans sans maintenance » démontré par le calcul. Compétences P1 acquises : budget énergétique, courant moyen pondéré, lecture datasheet (courant + conditions), compromis énergie/fraîcheur, bilan récolte/conso au pire cas, decision record sourcée. Reste à travailler (P2+) : KiCad schématique, chaînes d'alim, RF/antenne, routage.
+
+
+
+## Journal de compétences
+> **Ouverture Phase P2 — Conception schématique KiCad.** Objectif : schéma complet vérifié (ERC) des 5 blocs (alim/harvesting, MCU, radio+RF, capteurs I²C, interfaces), BOM préliminaire. Concepts posés : schéma = connectivité logique / PCB = implantation physique / **netlist** = pont entre les deux → une erreur schéma se propage au PCB (coût respin = semaines + k€). Méthode des **blocs fonctionnels** ; règles de lisibilité (alim en haut, masse en bas, signaux G→D, nets nommés). Terrain neuf (KiCad = niveau 1) → rythme ralenti, montée en autonomie progressive. Cette séance : installer KiCad 8, projet Git `lorawan-node`, Getting Started, premier composant + premier ERC. À travailler : cycle symbole→empreinte→net→ERC.
+
