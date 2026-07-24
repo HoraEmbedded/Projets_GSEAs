@@ -1,0 +1,55 @@
+[System]
+Name='Controller_fuzzy'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=2
+NumRules=9
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='input1'
+Range=[0 2]
+NumMFs=3
+MF1='PETIT':'trapmf',[0 0 0.1 0.3]
+MF2='MOYEN':'trimf',[0.2 0.5 0.8]
+MF3='GRAND':'trapmf',[0.6 1.2 2 2]
+
+[Input2]
+Name='input2'
+Range=[-3.14159265358979 3.14159265358979]
+NumMFs=3
+MF1='NEG':'trapmf',[-3.14 -3.14 -1.5 -0.1]
+MF2='ZERO':'trimf',[-0.15 0 0.15]
+MF3='POS':'trapmf',[0.1 1.5 3.14 3.14]
+
+[Output1]
+Name='output1'
+Range=[0 0.5]
+NumMFs=3
+MF1='MOY':'trimf',[0.1 0.25 0.4]
+MF2='RAPIDE':'trimf',[0.35 0.5 0.5]
+MF3='LENT':'trimf',[0 0 0.15]
+
+[Output2]
+Name='output2'
+Range=[0 0.5]
+NumMFs=3
+MF1='MOYEN':'trimf',[0.1 0.25 0.4]
+MF2='RAPIDE':'trimf',[0.35 0.5 0.5]
+MF3='LENT':'trimf',[0 0 0.15]
+
+[Rules]
+3 2, 2 2 (1) : 1
+3 3, 2 3 (1) : 1
+3 1, 3 2 (1) : 1
+2 2, 1 1 (1) : 1
+2 3, 1 3 (1) : 1
+2 1, 3 1 (1) : 1
+1 2, 3 3 (1) : 1
+1 3, 3 3 (1) : 1
+1 1, 3 3 (1) : 1
