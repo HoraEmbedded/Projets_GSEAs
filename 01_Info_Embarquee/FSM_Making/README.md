@@ -21,11 +21,13 @@ To resolve this, the project refactors the FSM into a **Transition Table using F
 ## Project Structure
 ```text
 FSM_Making/
-├── fsm.h                  # State/Event definitions and public API
-├── fsm.c                  # Transition table and core FSM engine
-├── test_fsm.c             # Unity test suite and assertions
-├── unity.c / unity.h      # Unity testing framework core
-└── rapport_complexite.txt # Static analysis results
+├── fsmV1(switch-case).c    # V1 : FSM en switch-case imbriqués (référence)
+├── fsm(transition).c       # V2 : table de transitions (pointeurs de fonction)
+├── fsm_FV.c / fsmFV.h      # Version finale : moteur FSM + API publique
+├── fsm_testUnity.c         # Suite de tests Unity
+├── unity.c / unity.h       # Framework de test Unity
+├── rapport_complexite.txt  # Analyse statique (Lizard)
+└── diagram.json            # Simulation Wokwi
 
 
 ## Build and Test
@@ -40,6 +42,15 @@ FSM_Making/
 ```bash
 gcc fsm.c test_fsm.c unity.c -o tests_fsm
 ```
+
+### Measured results (Lizard)
+
+| Metric | Value |
+|---|---|
+| Average cyclomatic complexity | **1.7** |
+| Max CCN (Process_Event) | 6 - well under the 10 threshold |
+| Warnings | 0 |
+| Unit test coverage | 100 % of transitions (Unity) |
 
 ### Execute Tests
 
@@ -87,3 +98,4 @@ Potential extensions include:
 ## License
 
 This project is intended for educational and demonstration purposes in the field of Embedded Systems and Software Engineering.
+

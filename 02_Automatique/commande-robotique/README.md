@@ -57,21 +57,18 @@ Robot **unicycle** (R roues = 0.05 m, demi-empattement L = 0.07 m) :
 
 ## Structure du dépôt
 
-```
-├── TP1_PID/
-│   ├── Robot2R_PID.slx        # Modèle Simscape + PID
-│   └── Robot2R_PID.m          # Simulation par script
-├── TP2_Cinematique/
-│   ├── Robot2R_FK.slx         # Cinématique directe
-│   ├── Robot2R_IK.slx         # Cinématique inverse
-│   └── Robot2R_IK_Traj.slx    # Trajectoires polynomiales
-├── TP3_Fuzzy/
-│   ├── robot_mobile.slx       # Modèle unicycle + contrôleur
-│   └── controleur.fis         # Système d'inférence flou
-├── docs/
-│   └── Rapport_TPs_Robotique.pdf
+├── Robot2R_PID.slx                  # TP1 : modèle Simscape + commande PID
+├── Robot2R_AZONHOUMON_Horacia.m     # TP1 : simulation par script
+├── Robot2R_FK.slx                   # TP2 : cinématique directe
+├── Robot2R_IK.slx                   # TP2 : cinématique inverse
+├── Robot2R_trajectory.slx           # TP2 : trajectoires polynomiales
+├── Robot2DOF.slx                    # Modèle du bras 2 DDL
+├── espace_travail.m                 # TP2 : tracé de l'espace de travail
+├── Robot_Unicycle.slx               # TP3 : robot mobile + contrôleur flou
+├── Controller_fuzzy.fis             # TP3 : système d'inférence flou
+├── images/                          # Captures et figures
+├── Rapport_TPs Robotique AZONHOUMON Horacia.pdf
 └── README.md
-```
 
 ## Prérequis
 
@@ -82,10 +79,11 @@ Robot **unicycle** (R roues = 0.05 m, demi-empattement L = 0.07 m) :
 
 ```matlab
 % TP1 : simulation par script
-run('TP1_PID/Robot2R_PID.m')
+run('Robot2R_AZONHOUMON_Horacia.m')
+
 
 % Ou ouvrir un modèle Simulink et lancer la simulation
-open_system('TP2_Cinematique/Robot2R_IK.slx')
+open_system('Robot2R_IK.slx')
 ```
 
 ## Licence & auteur
