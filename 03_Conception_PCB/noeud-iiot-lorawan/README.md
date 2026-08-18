@@ -1,4 +1,4 @@
-# Nœud capteur IIoT ultra-basse consommation — LoRaWAN & energy harvesting
+# Nœud capteur IIoT ultra-basse consommation : LoRaWAN & energy harvesting
 
 > Conception électronique & IIoT · **projet en cours**
 > Nœud capteur autonome LoRaWAN visant < 15 µA de courant moyen et 10 ans d'autonomie sans maintenance batterie.

@@ -1,4 +1,4 @@
-# Régulation de température d'un four industriel — identification FOPDT & réglage PID
+# Régulation de température d'un four industriel : identification FOPDT & réglage PID
 
 > Automatique · MATLAB
 > Identification d'un procédé thermique FOPDT et comparaison de trois méthodes de réglage PID pour tenir une consigne de 850 °C.

@@ -1,4 +1,4 @@
-# Convoyeur de tri automatique par hauteur — S7-1200 & Factory I/O
+# Convoyeur de tri automatique par hauteur : S7-1200 & Factory I/O
 
 > Automatisme industriel · ENSA Tanger, GSEA · TIA Portal V17
 > Tri d'objets par hauteur sur jumeau numérique, automate Siemens S7-1200 en langage Ladder.
