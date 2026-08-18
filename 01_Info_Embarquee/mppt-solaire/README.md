@@ -1,4 +1,4 @@
-# Régulateur de charge solaire MPPT — buck synchrone
+# Régulateur de charge solaire MPPT : buck synchrone
 
 > Électronique de puissance & embarqué · **projet en cours**
 > Conception d'un régulateur de charge solaire à recherche du point de puissance maximale (MPPT), du convertisseur au firmware.
