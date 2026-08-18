@@ -1,5 +1,18 @@
 # =========================
-# C / C++ / Info Embarquée
+# Python / IA
+# =========================
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.h5
+*.keras
+*.pkl
+
+# =========================
+# C / C++ / Embarqué
 # =========================
 *.o
 *.obj
@@ -9,28 +22,65 @@
 *.elf
 *.hex
 *.bin
+*.map
+.pio/
 .vscode/
 
 # =========================
 # MATLAB / Simulink
 # =========================
 *.asv
-slprj/
 *.autosave
+*.slxc
 *.mat
+slprj/
+codegen/
 
 # =========================
-# CAO Électronique (Proteus, KiCad...)
+# TIA Portal (Siemens)
+# Ne versionner que l'archive .zap17 exportée
+# =========================
+IM/
+System/
+Vci/
+XRef/
+TMP/
+Logs/
+UserFiles/
+AdditionalFiles/PLCM/
+*.plf
+*.idx
+*.db
+
+# =========================
+# CAO électronique (KiCad, Proteus)
 # =========================
 *.bak
 *.bck
 *-backups/
+*.kicad_prl
+fp-info-cache
 *.tmp
 
 # =========================
-# Rapports et OS
+# LaTeX
+# =========================
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# =========================
+# OS / éditeurs
 # =========================
 ~$*.docx
 ~$*.xlsx
 .DS_Store
 Thumbs.db
+
+# =========================
+# Personnel — jamais dans un repo public
+# =========================
+CVs/
+budget*
