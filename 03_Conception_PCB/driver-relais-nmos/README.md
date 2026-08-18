@@ -44,9 +44,12 @@ Démarche complète :
 ## Aperçu
 
 <!-- Remplacer par les vraies captures (dossier docs/) -->
-![Schéma du canal de commande](docs/schema-canal.png)
-![Routage KiCad](docs/routage-kicad.png)
-![Layout Microwind 356 doigts](docs/layout-microwind.png)
+![DRC](DRC.png)
+![Routage KiCad](schema_kicad.png)
+![Layout Microwind 356 doigts](Pictures/Microwind.png)
+![Routage KiCad bottom](Pictures/vue_gerber_bottom.png)
+![Routage KiCad top](Pictures/vue_gerber_top.png)
+![Routage KiCad vue3D](Pictures/vue_3D.png)
 
 ## Structure du dépôt
 
