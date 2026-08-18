@@ -43,13 +43,38 @@ Démarche complète :
 
 ## Aperçu
 
-<!-- Remplacer par les vraies captures (dossier docs/) -->
-![DRC](DRC.png)
-![Routage KiCad](schema_kicad.png)
-![Layout Microwind 356 doigts](Pictures/Microwind.png)
-![Routage KiCad bottom](Pictures/vue_gerber_bottom.png)
-![Routage KiCad top](Pictures/vue_gerber_top.png)
-![Routage KiCad vue3D](Pictures/vue_3D.png)
+<table>
+  <tr>
+    <td align="center">
+      <img src="Pictures/schema_kicad.png" width="400"><br>
+      <sub>Schéma KiCad</sub>
+    </td>
+    <td align="center">
+      <img src="Pictures/Microwind.png" width="400"><br>
+      <sub>Layout Microwind (356 doigts)</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="Pictures/vue_gerber_top.png" width="400"><br>
+      <sub>Routage KiCad, vue top</sub>
+    </td>
+    <td align="center">
+      <img src="Pictures/vue_gerber_bottom.png" width="400"><br>
+      <sub>Routage KiCad, vue bottom</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="Pictures/vue_3D.png" width="400"><br>
+      <sub>Rendu 3D de la carte</sub>
+    </td>
+    <td align="center">
+      <img src="Pictures/DRC.png" width="400"><br>
+      <sub>Rapport DRC</sub>
+    </td>
+  </tr>
+</table>
 
 ## Structure du dépôt
 
