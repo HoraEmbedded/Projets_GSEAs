@@ -1,50 +1,46 @@
-# Industrial Oven Temperature Control
+# Régulation de température d'un four industriel — identification FOPDT & réglage PID
 
-## Project Overview
-This project focuses on the temperature regulation of an industrial heat treatment oven. The system is modeled as a First Order Plus Dead Time (FOPDT) process to maintain a strict temperature setpoint (850°C).
+> Automatique · MATLAB
+> Identification d'un procédé thermique FOPDT et comparaison de trois méthodes de réglage PID pour tenir une consigne de 850 °C.
 
-## Objectives
-- Model the FOPDT thermal process.
-- Tune a PID controller using Ziegler-Nichols, Cohen-Coon, and the PID Tuner App.
-- Compare controller performance (overshoot, rise time, steady-state error).
-- Test system robustness against disturbances (simulated oven door opening).
+## Problème
 
+Réguler la température d'un four de traitement thermique : procédé lent (constante de temps 50 s) avec retard pur (12 s) — la configuration qui met les PID en difficulté — et robustesse exigée face aux perturbations (ouverture de porte).
 
-# Process Identification Report: Industrial Oven
+## Démarche
 
-## 1. Methodology
-The industrial oven thermal process is modeled as a First Order Plus Dead Time (FOPDT) system. The transfer function is defined as:
+1. **Identification en boucle ouverte** (échelon de 10 % de puissance, méthode de la tangente / Broida) :
 
-$$G(s) = \frac{K \cdot e^{-Ls}}{\tau s + 1}$$
+   G(s) = 1,5 · e^(−12s) / (50s + 1)
 
-To identify the unknown parameters ($K$, $L$, and $\tau$), a open-loop step response test was conducted using MATLAB. 
-- **Input Step Amplitude ($\Delta MV$):** 10% power injection at $t = 0$ seconds.
-- **Output Response ($\Delta PV$):** Temperature variation monitored until steady state.
+2. **Réglage PID par trois méthodes** : Ziegler-Nichols, Cohen-Coon, PID Tuner MATLAB.
+3. **Comparaison** : dépassement, temps de montée, erreur statique, rejet de perturbation.
 
-## 2. Graphical Identification Analysis
+## Contenu du dépôt
 
-### 2.1 Process Gain ($K$)
-The process gain represents the sensitivity of the system output relative to changes in the input.
-- Initial temperature variation: $0^\circ\text{C}$
-- Final steady-state temperature variation: $15^\circ\text{C}$
-- Output change ($\Delta PV$): $15^\circ\text{C}$
+```
+├── process_identification.m   # Identification FOPDT (K, L, τ)
+├── pid_tuning_zn.m            # Réglage Ziegler-Nichols
+├── pid_tuning_cc.m            # Réglage Cohen-Coon
+├── pid_tuning_app.m           # Réglage PID Tuner
+├── project_comparison.m       # Comparaison des trois régulateurs
+└── README.md
+```
 
-$$K = \frac{\Delta PV}{\Delta MV} = \frac{15}{10} = 1.5 \text{ } ^\circ\text{C}/\%$$
+## Résultats
 
-### 2.2 Dead Time ($L$)
-The dead time is the pure time delay before the system visually begins to react to the input step.
-- Using the tangent method at the point of inflection, the line crosses the time-axis exactly at:
+| Paramètre identifié | Valeur |
+|---|---|
+| Gain statique K | 1,5 °C/% |
+| Retard pur L | 12 s |
+| Constante de temps τ | 50 s |
 
-$$L = 12 \text{ seconds}$$
+Comparaison complète des trois réglages dans `project_comparison.m` (courbes superposées, critères chiffrés).
 
-### 2.3 Time Constant ($\tau$)
-According to the standard Broida/Ziegler-Nichols graphical estimation, the system reaches $63.2\%$ of its total response at time $t_{63.2\%}$.
-- $63.2\%$ of total variation: $15^\circ\text{C} \times 0.632 = 9.48^\circ\text{C}$
-- Graph reading shows that the temperature reaches $9.48^\circ\text{C}$ at $t = 62 \text{ seconds}$.
+## Environnement
 
-$$\tau = t_{63.2\%} - L = 62 - 12 = 50 \text{ seconds}$$
+`MATLAB` · `Control System Toolbox`
 
-## 3. Identified Transfer Function Model
-Substituting the identified parameters into the FOPDT mathematical structure yields the final model used for controller tuning:
+## Auteur
 
-$$G(s) = \frac{1.5 \cdot e^{-12s}}{50s + 1}$$
+**AZONHOUMON H. Horacia Gloriéta** ([@HoraEmbedded](https://github.com/HoraEmbedded)) · [Portfolio](https://hora-portfolio.vercel.app/)
