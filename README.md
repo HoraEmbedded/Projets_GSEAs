@@ -16,6 +16,7 @@ Ce dépôt regroupe mes projets académiques : systèmes embarqués, électroniq
 | [Serre intelligente](01_Info_Embarquee/greenhouse) | Régulation climatique bare-metal pilotée par interruptions (Timer1), hystérésis à double seuil, validée en software-in-the-loop | C, ATmega2560, PlatformIO, Wokwi |
 | [Machine à états finis](01_Info_Embarquee/fsm-making) | Implémentations comparées d'une FSM (switch-case vs table de transitions) avec tests unitaires Unity et analyse de complexité | C, Unity |
 | [Distributeur automatique (FSM)](01_Info_Embarquee/fsm-vending-machine) | Machine à états d'un distributeur, simulée sur microcontrôleur | C, PlatformIO, Wokwi |
+| [MPPT solaire](01_Info_Embarquee/mppt-solaire) | Optimisation du point de puissance maximale d'un panneau solaire — en cours | Embarqué, électronique de puissance |
 
 ### 02 · Automatique
 
