@@ -28,7 +28,7 @@ Démarche complète :
 
 1. **Calculs** : résistances de grille et de LED d'optocoupleur, point de fonctionnement, dissipations thermiques.
 2. **Simulation** : validation du canal sous **Proteus** et **PSpice** (régimes statique et de commutation).
-3. **Industrialisation** : schéma et routage 6 canaux sous **KiCad** — 0 erreur DRC, fichiers **Gerber** exportés, nomenclature chiffrée **DigiKey** (~22 $ les 6 canaux).
+3. **Industrialisation** : schéma et routage 6 canaux sous **KiCad** : 0 erreur DRC, fichiers **Gerber** exportés, nomenclature chiffrée **DigiKey** (~22 $ les 6 canaux).
 4. **Silicium** : re-conception du transistor en technologie **ENSAT 0,8 µm** sous **Microwind** — layout en peigne de **356 doigts**, W/L ≈ 17 778.
 
 ## Résultats mesurés
@@ -43,10 +43,38 @@ Démarche complète :
 
 ## Aperçu
 
-<!-- Remplacer par les vraies captures (dossier docs/) -->
-![Schéma du canal de commande](docs/schema-canal.png)
-![Routage KiCad](docs/routage-kicad.png)
-![Layout Microwind 356 doigts](docs/layout-microwind.png)
+<table>
+  <tr>
+    <td align="center">
+      <img src="Pictures/schema_kicad.png" width="400"><br>
+      <sub>Schéma KiCad</sub>
+    </td>
+    <td align="center">
+      <img src="Pictures/Microwind.png" width="400"><br>
+      <sub>Layout Microwind (356 doigts)</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="Pictures/vue_gerber_top.png" width="400"><br>
+      <sub>Routage KiCad, vue top</sub>
+    </td>
+    <td align="center">
+      <img src="Pictures/vue_gerber_bottom.png" width="400"><br>
+      <sub>Routage KiCad, vue bottom</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="Pictures/vue_3D.png" width="400"><br>
+      <sub>Rendu 3D de la carte</sub>
+    </td>
+    <td align="center">
+      <img src="Pictures/DRC.png" width="400"><br>
+      <sub>Rapport DRC</sub>
+    </td>
+  </tr>
+</table>
 
 ## Structure du dépôt
 

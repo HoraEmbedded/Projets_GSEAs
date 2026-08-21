@@ -55,20 +55,24 @@ Robot **unicycle** (R roues = 0.05 m, demi-empattement L = 0.07 m) :
 
 **Résultats** (ralliement du point (2, 2)) : suivi précis, **erreur latérale < 0.05 m**, robustesse aux perturbations. Augmenter le nombre de règles améliore la précision ; ajuster les fonctions d'appartenance réduit les oscillations.
 
+
 ## Structure du dépôt
 
-├── Robot2R_PID.slx                  # TP1 : modèle Simscape + commande PID
-├── Robot2R_AZONHOUMON_Horacia.m     # TP1 : simulation par script
-├── Robot2R_FK.slx                   # TP2 : cinématique directe
-├── Robot2R_IK.slx                   # TP2 : cinématique inverse
-├── Robot2R_trajectory.slx           # TP2 : trajectoires polynomiales
-├── Robot2DOF.slx                    # Modèle du bras 2 DDL
-├── espace_travail.m                 # TP2 : tracé de l'espace de travail
-├── Robot_Unicycle.slx               # TP3 : robot mobile + contrôleur flou
-├── Controller_fuzzy.fis             # TP3 : système d'inférence flou
-├── images/                          # Captures et figures
-├── Rapport_TPs Robotique AZONHOUMON Horacia.pdf
+```
+.
+├── Robot2R_PID.slx                       # TP1 : modèle Simscape + commande PID
+├── Robot2R_AZONHOUMON_Horacia.m          # TP1 : simulation par script
+├── Robot2R_FK.slx                        # TP2 : cinématique directe
+├── Robot2R_IK.slx                        # TP2 : cinématique inverse
+├── Robot2R_trajectory.slx                # TP2 : trajectoires polynomiales
+├── Robot2DOF.slx                         # Modèle du bras 2 DDL
+├── espace_travail.m                      # TP2 : tracé de l'espace de travail
+├── Robot_Unicycle.slx                    # TP3 : robot mobile + contrôleur flou
+├── Controller_fuzzy.fis                  # TP3 : système d'inférence flou
+├── images/                               # Captures et figures
+├── Rapport_TPs_Robotique_AZONHOUMON_Horacia.pdf
 └── README.md
+```
 
 ## Prérequis
 
