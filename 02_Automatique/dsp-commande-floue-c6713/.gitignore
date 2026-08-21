@@ -1,0 +1,10 @@
+# Artefacts de build Code Composer Studio
+Debug/
+Release/
+*.out
+*.obj
+*.map
+*.lst
+.launches/
+.settings/
+targetConfigs/
