@@ -1,0 +1,71 @@
+[System]
+Name='FUZZY_ROBOT_ARM_3'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=25
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='E'
+Range=[-1 1]
+NumMFs=5
+MF1='NB':'trapmf',[-1 -1 -0.5 -0.1]
+MF2='NE':'trimf',[-0.5 -0.1 0]
+MF3='ZE':'trimf',[-0.1 0 0.1]
+MF4='PO':'trimf',[0 0.1 0.5]
+MF5='PB':'trapmf',[0.1 0.5 1 1]
+
+[Input2]
+Name='DE'
+Range=[-1 1]
+NumMFs=5
+MF1='NB':'trimf',[-1 -1 -0.5]
+MF2='NE':'trimf',[-1 -0.5 0]
+MF3='ZE':'trimf',[-0.5 0 0.5]
+MF4='PO':'trimf',[0 0.5 1]
+MF5='PB':'trimf',[0.5 1 1]
+
+[Output1]
+Name='DU'
+Range=[-1 1]
+NumMFs=7
+MF1='NB':'trimf',[-1 -1 -1]
+MF2='NM':'trimf',[-0.77 -0.76 -0.75]
+MF3='NS':'trimf',[-0.37 -0.36 -0.35]
+MF4='ZE':'trimf',[-0.01 0 0.01]
+MF5='PS':'trimf',[0.35 0.36 0.37]
+MF6='PB':'trimf',[1 1 1]
+MF7='PM':'trimf',[0.75 0.76 0.77]
+
+[Rules]
+1 1, 1 (1) : 1
+2 1, 1 (1) : 1
+3 1, 2 (1) : 1
+4 1, 3 (1) : 1
+5 1, 4 (1) : 1
+1 2, 1 (1) : 1
+2 2, 2 (1) : 1
+3 2, 3 (1) : 1
+4 2, 4 (1) : 1
+5 2, 5 (1) : 1
+1 3, 2 (1) : 1
+2 3, 3 (1) : 1
+3 3, 4 (1) : 1
+4 3, 5 (1) : 1
+5 3, 7 (1) : 1
+1 4, 3 (1) : 1
+2 4, 4 (1) : 1
+3 4, 5 (1) : 1
+4 4, 7 (1) : 1
+5 4, 6 (1) : 1
+1 5, 4 (1) : 1
+2 5, 5 (1) : 1
+3 5, 7 (1) : 1
+4 5, 6 (1) : 1
+5 5, 6 (1) : 1
