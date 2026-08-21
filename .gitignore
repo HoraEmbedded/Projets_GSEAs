@@ -85,3 +85,14 @@ Thumbs.db
 CVs/
 budget*
 05_Projets_Globaux/
+
+# =========================
+# Code Composer Studio (DSP TI)
+# Garder .project / .cproject / .ccsproject / *.cmd
+# =========================
+Debug/
+Release/
+*.lst
+.launches/
+.settings/
+targetConfigs/
