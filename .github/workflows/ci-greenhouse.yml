@@ -1,19 +1,15 @@
-on:
-  push:
-    paths: ['01_Info_Embarquee/greenhouse/**']
-  pull_request:
-    paths: ['01_Info_Embarquee/greenhouse/**']
-
-defaults:
-  run:
-    working-directory: 01_Info_Embarquee/greenhouse
-
 name: CI
 
 on:
   push:
+    paths: ['01_Info_Embarquee/greenhouse/**', '.github/workflows/ci-greenhouse.yml']
   pull_request:
+    paths: ['01_Info_Embarquee/greenhouse/**', '.github/workflows/ci-greenhouse.yml']
 
+defaults:
+  run:
+    working-directory: 01_Info_Embarquee/greenhouse
+    
 jobs:
   build-firmware:
     name: Build AVR firmware
