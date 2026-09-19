@@ -94,4 +94,4 @@ Release/
 *.lst
 .launches/
 .settings/
-targetConfigs/
+targetConfigs/projets-globaux/
