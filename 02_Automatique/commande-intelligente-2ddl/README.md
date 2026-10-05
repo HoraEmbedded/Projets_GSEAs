@@ -139,14 +139,6 @@ La cible d'entraînement de 10⁻⁷ n'a été atteinte par aucun réseau. Les M
 rapportées sont des erreurs d'apprentissage : aucun jeu de validation
 indépendant n'a été tenu à l'écart, et le réseau imitant une loi déterministe,
 le risque de sur-apprentissage est faible mais non mesuré.
-
-## À compléter
-
-L'article au format IEEE reste à déposer dans `docs/`. Les figures des fonctions
-d'appartenance du contrôleur flou et de l'architecture Simulink du GA-PID sont
-à exporter depuis MATLAB.
-
-Deux points à vérifier avant publication : `GA_PID_Main.m` et `main_GA.m`
 semblent faire double emploi, et `Joint_1.slx`, `Joint_2NN.slx` et `joint.slx`
 coexistent sans nommage clair. Garder le fichier de référence et supprimer les
 autres, ou les renommer explicitement.
